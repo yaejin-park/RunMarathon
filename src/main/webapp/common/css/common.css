@@ -86,6 +86,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     width:1200px;
     margin:0 auto;
 }
+#wrap {
+	width:100%;
+	overflow:hidden;
+}
 header {
     position:fixed;
     top:0;
@@ -220,6 +224,26 @@ header.active .menu-div .menu-btn span {
 }
 #cBody {
     position:relative;
+}
+#cBody .sub-content {
+	margin-top:110px;
+	padding:110px 0 180px;
+}
+#cBody .sub-content:after {
+	content:"";
+	display:block;
+	clear:both;
+}
+#cBody .sub-content .nav-area {
+	float:left;
+	width:300px;
+	border:1px solid red;
+}
+#cBody .sub-content .content-area {
+	float:left;
+	width:900px;
+	padding-left:30px;
+	border:1px solid blue;
 }
 footer {
     padding:40px 0;

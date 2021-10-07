@@ -29,7 +29,23 @@
 			<jsp:include page="./layout/header.jsp"></jsp:include>
 		</header><!--// header -->
 		<div id="cBody">
-			<jsp:include page="<%= goPage %>"></jsp:include>
+			<% if(request.getParameter("go") != null){ %>
+				<div class="inner">
+					<div class="sub-content">
+						<div class="nav-area">
+							<p>one-depth 메뉴명</p>
+							<div class="two-depth">
+								<a href="javascript:">two-depth 메뉴명</a>
+							</div>	
+						</div>
+						<div class="content-area">
+							<jsp:include page="<%= goPage %>"></jsp:include>
+						</div>
+					</div>	
+				</div>
+			<% } else{%>
+				<jsp:include page="<%= goPage %>"></jsp:include>
+			<% } %>
 		</div>
 		<footer>
 			<jsp:include page="./layout/footer.jsp"></jsp:include>
