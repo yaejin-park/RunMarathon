@@ -18,8 +18,10 @@
 	
 	if(request.getParameter("go") != null){
 		goPage = request.getParameter("go");
-	}
+	}else{
 %>
+	<script type="text/javascript" src="./common/js/main.js"></script><!-- Script (메인) -->
+<%}%>
 <body>
 	<!-- wrap -->
 	<div id="wrap">
