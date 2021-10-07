@@ -1,5 +1,6 @@
 /build/
 
+
 # Created by https://www.toptal.com/developers/gitignore/api/java,eclipse,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse,visualstudiocode
 
@@ -109,8 +110,5 @@ hs_err_pid*
 # Ignore all local history of files
 .history
 .ionide
-
-### JDBC class ignore
-JDBCconnect.java
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,visualstudiocode
