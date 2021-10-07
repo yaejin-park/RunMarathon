@@ -28,17 +28,19 @@
 		</header><!--// header -->
 		<div id="cBody">
 			<% if(request.getParameter("go") != null){ %>
-				<div class="sub-content">
-					<div class="nav-area">
-						<p>one-depth 메뉴명</p>
-						<div class="two-depth">
-							<a href="javascript:">two-depth 메뉴명</a>
-						</div>	
-					</div>
-					<div class="content-area">
-						<jsp:include page="<%= goPage %>"></jsp:include>
-					</div>
-				</div>	
+				<div class="inner">
+					<div class="sub-content">
+						<div class="nav-area">
+							<p>one-depth 메뉴명</p>
+							<div class="two-depth">
+								<a href="javascript:">two-depth 메뉴명</a>
+							</div>	
+						</div>
+						<div class="content-area">
+							<jsp:include page="<%= goPage %>"></jsp:include>
+						</div>
+					</div>	
+				</div>
 			<% } else{%>
 				<jsp:include page="<%= goPage %>"></jsp:include>
 			<% } %>

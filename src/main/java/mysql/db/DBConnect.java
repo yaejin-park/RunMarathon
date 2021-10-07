@@ -7,12 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DbConnect {
+public class DBConnect {
 	static final String MYSQLDRIVER = "com.mysql.jdbc.Driver";
 	static final String MYSQL_URL = "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul";
 	
 	
-	public DbConnect() {
+	public DBConnect() {
 		// TODO Auto-generated constructor stub
 		try {
 			Class.forName(MYSQLDRIVER);
