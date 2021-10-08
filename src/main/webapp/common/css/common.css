@@ -125,14 +125,20 @@ header .menu-div .menu-btn {
 	height:30px;
 }
 header .menu-div .menu-btn span {
+	position:absolute;
+	top:0;
+	left:0;
 	display:block;
-	margin-top:10px;
+	width:100%;
 	height:3px;
 	background:#6a1c52;
 }
-header .menu-div .menu-btn span:first-child {
-	margin-top:0;
-} 
+header .menu-div .menu-btn span:nth-child(2) {
+	top:14px;
+}
+header .menu-div .menu-btn span:nth-child(3) {
+	top:27px;
+}
 header .menu {
 	display:none;
     width:1020px;
@@ -237,7 +243,34 @@ header.active .menu-div .menu-btn span {
 #cBody .sub-content .nav-area {
 	float:left;
 	width:300px;
-	border:1px solid red;
+	
+}
+#cBody .sub-content .nav-area > p {
+	font-size:30px;
+}
+#cBody .sub-content .nav-area > p:before {
+	content:"";
+	display:block;
+	width:50px;
+	height:5px;
+	margin-bottom:10px;
+	background:#6a1c52;
+}
+#cBody .sub-content .nav-area .two-depth {
+	margin-top:50px;
+}
+#cBody .sub-content .nav-area .two-depth a {
+	display:block;
+	height:66px;
+	padding:20px;
+	border-bottom:1px solid #ccc;
+}
+#cBody .sub-content .nav-area .two-depth a:hover, #cBody .sub-content .nav-area .two-depth a.active {
+	font-weight:bold;
+	color:#6a1c52;
+}
+#cBody .sub-content .nav-area .two-depth a:last-child {
+	border-bottom:0;
 }
 #cBody .sub-content .content-area {
 	float:left;
