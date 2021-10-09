@@ -19,7 +19,7 @@
 	charset="utf-8"></script>	
 </head>
 <body>
-<form action="notice/smartaction.jsp" method="post">
+<form action="noticeBoard/smartaction.jsp" method="post">
 	<table class="table table-bordered" style="width: 800px;margin-left: 100px;">
 		<caption><h3>스마트 포토 게시판</h3></caption>
 		<tr>
@@ -52,7 +52,7 @@
 				
 				<button type="button" class="btn btn-warning"
 					style="width: 120px;"
-					onclick="location.href='index.jsp?go=notice/noticeList.jsp'">목록</button>
+					onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp'">목록</button>
 			</td>
 		</tr>
 		

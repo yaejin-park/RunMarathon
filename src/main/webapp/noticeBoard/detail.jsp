@@ -55,10 +55,10 @@
 		<tr>
 			<td align="center">
 				<button type="button" class="btn btn-info" style="width: 80px;" 
-					onclick="location.href='index.jsp?go=notice/smartform.jsp'">글쓰기</button>
+					onclick="location.href='index.jsp?go=noticeBoard/smartform.jsp'">글쓰기</button>
 				
 				<button type="button" class="btn btn-info" style="width: 80px;" 
-					onclick="location.href='index.jsp?go=notice/noticeList.jsp?currentPage=<%=currentPage%>'">목록</button>
+					onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=currentPage%>'">목록</button>
 				
 				<button type="button" class="btn btn-info" style="width: 80px;" 
 					onclick="location.href=''">수정</button>
