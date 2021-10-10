@@ -242,7 +242,7 @@ header.active .menu-div .menu-btn span {
 }
 #cBody .sub-content .nav-area {
 	float:left;
-	width:300px;
+	width:240px;
 	
 }
 #cBody .sub-content .nav-area > p {
@@ -274,9 +274,15 @@ header.active .menu-div .menu-btn span {
 }
 #cBody .sub-content .content-area {
 	float:left;
-	width:900px;
-	padding-left:30px;
-	border:1px solid blue;
+	width:960px;
+	padding-left:60px;
+}
+.title {
+	margin-bottom:30px;
+	font-size:25px;
+}
+.info-txt {
+	font-size:14px;
 }
 footer {
     padding:40px 0;

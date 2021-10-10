@@ -61,8 +61,10 @@
 	<div class="swiper-pagination"></div>
 </div><!-- main-vis -->
 
-<div class="main-sec course" style="background-image:url('./common/image/main-course-bg.jpg');">
+<div class="main-sec course">
+	<div class="bg"></div>
 	<div class="inner">
+		<div class="img-div"><img src="./common/image/main-course-img.png"></div>
 		<div class="txt-div">
 			<p class="txt1">Run&Fun Course</p>
 			<p class="txt2">
@@ -81,6 +83,7 @@
 </div>
 
 <div class="main-sec review">
+	<p class="tit">REVIEW</p>
 	<div class="swiper-wrapper">
 		<a href="javascript:" class="swiper-slide">
 			<div class="img-div">
