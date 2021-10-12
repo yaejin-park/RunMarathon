@@ -22,6 +22,6 @@
 	
 	//방금전에 추가된 num값 얻기
 	String idx=dao.getMaxNum();
-	String path="communityList.jsp?idx="+idx;
+	String path="index.jsp?go=community/communityList.jsp?idx="+idx;
 	response.sendRedirect(path);
 %>
