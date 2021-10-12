@@ -36,8 +36,9 @@
 			%>
 		</ul>
 	</div>
+	
 	<div class="util">
-		<a href="javascript:">로그인</a>
-		<a href="javascript:">회원가입</a>
+		<a href="index.jsp?go=login/loginForm.jsp">로그인</a>
+      	<a href="index.jsp?go=join/joinForm.jsp">회원가입</a>
 	</div>
 </div>
