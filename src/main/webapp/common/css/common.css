@@ -284,6 +284,13 @@ header.active .menu-div .menu-btn span {
 .info-txt {
 	font-size:14px;
 }
+/* 아코디언 */
+.accor-content{
+   background-color: #ECECEC;
+   border-radius: 5px;
+   margin: 10px 10px 10px 20px;
+   padding: 15px;
+}
 footer {
     padding:40px 0;
     border-top:1px solid #ccc;

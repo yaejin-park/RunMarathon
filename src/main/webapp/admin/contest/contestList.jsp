@@ -12,6 +12,23 @@
 	MenuDAO menudao = new MenuDAO();
 	menudao.getOneDepth(menu_one);
 %>
+<script type="text/javascript">
+$(function(){
+	$(".delete-btn").click(function(){
+		var ck=$(".delcheck:checked");
+		//alert(ck.length);
+		
+		var s="";
+		$.each(ck,function(i,item){
+			//alert($(item).val());
+			s+=$(item).val()+"|";		
+		});
+		s=s.substring(0,s.length-1);
+		//alert(s);
+		
+	});
+})
+</script>
 <div class="admin-area">
 	<p class="title">관리자-대회</p>
 	<div class="contest-list">
@@ -51,19 +68,3 @@
 		</table>
 	</div>
 </div>
-<script type="text/javascript">
-$(".delete-btn").click(function(){
-	var ck=$(".delcheck:checked");
-	//alert(ck.length);
-	
-	var s="";
-	$.each(ck,function(i,item){
-		//alert($(item).val());
-		s+=$(item).val()+"|";		
-	});
-	s=s.substring(0,s.length-1);
-	//alert(s);
-	
-	
-});
-</script>

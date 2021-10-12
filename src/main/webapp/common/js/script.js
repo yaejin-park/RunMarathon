@@ -33,6 +33,33 @@ $(function(){
 			$("header .menu").fadeOut(500);	
 		}
 	});
+	
+	$(".detail-icon").mouseover(function(){
+		$(this).css("color", "#659EFF");
+	});
+	
+	$(".detail-icon").mouseleave(function(){
+		if(!$(this).parent().parent().next().is(":visible")){
+			$(this).css("color", "gray");
+		}
+	});
+   
+	$(".accor-title").mouseover(function(){
+		$(this).css("cursor", "pointer");
+	});
+	
+	$(".accor-content").slideUp(0);
+	$(".accor-title").click(function(){
+		if(!$(this).next().is(":visible")){
+			$(this).parents("tr").siblings().find(".accor-content").slideUp();
+			$(this).next().slideDown();
+			$(this).find('.glyphicon-menu-down').css('color','#659EFF').removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
+			$(this).parents("tr").siblings().find('.glyphicon-menu-up').css('color','gray').removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
+		} else{
+			$(this).next().slideUp();
+			$(this).find(".glyphicon-menu-up").css('color','gray').removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
+		}
+	});
 });
 
 function popup(url, w, h){
