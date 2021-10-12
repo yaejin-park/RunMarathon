@@ -88,7 +88,7 @@ public class NoticeDAO {
 		return list;
 	}
 	
-	//idx에 해당하는 dto반환 (게시판 목록을 클릭햤을 때 번호에 해당하는 내용을 보여주기위함)
+	//idx에 해당하는 dto반환 (게시판 목록을 클릭했을 때 번호에 해당하는 내용을 보여주기위함)
 	public NoticeDTO getData(String idx) {
 		NoticeDTO dto = new NoticeDTO();
 		Connection conn = db.getConnection();
@@ -147,6 +147,25 @@ public class NoticeDAO {
 			pstmt = conn.prepareStatement(sql);
 			//바인딩
 			pstmt.setString(1, idx);
+			//실행
+			pstmt.execute();
+		} catch (Exception e) {
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	//delete
+	public void deleteNotice(String idx) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "delete from notice where idx=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1,idx);
+
 			//실행
 			pstmt.execute();
 		} catch (Exception e) {

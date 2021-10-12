@@ -4,7 +4,6 @@
 <%@page import="data.dao.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <%
 	NoticeDAO dao = new NoticeDAO();
@@ -61,7 +60,7 @@
 <!-- noticeList -->
 <button type="button" class="btn btn-success"
 	style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
-	onclick="location.href='index.jsp?go=noticeBoard/smartform.jsp'">
+	onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp'">
 	<span class="glyphicon glyphicon-pencil"></span>글추가
 </button>
 <table class="table table-bordered" style="width: 900px;">
@@ -105,7 +104,7 @@
 				//이전
 				if(startPage>1){%>
 		<li><a
-			href="index.jsp?main=noticeBoard/noticeList.jsp?currentPage=<%=startPage-1%>">◀</a>
+			href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=startPage-1%>">◀</a>
 			<%}
 			
 					for(int pp = startPage; pp<=endPage; pp++){

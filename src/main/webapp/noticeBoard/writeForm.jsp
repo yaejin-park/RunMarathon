@@ -19,8 +19,8 @@
 	charset="utf-8"></script>	
 </head>
 <body>
-<form action="noticeBoard/smartaction.jsp" method="post">
-	<table class="table table-bordered" style="width: 800px;margin-left: 100px;">
+<form action="noticeBoard/noticeAction.jsp" method="post">
+	<table class="table table-bordered" style="width: 800px;">
 		<caption><h3>스마트 포토 게시판</h3></caption>
 		<tr>
 			<th bgcolor="orange" width="100">작성자</th>
@@ -41,7 +41,6 @@
 				<textarea name="content" id="content"		
 					required="required"			
 					style="width: 100%;height: 300px;display: none;"></textarea>		
-			
 			</td>
 		</tr>
 		<tr>
@@ -49,13 +48,11 @@
 				<button type="button" class="btn btn-warning"
 					style="width: 120px;"
 					onclick="submitContents(this)">DB저장</button>
-				
 				<button type="button" class="btn btn-warning"
 					style="width: 120px;"
 					onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp'">목록</button>
 			</td>
 		</tr>
-		
 	</table>   
 </form>
 
@@ -76,34 +73,25 @@ nhn.husky.EZCreator.createInIFrame({
 }); 
 
 //‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
-
 function submitContents(elClickedObj) {
 
     // 에디터의 내용이 textarea에 적용된다.
-
     oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
 
- 
-
     // 에디터의 내용에 대한 값 검증은 이곳에서
-
     // document.getElementById("textAreaContent").value를 이용해서 처리한다.
     try {
         elClickedObj.form.submit();
     } catch(e) { 
 
     }
-
 }
 
 // textArea에 이미지 첨부
-
 function pasteHTML(filepath){
     var sHTML = '<img src="<%=request.getContextPath()%>/noticeSave/'+filepath+'">';
     oEditors.getById["content"].exec("PASTE_HTML", [sHTML]); 
-
 }
 </script>
-
 </body>
 </html>

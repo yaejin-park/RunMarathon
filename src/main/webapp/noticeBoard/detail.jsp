@@ -63,7 +63,7 @@
 				<button type="button" class="btn btn-info" style="width: 80px;" 
 					onclick="location.href=''">수정</button>
 				<button type="button" class="btn btn-info" style="width: 80px;" 
-					onclick="location.href=''">삭제</button>
+					onclick="location.href='index.jsp?go=noticeBoard/delete.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">삭제</button>
 			</td>
 		</tr>
 	</table>
