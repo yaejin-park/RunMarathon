@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="data.dto.MenuDTO"%>
+<%@page import="data.dao.MenuDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,6 +18,8 @@
 </head>
 <%
 	String goPage = "layout/main.jsp";
+	String menu_pt = request.getParameter("menu_one");
+	String menu_idx = request.getParameter("menu_two");
 	
 	if(request.getParameter("go") != null){
 		goPage = request.getParameter("go");
@@ -33,9 +38,19 @@
 				<div class="inner">
 					<div class="sub-content">
 						<div class="nav-area">
-							<p>one-depth 메뉴명</p>
+							<%
+								MenuDAO dao = new MenuDAO();
+								String oneDepth = dao.getOneDepth(menu_pt);
+							%>
+							<p><%= oneDepth %></p>
 							<div class="two-depth">
-								<a href="javascript:">two-depth 메뉴명</a>
+								<%
+									List<MenuDTO> twoDepthList = dao.getTwoDepth(menu_pt);
+									for(MenuDTO twoD:twoDepthList){
+									%>
+										<a href="index.jsp?go=<%= twoD.getMenu_url() %>&menu_one=<%= twoD.getParent_idx() %>&menu_two=<%= twoD.getMenu_idx() %>" class="<%= twoD.getMenu_idx().equals(menu_idx)?"active":""%>"><%= twoD.getMenu_name() %></a>
+									<% }
+								%>
 							</div>	
 						</div>
 						<div class="content-area">
