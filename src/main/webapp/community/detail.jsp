@@ -17,7 +17,7 @@
 			 $.ajax({
 				type:"get",
 				dataType:"json",
-				url:"ajaxChu.jsp",
+				url:"community/ajaxChu.jsp",
 				data :{"idx":idx},
 				success:function(data){
 					location.reload();
@@ -65,7 +65,7 @@
 		<%
 			//각 방명록에 달린 댓글 목록 가져오기
 			ReplyDAO adao=new ReplyDAO();
-			System.out.println(idx);
+			//System.out.println(idx);
 			List<ReplyDTO> alist=adao.getAllAnswer(idx);
 		%> <!-- 댓글 & 추천 -->
 		<tr>
@@ -75,7 +75,7 @@
 					 		//if(loginok!=null){//입력폼은 로그인한 경우에만 보이게하기
 					 		%>
 					<div>
-						<form action="replyInsert.jsp" method="post">
+						<form action="community/replyInsert.jsp" method="post">
 							<input type="hidden" name="idx" value="<%=dto.getIdx()%>">
 							<input type="hidden" name="nickname" value="<%=dto.getNickname()%>">
 							<input type="hidden" name="currentPage" value="<%=currentPage%>">
@@ -141,7 +141,7 @@
 
 							<button type="button" class="btn btn-sm btn-info"
 								style="width: 80px;"
-								onclick="location.href='communityList.jsp?currentPage=<%=currentPage%>'">목록</button>
+								onclick="location.href='index.jsp?go=community/communityList.jsp?currentPage=<%=currentPage%>'">목록</button>
 
 							<button type="button" class="btn btn-sm btn-info"
 								style="width: 80px;" onclick="location.href=''">수정</button>

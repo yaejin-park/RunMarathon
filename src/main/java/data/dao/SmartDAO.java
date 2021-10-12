@@ -83,7 +83,38 @@ public class SmartDAO {
 			//獄쏅뗄�뵥占쎈뎃
 			pstmt.setString(1, idx);
 			rs=pstmt.executeQuery();
-			if(rs.next())
+			if(rs.next()) 
+			{
+				dto.setIdx(rs.getString("idx"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setChu_count(rs.getInt("chu_count"));
+				dto.setRead_count(rs.getInt("read_count"));
+				dto.setWrite_day(rs.getTimestamp("write_day"));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
+	}
+	public SmartDTO getSearchData(String search)
+	{
+		SmartDTO dto=new SmartDTO();
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from community where subject like '%?%'";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//獄쏅뗄�뵥占쎈뎃
+			pstmt.setString(1, search);
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
 			{
 				dto.setIdx(rs.getString("idx"));
 				dto.setNickname(rs.getString("nickname"));

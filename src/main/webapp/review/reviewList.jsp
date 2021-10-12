@@ -113,7 +113,7 @@ table.maintd tr {
 		</tbody>
 	</table>
 	<button type="button" class="btn btn-info"
-	style="width: 130px;margin-left: 800px;"
+	style="width: 130px;margin-left: 700px;"
 	onclick="location.href=''">
 	<span class="glyphicon glyphicon-pencil"></span>후기작성하기</button>
 
