@@ -37,6 +37,7 @@ $(function(){
 	$(".detail-icon").mouseover(function(){
 		$(this).css("color", "#659EFF");
 	});
+	
 	$(".detail-icon").mouseleave(function(){
 		if(!$(this).parent().parent().next().is(":visible")){
 			$(this).css("color", "gray");
