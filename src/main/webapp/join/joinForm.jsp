@@ -29,6 +29,13 @@
 		font-weight: bold;
 	}
 	
+	.accor-content{
+		overflow: auto; 
+		width:500px; 
+		height:150px; 
+		white-space:pre;
+	}
+	
 </style>
 <script type="text/javascript">
 $(function(){
@@ -88,7 +95,8 @@ $(function(){
 
 		//아이디 중복 체크
 		$("#idDouble").click(function() {
-			window.open("join/idSearch.jsp","중복체크","width=550px, height=350px, left=500px, top=100px");
+			//window.open("join/idSearch.jsp","중복체크","width=550px, height=350px, left=500px, top=100px");
+			popup("join/idSearchForm.jsp", 550, 350);
 		});
 		
 		//주소 검색
@@ -100,12 +108,7 @@ $(function(){
 	            }
 	        }).open();
 		});
-		
-		//회원가입 버튼
-		$("#joinYes").click(function() {
-			
-		});
-		
+
 		//취소 버튼
 		$("#joinNo").click(function() {
 			//로그인 페이지로 이동
@@ -199,7 +202,7 @@ $(function(){
 						</div>
 						<div style="text-align: right;"><span class="glyphicon glyphicon-menu-down detail-icon" style="font-weight: bold;">자세히보기</span></div>
 					</div>
-					<div class="accor-content" style="overflow: auto; width:500px; height:150px; white-space:pre;">
+					<div class="accor-content">
 						<jsp:include page="./terms.jsp?term=1"></jsp:include>
 					</div>
 				</td>
@@ -239,93 +242,93 @@ $(function(){
 <hr>
 
 <div>
-		<table class="table table-bordered" style="width: 760px; float: left;">
-			<tbody>
-				<tr>
-					<th>이름</th>
-					<td>
-						<input type="text" name="name" class="form-control" autofocus="autofocus" required="required">
-					</td>
-				</tr>
-				
-				<tr>
-					<th>전화번호</th>
-					<td>
-						<input type="text" name="hp1" id="hp1" class="form-control" required="required" maxlength="4" style="width: 100px;" value="">
-						<select id="selHp1" class="form-control" style="width: 100px; background-color: #BDD6FF">
-							<option value="-" selected="selected">직접입력</option> 
-							<option value="010">010</option>
-							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="017">017</option>
-							<option value="018">018</option>
-							<option value="019">019</option>
-						</select>
-						<b>-</b>
-						<input type="text" name="hp2" id="hp2" class="form-control" required="required" maxlength="4" style="width: 160px; width: 100px;">
-						<b>-</b>
-						<input type="text" name="hp3" id="hp3" class="form-control" required="required" maxlength="4" style="width: 160px; width: 100px;">
-					</td>
-				</tr>
+	<table class="table table-bordered" style="width: 760px; float: left;">
+		<tbody>
+			<tr>
+				<th>이름</th>
+				<td>
+					<input type="text" name="name" class="form-control" autofocus="autofocus" required="required">
+				</td>
+			</tr>
+			
+			<tr>
+				<th>전화번호</th>
+				<td>
+					<input type="text" name="hp1" id="hp1" class="form-control" required="required" maxlength="4" style="width: 100px;" value="">
+					<select id="selHp1" class="form-control" style="width: 100px; background-color: #BDD6FF">
+						<option value="-" selected="selected">직접입력</option> 
+						<option value="010">010</option>
+						<option value="011">011</option>
+						<option value="016">016</option>
+						<option value="017">017</option>
+						<option value="018">018</option>
+						<option value="019">019</option>
+					</select>
+					<b>-</b>
+					<input type="text" name="hp2" id="hp2" class="form-control" required="required" maxlength="4" style="width: 160px; width: 100px;">
+					<b>-</b>
+					<input type="text" name="hp3" id="hp3" class="form-control" required="required" maxlength="4" style="width: 160px; width: 100px;">
+				</td>
+			</tr>
 
-				<tr>
-					<th>아이디</th>
-					<td>
-					<input type="text" name="id" id="id" class="form-control" required="required">
-					<button type="button" class="btn btn-info" id="idDouble">중복체크</button>
-					</td>
-				</tr>
-				
-				<tr>
-					<th>비밀번호</th>
-					<td>
-						<input type="password" name="pass1" id="pass1" class="form-control" required="required" maxlength="15" placeholder="비밀번호">
-						<div class="plus" id="passCheck" style="font-size: 0.8em;"></div>
-						<input type="password" name="pass2" id="pass2" class="form-control" required="required" maxlength="15" placeholder="비밀번호 확인">
-						<div class="plus" id="passSame" style="font-size: 0.8em;"></div>
-					</td>
-				</tr>
-				
-				<tr>
-					<th>주소</th>
-					<td>
-						<input type="text" name="addr1" id="addr1" class="form-control" required="required"  placeholder="주소" readonly="readonly">
-						<button type="button" class="btn btn-info" id="searchAddr">주소검색</button>
-						<br><br>
-						<input type="text" name="addr2" id="addr2" class="form-control" required="required"  placeholder="상세주소 입력" style="width: 300px;">
-					</td>					
-				</tr>
-				
-				<tr>
-					<th>닉네임</th>
-					<td>
-					<input type="text" name="nick" id="nick" class="form-control" required="required">
-					<button type="button" class="btn btn-info" id="idNickDouble">중복체크</button>
-					</td>
-				</tr>
-				
-				<tr>
-					<th>본인인증 질문</th>
-					<td>
-						<select name="selAuth" id="selAuth" class="form-control">
-							<option value="-" disabled="disabled">선택</option>
-							<option value="character">좋아하는 캐릭터는?</option>
-							<option value="school">초등학교 이름은?</option>
-							<option value="movie">좋아하는 영화는?</option>
-							<option value="freind">친한 친구의 이름은?</option>
-							<option value="hobby">나의 취미는?</option>
-						</select>
-						<input type="text" name="auth" class="form-control" required="required" maxlength="20">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
-						<button type="submit" id="joinYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">회원가입하기</button>&nbsp;&nbsp;
-						<button type="reset" id="joinNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;">취소</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+			<tr>
+				<th>아이디</th>
+				<td>
+				<input type="text" name="id" id="id" class="form-control" required="required" readonly="readonly">
+				<button type="button" class="btn btn-info" id="idDouble">중복체크</button>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>비밀번호</th>
+				<td>
+					<input type="password" name="pass1" id="pass1" class="form-control" required="required" maxlength="15" placeholder="비밀번호">
+					<div class="plus" id="passCheck" style="font-size: 0.8em;"></div>
+					<input type="password" name="pass2" id="pass2" class="form-control" required="required" maxlength="15" placeholder="비밀번호 확인">
+					<div class="plus" id="passSame" style="font-size: 0.8em;"></div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>주소</th>
+				<td>
+					<input type="text" name="addr1" id="addr1" class="form-control" required="required"  placeholder="주소" readonly="readonly">
+					<button type="button" class="btn btn-info" id="searchAddr">주소검색</button>
+					<br><br>
+					<input type="text" name="addr2" id="addr2" class="form-control" required="required"  placeholder="상세주소 입력" style="width: 300px;">
+				</td>					
+			</tr>
+			
+			<tr>
+				<th>닉네임</th>
+				<td>
+				<input type="text" name="nick" id="nick" class="form-control" required="required" readonly="readonly">
+				<button type="button" class="btn btn-info" id="idNickDouble">중복체크</button>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>본인인증 질문</th>
+				<td>
+					<select name="selAuth" id="selAuth" class="form-control">
+						<option value="-" disabled="disabled">선택</option>
+						<option value="character">좋아하는 캐릭터는?</option>
+						<option value="school">초등학교 이름은?</option>
+						<option value="movie">좋아하는 영화는?</option>
+						<option value="freind">친한 친구의 이름은?</option>
+						<option value="hobby">나의 취미는?</option>
+					</select>
+					<input type="text" name="auth" class="form-control" required="required" maxlength="20">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<button type="submit" id="joinYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">회원가입하기</button>&nbsp;&nbsp;
+					<button type="reset" id="joinNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;">취소</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 </form>
 </body>

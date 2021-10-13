@@ -123,4 +123,30 @@ public class MemberDAO {
 		}
 		return name;
 	}
+	
+	//아이디로 닉네임 얻기
+	public String getNick(String id) {
+		String nick ="";
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select nick from member where id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				nick = rs.getString("nick");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return nick;
+	}
 }

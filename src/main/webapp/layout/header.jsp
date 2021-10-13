@@ -1,3 +1,4 @@
+<%@page import="data.dao.MemberDAO"%>
 <%@page import="data.dto.MenuDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.MenuDAO"%>
@@ -36,18 +37,21 @@
 			%>
 		</ul>
 	</div>
-	<% if(session.getAttribute("sessionLogin")!="yes"){
+	<% if(session.getAttribute("sessionLogin")==null){
 	%>
 		<div class="util">
-			<a href="index.jsp?go=login/loginMain.jsp">로그인</a>
-			<a href="index.jsp?go=join/joinForm.jsp">회원가입</a>
+			<a href="index.jsp?go=login/loginMain.jsp&menu_one=21">로그인</a>
+			<a href="index.jsp?go=join/joinForm.jsp&menu_one=24">회원가입</a>
 		</div>
 	<%
 	} else{
+		String id = (String)session.getAttribute("sessionId");
+		MemberDAO mdao = new MemberDAO();
+		String nick = mdao.getNick(id);
 	%>
 		<div class="util">
-			<a href="index.jsp?go=login/loginMain.jsp">로그인 중</a>
-			<a href="index.jsp?go=login/logoutAction.jsp">로그아웃</a>
+			<a href="login/logoutAction.jsp">로그아웃</a>
+			<a href="index.jsp?go=login/loginMain.jsp&menu_one=21">마이페이지</a>
 		</div>
 	<%} %>
 </div>

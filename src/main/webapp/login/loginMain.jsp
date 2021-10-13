@@ -5,7 +5,7 @@
 	String sessionLogin = (String)session.getAttribute("sessionLogin");
 	
 	//로그인 안됐으면
-	if(sessionLogin!="yes"){
+	if(sessionLogin==null){
 	%>
 		<jsp:include page="loginForm.jsp"/>
 	<%

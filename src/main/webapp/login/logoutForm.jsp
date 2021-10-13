@@ -17,7 +17,7 @@
 <div style="margin: 0 auto; width: 100%;">
 	<b><%=name%>님은 현재 로그인 중입니다.</b>
 	<br><br>
-	<button type="button" class="btn btn-warning" onclick="location.href='index.jsp?go=login/logoutAction.jsp'">로그아웃</button>
+	<button type="button" class="btn btn-warning" onclick="location.href='login/logoutAction.jsp'">로그아웃</button>
 	<button type="button" class="btn btn-info" onclick="location.href='index.jsp'">메인페이지</button>
 </div>
 </html>

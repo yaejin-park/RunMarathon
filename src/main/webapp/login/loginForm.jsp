@@ -23,6 +23,20 @@
 </style>
 <script>
 $(function() {
+	<%
+	String sessionId = (String)session.getAttribute("sessionId");
+	String sessionSave = (String)session.getAttribute("sessionSave");
+	
+	String idValue="";
+	
+	//아이디저장시,
+	if(sessionSave!=null){
+		idValue = sessionId;
+	%>
+	$("#idSave").prop("checked", true);
+	<% 
+	}
+	%>
 	//네이버 로그인
 	var naverLogin = new naver.LoginWithNaverId(
 			{
@@ -108,22 +122,6 @@ $(function() {
 	    }
 	  }  
 </script>
-<%
-	String sessionId = (String)session.getAttribute("sessionId");
-	String sessionSave = (String)session.getAttribute("sessionSave");
-	
-	String idValue="";
-	
-	//아이디저장시,
-	if(sessionSave=="yes"){
-		idValue = sessionId;
-	%>
-	<script type="text/javascript">
-		$("#idSave").prop("checked", true);
-	</script>
-	<% 
-}
-%>
 </head>
 
 <body>
@@ -186,7 +184,7 @@ $(function() {
 			</td>
 			<td>
 				<div align="right">
-					<button type="button" class="btn btn-info" style="width: 100px; height: 40px;">회원가입</button>
+					<button type="button" class="btn btn-info" style="width: 100px; height: 40px;" onclick="location.href='index.jsp?go=join/joinForm.jsp?&menu_one=24'">회원가입</button>
 				</div>				
 			</td>
 		</tr>
