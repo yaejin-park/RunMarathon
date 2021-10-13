@@ -43,7 +43,6 @@ $(function(){
 			$(this).css("color", "gray");
 		}
 	});
-   
 	
 	$(".accor-title").mouseover(function(){
 		$(this).css("cursor", "pointer");
