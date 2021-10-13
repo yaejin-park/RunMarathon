@@ -37,12 +37,12 @@
 			gift_check = "1";
 		}
 		String gift_start = multi.getParameter("gift_start");
-		if(request.getParameter("gift_start") == "") {
+		if(request.getParameter("gift_start") == "" || gift_check.equals("0")) {
 			gift_start = "2000-01-01";
 		} 
 		
 		String gift_end = multi.getParameter("gift_end");
-		if(request.getParameter("gift_end") == "") {
+		if(request.getParameter("gift_end") == "" || gift_check.equals("0")) {
 			gift_end = "2000-01-01";
 		}
 		
@@ -62,18 +62,20 @@
 		dao.insertContest(contest);
 		
 		// 기념품
-		String giftName = multi.getParameter("giftName");
-		String giftContent = multi.getParameter("giftContent");
-		String photo = multi.getFilesystemName("photo");
-		
-		GiftDTO gift = new GiftDTO();
-		gift.setName(giftName);
-		gift.setContent(giftContent);
-		gift.setContest_name(name);
-		gift.setPhoto(photo);
-		
-		GiftDAO giftDao = new GiftDAO();
-		giftDao.insertGift(gift);
+		if(gift_check.equals("1")) {
+			String giftName = multi.getParameter("giftName");
+			String giftContent = multi.getParameter("giftContent");
+			String photo = multi.getFilesystemName("photo");
+			
+			GiftDTO gift = new GiftDTO();
+			gift.setName(giftName);
+			gift.setContent(giftContent);
+			gift.setContest_name(name);
+			gift.setPhoto(photo);
+			
+			GiftDAO giftDao = new GiftDAO();
+			giftDao.insertGift(gift);
+		}
 
 		response.sendRedirect("../../index.jsp?go=admin/contest/contestList.jsp&menu_one=13&menu_two=20");
 	} catch(Exception e){

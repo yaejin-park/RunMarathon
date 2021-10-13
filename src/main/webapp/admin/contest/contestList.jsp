@@ -12,22 +12,57 @@
 	MenuDAO menudao = new MenuDAO();
 	menudao.getOneDepth(menu_one);
 %>
+<style>
+	.chk {
+		text-align:center;
+	}
+</style>
 <script type="text/javascript">
 $(function(){
-	$(".delete-btn").click(function(){
-		var ck=$(".delcheck:checked");
-		//alert(ck.length);
-		
-		var s="";
-		$.each(ck,function(i,item){
-			//alert($(item).val());
-			s+=$(item).val()+"|";		
-		});
-		s=s.substring(0,s.length-1);
-		//alert(s);
-		
+	$(".all-check").change(function(){
+		if($(this).prop("checked") == true){
+			$(".del-check").prop("checked", true);
+		}else{
+			$(".del-check").prop("checked", false);
+		}
 	});
-})
+	
+	var s="";
+	$(".del-check").change(function(){
+		var n = 0;
+		var len = $(".del-check").length;
+		var ck=$(".delcheck:checked");
+		
+		$.each($(".del-check"), function(i, elt) {
+			var chk = $(elt).prop("checked");
+			
+			if(chk == true){
+				n++;
+				s+=$(elt).val().trim()+"-";	
+			}
+			
+			if(n == len){
+				$(".all-check").prop("checked", true);
+			}else{
+				$(".all-check").prop("checked", false);
+			}
+		});
+		
+		s=s.substring(0, s.length-1);
+	});
+	
+	$(".delete-btn").click(function(){
+		$.ajax({
+			type:"get",
+			url:"./admin/contest/deleteContestAction.jsp",
+			dataType:"html",
+			data:{name:s},
+			success:function(result){
+				location.reload(true);
+			},
+		});
+	});
+});
 </script>
 <div class="admin-area">
 	<p class="title">관리자-대회</p>
@@ -38,12 +73,14 @@ $(function(){
 		</div>
 		<table class="table table-bordered">
 			<colgroup>
+				<col width="40px">
 				<col width="50px">
 				<col width="*">
 				<col width="250px">
 			</colgroup>
 			<thead>
 				<tr>
+					<th class="chk"><input type="checkbox" class="all-check"></th>
 					<th>No.</th>
 					<th>대회명</th>
 					<th>대회기간</th>
@@ -58,7 +95,7 @@ $(function(){
 						String contestName = URLEncoder.encode(dto.getName(), "UTF-8");
 				%>	
 					<tr>
-					    <td><input type="checkbox" class="delcheck" value="<%=dto.getName() %>"></td>
+					    <td class="chk"><input type="checkbox" class="del-check" value="<%=dto.getName() %>"></td>
 						<td><%= ++cnt %></td>
 						<td><a href="./index.jsp?go=admin/contest/contestView.jsp&menu_one=<%=menu_one%>&menu_two=<%= menu_two%>&contest_name=<%= contestName %>"><%= dto.getName() %></a></td>
 						<td><%= dto.getContest_start() %> ~ <%= dto.getContest_end() %></td>
