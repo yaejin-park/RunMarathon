@@ -43,11 +43,10 @@ $(function(){
 			$(this).css("color", "gray");
 		}
 	});
-   
+	
 	$(".accor-title").mouseover(function(){
 		$(this).css("cursor", "pointer");
 	});
-	
 	$(".accor-content").slideUp(0);
 	$(".accor-title").click(function(){
 		if(!$(this).parents(".accor-div").find(".accor-content").is(":visible")){
@@ -63,11 +62,11 @@ $(function(){
 });
 
 function popup(url, w, h){
-	var width = $(window).innerWidth();
-	var height = $(window).innerHeight();
-	
-	var left = ((width / 2) - (w / 2));
-	var top = ((height / 2) - (h / 2));
-	var options = 'top=' + top + ', left=' + left + ', width=' + w + ', height=' + h + ', status=no, menubar=no, toolbar=no, resizable=no';
-	window.open(url, "",  options);
+   var width = $(window).innerWidth();
+   var height = $(window).innerHeight();
+   
+   var left = ((width / 2) - (w / 2));
+   var top = ((height / 2) - (h / 2));
+   var options = 'top=' + top + ', left=' + left + ', width=' + w + ', height=' + h + ', status=no, menubar=no, toolbar=no, resizable=no';
+   window.open(url, "",  options);
 }

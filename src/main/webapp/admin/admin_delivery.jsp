@@ -5,14 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link
-   href="https://fonts.googleapis.com/css2?family=Dokdo&family=Gaegu&family=Gugi&family=Nanum+Pen+Script&display=swap"
-   rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dokdo&family=Gaegu&family=Gugi&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="http://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
-	<h3>건들지 마세요. test 파일 입니다</h3>
-	<h3>test 테스트@@!!</h3>
+
 </body>
 </html>

@@ -100,10 +100,11 @@
 		$("#checkGift").change(function(){
 			if($("#checkGift").is(":checked")){
 				$(this).parents("td").find(".form-inline").show();
-				$(this).parents("td").find(".form-inline").find("input").attr("required", "required");
+				$(this).parents("td").find(".form-inline").find("input").attr("required", true);
 				$(".gift-div").show();
 			}else{
 				$(this).parents("td").find(".form-inline").hide();
+				$(this).parents("td").find(".form-inline").find("input").attr("required", false);
 				$(".gift-div").hide();
 			}
 		});
@@ -216,11 +217,11 @@
 							<div class="gift-box">
 								<div class="form-list">
 									<p class="txt1">타이틀</p>
-									<input type="text" class="form-control" name="giftName" required="required">
+									<input type="text" class="form-control" name="giftName">
 								</div>
 								<div class="form-list">
 									<p class="txt1">설명</p>
-									<textarea class="form-control" name="giftContent" required="required"></textarea>
+									<textarea class="form-control" name="giftContent"></textarea>
 								</div>
 								<div class="form-list">
 									<p class="txt1">첨부파일</p>
