@@ -1,3 +1,5 @@
+<%@page import="data.dto.MemberDTO"%>
+<%@page import="data.dao.MemberDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="data.dto.NoticeDTO"%>
 <%@page import="java.util.List"%>
@@ -6,6 +8,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
+	/*페이징 처리*/
 	NoticeDAO dao = new NoticeDAO();
 
 	//페이징 처리에 필요한 변수 선언
@@ -47,21 +50,32 @@
 	//현재 페이지의 리스트가 더 이상 없을 경우(삭제해서) 이전 페이지로 이동한다
 	if(list.size()==0 && totalCount>0){%>
 	<script type="text/javascript">
-			location.href = "index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=currentPage-1%>";
+			location.href = "index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=currentPage-1%>";
 	</script>
+	
 <%}
-	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	
 	//각 페이지에 출력한 시작 번호
 	int no = totalCount - (currentPage-1) * perPage;
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	/*로그인 세션 처리에 필요한 변수 선언*/
+	String sessionLogin = (String)session.getAttribute("sessionLogin");
+	
+	String id = (String)session.getAttribute("sessionId");
 %>
 
 <!-- noticeList -->
-<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
-	onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp&menu_one=12&menu_two=18&'">
-	<span class="glyphicon glyphicon-pencil"></span>글추가
-</button>
+<%
+	
+	if(sessionLogin!=null && id.equals("admin")){
+%>
+	<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
+		onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp&menu_one=12&menu_two=18'">
+		<span class="glyphicon glyphicon-pencil"></span>글추가
+	</button>
+<%
+}
+%>
 <table class="table table-bordered" style="width: 900px;">
 	<caption>
 		<b>공지사항</b>
@@ -77,12 +91,14 @@
 	</thead>
 	<tbody>
 		<%
-		if(totalCount==0){%>
+		if(totalCount==0){
+		%>
 			<tr height="40">
 				<td colspan="5" align="center"><b>등록된 글이 없습니다.</b></td>
 			</tr>
 		<%}else{
-			for(NoticeDTO dto:list){%>
+			for(NoticeDTO dto:list){
+		%>
 			<tr>
 				<td align="center"><%=no-- %></td>
 				<td>
@@ -112,14 +128,17 @@
 		}
 		for(int pp = startPage; pp<=endPage; pp++){
 			if(pp==currentPage){//만약에 현재페이지면 액티브를 주겠다.%>
-				<li class="active"><a href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
-			<%} else{%>
-				<li><a href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
+				<li class="active"><a href="index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=pp%>"><%=pp %></a></li>
+			<%} else{
+			%>
+				<li><a href="index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=pp%>"><%=pp %></a></li>
 			<%}
 		}
 		//다음
-		if(endPage<totalPage){%>
-			<li><ahref="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=endPage+1%>">▶</a>
-		<%}%>
+		if(endPage<totalPage){
+		%>
+			<li><ahref="index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=endPage+1%>">▶</a>
+		<%}
+		%>
 	</ul>
 </div>

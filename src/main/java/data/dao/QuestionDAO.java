@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+import data.dto.NoticeDTO;
 import data.dto.QuestionDTO;
 import mysql.db.DBConnect;
 
@@ -47,6 +48,7 @@ public class QuestionDAO {
 		int ref=0;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				ref = rs.getInt(1);
@@ -66,6 +68,7 @@ public class QuestionDAO {
 		int num=0;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				num = rs.getInt(1);
@@ -88,6 +91,7 @@ public class QuestionDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				n = rs.getInt(1);
@@ -109,9 +113,10 @@ public class QuestionDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//바인딩
+			
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, perpage);
+			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				QuestionDTO dto = new QuestionDTO();
@@ -119,6 +124,8 @@ public class QuestionDAO {
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriter(rs.getString("writer"));
+				dto.setRef(rs.getInt("ref"));
+				dto.setStep(rs.getInt("step"));
 				dto.setWriteDay(rs.getTimestamp("write_day"));
 				//list에 추가
 				list.add(dto);
@@ -130,7 +137,7 @@ public class QuestionDAO {
 		return list;
 	}
 	
-	//idx에 해당하는 dto반환 (게시판 목록을 클릭햤을 때 번호에 해당하는 내용을 보여주기위함)
+	//idx에 해당하는 dto반환 (게시판 목록을 클릭했을 때 번호에 해당하는 내용을 보여주기위함)
 	public QuestionDTO getData(String idx) {
 		QuestionDTO dto = new QuestionDTO();
 		Connection conn = db.getConnection();
@@ -140,8 +147,9 @@ public class QuestionDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//바인딩
+			
 			pstmt.setString(1, idx);
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				dto.setIdx(rs.getString("idx"));
@@ -166,8 +174,9 @@ public class QuestionDAO {
 		String sql = "select subject, pass, ref, step, reforder from question where idx = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//바인딩
+			
 			pstmt.setString(1, idx);
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				dto.setSubject(rs.getString("subject"));
@@ -183,6 +192,7 @@ public class QuestionDAO {
 		return dto;
 	}
 	
+	//답변 insert
 	public void insertAnswer(QuestionDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -202,6 +212,61 @@ public class QuestionDAO {
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	//Q&A update(수정)
+	public void updateQuestion(QuestionDTO dto) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "update question set subject=?, pass=?, content=? where idx=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getSubject());
+			pstmt.setString(2, dto.getPass());
+			pstmt.setString(3, dto.getContent());
+			pstmt.setString(4, dto.getIdx());
+
+			pstmt.execute();
+		} catch (Exception e) {
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	public void deleteQuestion(int ref) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "delete from question where ref=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,ref);
+			
+			pstmt.execute();
+		} catch (Exception e) {
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	public void deleteAnswer(String idx) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "delete from question where idx=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,idx);
+			
+			pstmt.execute();
+		} catch (Exception e) {
 		} finally {
 			db.dbClose(pstmt, conn);
 		}
