@@ -58,70 +58,68 @@
 %>
 
 <!-- noticeList -->
-<button type="button" class="btn btn-success"
-	style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
-	onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp'">
+<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
+	onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp&menu_one=12&menu_two=18&'">
 	<span class="glyphicon glyphicon-pencil"></span>글추가
 </button>
 <table class="table table-bordered" style="width: 900px;">
 	<caption>
 		<b>공지사항</b>
 	</caption>
-	<tr bgcolor="#dda0dd">
-		<th width="50px">번호</th>
-		<th width="350px">제목</th>
-		<th width="100px">작성자</th>
-		<th width="150px">작성일</th>
-		<th width="70px">조회</th>
-	</tr>
-	<%
+	<thead>
+		<tr bgcolor="#dda0dd">
+			<th width="50px">번호</th>
+			<th width="350px">제목</th>
+			<th width="100px">작성자</th>
+			<th width="150px">작성일</th>
+			<th width="70px">조회</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%
 		if(totalCount==0){%>
-	<tr height="40">
-		<td colspan="5" align="center"><b>등록된 글이 없습니다.</b></td>
-	</tr>
-	<%}else{
+			<tr height="40">
+				<td colspan="5" align="center"><b>등록된 글이 없습니다.</b></td>
+			</tr>
+		<%}else{
 			for(NoticeDTO dto:list){%>
-	<tr>
-		<td align="center"><%=no-- %></td>
-		<td>
-			<a style="color: black"
-				href="index.jsp?go=noticeBoard/detail.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>&key=list">
-					<%=dto.getSubject() %>
-			</a>
-		</td>
-		<td><%=dto.getWriter() %></td>
-		<td><%=sdf.format(dto.getWriteDay()) %></td>
-		<td><%=dto.getReadCount() %></td>
-	</tr>
-	<%}
+			<tr>
+				<td align="center"><%=no-- %></td>
+				<td>
+					<a style="color: black"
+						href="index.jsp?go=noticeBoard/detail.jsp?&menu_one=12&menu_two=18&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>&key=list"><%=dto.getSubject() %>
+					</a>
+				</td>
+				<td><%=dto.getWriter() %></td>
+				<td><%=sdf.format(dto.getWriteDay()) %></td>
+				<td><%=dto.getReadCount() %></td>
+			</tr>
+		<%	
+			}
 		}
 		%>
+	</tbody>
 </table>
 <!-- 페이징 처리-->
 <div style="width: 900px; text-align: center;">
 	<ul class="pagination">
 		<%
-				//이전
-				if(startPage>1){%>
-		<li><a
-			href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=startPage-1%>">◀</a>
+		//이전
+		if(startPage>1){
+		%>
+			<li><a href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=startPage-1%>">◀</a>
+		<%
+		}
+		for(int pp = startPage; pp<=endPage; pp++){
+			if(pp==currentPage){//만약에 현재페이지면 액티브를 주겠다.%>
+				<li class="active"><a href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
+			<%} else{%>
+				<li><a href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
 			<%}
-			
-					for(int pp = startPage; pp<=endPage; pp++){
-					if(pp==currentPage){//만약에 현재페이지면 액티브를 주겠다.%>
-		<li class="active"><a
-			href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
-		<%} else{%>
-		<li><a
-			href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
-		<%}
-				}
-				
-				//다음
-				if(endPage<totalPage){%>
-		<li><a
-			href="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=endPage+1%>">▶</a>
-			<%}
-			%>
+		}
+		//다음
+		if(endPage<totalPage){%>
+			<li><ahref="index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=endPage+1%>">▶</a>
+		<%}%>
 	</ul>
 </div>

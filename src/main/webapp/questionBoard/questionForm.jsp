@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-
-글쓰기 폼 입니다!
 
 <form action="questionBoard/questionAction.jsp" method="post">
 	<table class="table table-bordered" style="width: 800px;">

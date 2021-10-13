@@ -10,8 +10,6 @@
 	String root = request.getContextPath();
 %>
 
-답변 폼 입니다!
-
 <form action="questionBoard/answerAction.jsp" method="post">
 	<table class="table table-bordered" style="width: 800px;">
 		<caption>Answer</caption>
@@ -30,7 +28,7 @@
 				<th>제 목</th>
 				<td>
 					<input type="text" name="subject" class="form-control" required="required" style="width: 600px;" 
-					value="&nbsp;&nbsp;&nbsp;<img src = '<%=root %>/image/reply.PNG' height='30px' width='50px'>[답변]<%=dto.getSubject()%>">
+					value="&nbsp;&nbsp;&nbsp;<img src='<%=root %>/image/reply.PNG' height='30px' width='50px'>[답변]<%=dto.getSubject()%>">
 				</td>
 			</tr>
 			<tr>

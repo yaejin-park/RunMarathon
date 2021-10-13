@@ -25,21 +25,32 @@
 		padding-left: 20px;
 		text-align: left;
 	}
-</style>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 	
-<script type="text/javascript">
-	$(function(){
-		$(".content").hide();
-		
-		$(document).on("click", "#subject", function(){
-			$(".content").next().next().toggle();
-			
-		});
-		
-	});
-
-</script>
+	.qna-title{
+		display: table;
+		width: 100%;
+		table-layout: fixed;
+	}
+	.qna-title > * {
+		display:table-cell;	
+	}
+	
+	.qna-no{
+		width: 75px;
+	}
+	
+	.qna-subject{
+		width: 380px;
+	}
+	
+	.qna-writer{
+		width: 75px;
+	}
+	
+	.qna-day{
+		width: 160px;
+	}
+</style>
 
 <%
 	QuestionDAO dao = new QuestionDAO();
@@ -93,83 +104,68 @@
 	int no = totalCount - (currentPage-1) * perPage;
 %>
 	
-<button type="button" class="btn btn-success"
-	style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
+<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
 	onclick="location.href='index.jsp?go=questionBoard/questionForm.jsp'">
 	<span class="glyphicon glyphicon-pencil"></span>글추가
 </button>
 
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
-	<thead>
-		<colgroup>
-			<col width="75px">
-			<col width="380px">
-			<col width="75px">
-			<col width="160px">
-		</colgroup>
-		<tr style="text-align: center;">
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-		</tr>
-	</thead>
-	<tbody style="text-align: center;">
-		<%if(totalCount==0){%>
-		<tr height="40">
-			<td colspan="4" align="center"><b>등록된 글이 없습니다.</b></td>
-		</tr>
-		<%
-		}else{
-				for(QuestionDTO dto:list){
-		%>
-		<tr>
-			<td align="center"><%=no-- %></td>
-			<td id="subject"><%=dto.getSubject() %></td>
-			<td><%=dto.getWriter() %></td>
-			<td><%=sdf.format(dto.getWriteDay()) %></td>
-		</tr>
-		<tr class="content">
-			<td colspan="4">
-				<div>
-				<%=dto.getContent() %>
-				<button type="button" onclick="">수정</button>
+<div class="accor-all">
+
+	<%if(totalCount==0){%>
+	<div height="40">
+		<b>등록된 글이 없습니다.</b>
+	</div>
+	<%
+	}else{
+			for(QuestionDTO dto:list){
+	%>
+	<div class="accor-div">
+		<div class="qna-title">
+			<div class="qna-no">
+				<%=no-- %>
+			</div>
+			<div class="qna-subject accor-title">
+				<%=dto.getSubject() %>
+			</div>
+			<div class="qna-writer">
+				<%=dto.getWriter() %>
+			</div>
+			<div class="qna-day">
+				<%=sdf.format(dto.getWriteDay()) %>
+			</div>
+		</div>
+		<div class="accor-content">
+			<%=dto.getContent() %>
+			<button type="button" onclick="">수정</button>
 				<button type="button" onclick="">삭제</button>
 				<button type="button" onclick="location.href='index.jsp?go=questionBoard/answerForm.jsp?idx=<%=dto.getIdx()%>'">답변</button>
-				</div>
-			</td>
-		</tr>
+		</div>
+	</div>
 		<%}
-			}
-		%>
-	</tbody>
-</table>
+	}
+	%>
+</div>
 
 <!-- 페이징 처리-->
 <div style="width: 900px; text-align: center;">
 	<ul class="pagination">
 		<%
-				//이전
-				if(startPage>1){%>
-		<li><a
-			href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=startPage-1%>">◀</a>
+		//이전
+		if(startPage>1){
+		%>
+			<li><a href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=startPage-1%>">◀</a>
+		<%
+		}
+		for(int pp = startPage; pp<=endPage; pp++){
+			if(pp==currentPage){//만약에 현재페이지면 액티브를 주겠다.%>
+				<li class="active"><a href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
+			<%} else{%>
+				<li><a href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
 			<%}
-			
-					for(int pp = startPage; pp<=endPage; pp++){
-					if(pp==currentPage){//만약에 현재페이지면 액티브를 주겠다.%>
-		<li class="active"><a
-			href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
-		<%} else{%>
-		<li><a
-			href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
-		<%}
-				}
-				
-				//다음
-				if(endPage<totalPage){%>
-		<li><a
-			href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=endPage+1%>">▶</a>
-			<%}
-			%>
+		}
+		//다음
+		if(endPage<totalPage){%>
+			<li><a href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=endPage+1%>">▶</a>
+		<%}%>
 	</ul>
 </div>

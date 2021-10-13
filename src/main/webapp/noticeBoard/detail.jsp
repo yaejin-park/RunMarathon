@@ -3,13 +3,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
 <%
 	String idx = request.getParameter("idx");
 	String currentPage = request.getParameter("currentPage");
@@ -32,40 +26,39 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 %>
-	<table class="table table-bordered">
-		<caption><b>내용보기</b></caption>
-		<tr>
-			<th>
-				<span style="font-size: 1.7em;"><%=dto.getSubject() %></span>
-				<br>
-				<span style="color: black; font-size: 10pt; margin-left: 30px;">
-					<%=dto.getWriter() %></span><br>
-				<span style="color: gray; font-size: 10pt; margin-left: 30px;">
-					<%=sdf.format(dto.getWriteDay()) %>
-					&nbsp;&nbsp;&nbsp;
-					조회 <%=dto.getReadCount() %>
-				</span>
-			</th>
-		</tr>
-		<tr>
-			<td>
-				<%=dto.getContent() %>
-			</td>
-		</tr>
-		<tr>
-			<td align="center">
-				<button type="button" class="btn btn-info" style="width: 80px;" 
-					onclick="location.href='index.jsp?go=noticeBoard/smartform.jsp'">글쓰기</button>
+<table class="table table-bordered">
+	<caption><b>내용보기</b></caption>
+	<tr>
+		<th>
+			<span><%=dto.getSubject() %></span>
+			<br>
+			<span>
+				<%=dto.getWriter() %></span><br>
+			<span>
+				<%=sdf.format(dto.getWriteDay()) %>
+				&nbsp;&nbsp;&nbsp;
+				조회 <%=dto.getReadCount() %>
+			</span>
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<%=dto.getContent() %>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<button type="button" class="btn btn-info" style="width: 80px;" 
+				onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp&menu_one=12&menu_two=18&'">글쓰기</button>
+			
+			<button type="button" class="btn btn-info" style="width: 80px;" 
+				onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=currentPage%>'">목록</button>
+			
+			<button type="button" class="btn btn-info" style="width: 80px;" 
+				onclick="location.href=''">수정</button>
 				
-				<button type="button" class="btn btn-info" style="width: 80px;" 
-					onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp?currentPage=<%=currentPage%>'">목록</button>
-				
-				<button type="button" class="btn btn-info" style="width: 80px;" 
-					onclick="location.href=''">수정</button>
-				<button type="button" class="btn btn-info" style="width: 80px;" 
-					onclick="location.href='index.jsp?go=noticeBoard/delete.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">삭제</button>
-			</td>
-		</tr>
-	</table>
-</body>
-</html>
+			<button type="button" class="btn btn-info" style="width: 80px;" 
+				onclick="location.href='noticeBoard/delete.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">삭제</button>
+		</td>
+	</tr>
+</table>

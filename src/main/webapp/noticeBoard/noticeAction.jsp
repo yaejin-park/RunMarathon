@@ -18,6 +18,6 @@
 	
 	//방금 추가된 idx 값 얻기
 	String idx = dao.getMaxIdx();
-	String path = "../index.jsp?go=noticeBoard/detail.jsp?idx=" + idx;
+	String path = "../index.jsp?go=noticeBoard/detail.jsp?&menu_one=12&menu_two=18&idx=" + idx;
 	response.sendRedirect(path);
 %>

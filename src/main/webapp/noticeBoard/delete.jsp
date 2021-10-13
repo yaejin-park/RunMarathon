@@ -3,10 +3,6 @@
     pageEncoding="UTF-8"%>
 
 <%
-	//삭제 후 다시 List로 이동
-	String go = "../index.jsp?go=noticeBoard/noticeList.jsp";
-	response.sendRedirect(go);
-
 	String idx = request.getParameter("idx");
 	String currentPage = request.getParameter("currentPage");
 
@@ -14,4 +10,7 @@
 	NoticeDAO dao = new NoticeDAO();
 	dao.deleteNotice(idx);
 	
+	//삭제 후 다시 List로 이동
+	String go = "../index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=" + currentPage;
+	response.sendRedirect(go);
 %>

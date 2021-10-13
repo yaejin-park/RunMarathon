@@ -23,5 +23,4 @@
 	
 	String path = "../index.jsp?go=questionBoard/questionList.jsp";
 	response.sendRedirect(path);
-
 %>
