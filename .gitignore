@@ -111,6 +111,9 @@ hs_err_pid*
 .history
 .ionide
 
+<<<<<<< HEAD
+# End of https://www.toptal.com/developers/gitignore/api/java,eclipse,visualstudiocode
+=======
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,visualstudiocode
 
 
@@ -228,3 +231,4 @@ hs_err_pid*
 DBConnect.java
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,visualstudiocode
+>>>>>>> kmj
