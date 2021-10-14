@@ -18,7 +18,7 @@ public class ContestDAO {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from contest";
+		String sql = "select * from contest order by contest_start desc";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -109,7 +109,7 @@ public class ContestDAO {
 	public void updateContest(ContestDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "update contest set name=? , content=?, contest_start=?, contest_end=?, apply_start=?, apply_end=?, gift_check=?, gift_start=?, gift_end=?, money=?";
+		String sql = "update ignore contest set name=? , content=?, contest_start=?, contest_end=?, apply_start=?, apply_end=?, gift_check=?, gift_start=?, gift_end=?, money=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

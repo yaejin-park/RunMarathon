@@ -12,6 +12,19 @@
 		color:#5799c0;
 	}
 </style>
+<script type="text/javascript">
+	$(function(){
+		if($("#checkGift").val() == "1"){
+			console.log("체크")
+			$("#checkGift").prop("checked", true);
+			$("#checkGift").parents(".checkbox").next().show();
+		}else{
+			console.log("체크xxx")
+			$("#checkGift").prop("checked", false);
+			$("#checkGift").parents(".checkbox").next().hide();
+		}
+	});
+</script>
 <%
 	String contestName = request.getParameter("contest_name");
 	
@@ -56,7 +69,7 @@
 						<th>기념품</th>
 						<td>
 							<div class="checkbox">
-								<label><input type="checkbox" id="checkGift" name="gift_check" checked="<%= dto.getGift_check() %>" disabled="disabled">기념품 제공</label> 
+								<label><input type="checkbox" id="checkGift" name="gift_check" value="<%= dto.getGift_check() %>" disabled="disabled">기념품 제공</label> 
 							</div>
 							<div><%= dto.getGift_start() %> ~ <%= dto.getGift_end() %></div>
 						</td>
