@@ -188,10 +188,9 @@ public class MemberDAO {
 		return dto;
 	}
 	
-	//비밀번호 찾기
-	public MemberDTO findLogin(String name, String hp, String id, String auth1, String auth2) {
-		MemberDTO dto  = new MemberDTO();
-		return 
-	}
+	/*
+	 * //비밀번호 찾기 public MemberDTO findLogin(String name, String hp, String id,
+	 * String auth1, String auth2) { MemberDTO dto = new MemberDTO(); }
+	 */
 	
 }
