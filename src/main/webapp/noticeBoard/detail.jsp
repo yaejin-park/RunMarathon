@@ -49,16 +49,23 @@
 	<tr>
 		<td align="center">
 			<button type="button" class="btn btn-info" style="width: 80px;" 
-				onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp&menu_one=12&menu_two=18&'">글쓰기</button>
-			
-			<button type="button" class="btn btn-info" style="width: 80px;" 
 				onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=currentPage%>'">목록</button>
-			
-			<button type="button" class="btn btn-info" style="width: 80px;" 
-				onclick="location.href=''">수정</button>
-				
-			<button type="button" class="btn btn-info" style="width: 80px;" 
-				onclick="location.href='noticeBoard/delete.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">삭제</button>
 		</td>
 	</tr>
 </table>
+<%
+	/*로그인 세션 처리에 필요한 변수 선언*/
+	String sessionLogin = (String)session.getAttribute("sessionLogin");
+	
+	String id = (String)session.getAttribute("sessionId");
+	if(sessionLogin!=null && id.equals("admin")){
+%>
+<button type="button" class="btn btn-info" style="width: 80px;" 
+	onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp&menu_one=12&menu_two=18'">글쓰기</button>
+<button type="button" class="btn btn-info" style="width: 80px;" 
+	onclick="location.href='index.jsp?go=noticeBoard/updateForm.jsp?&menu_one=12&menu_two=18&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
+<button type="button" class="btn btn-info" style="width: 80px;" 
+	onclick="location.href='noticeBoard/delete.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">삭제</button>
+<%
+	}
+%>

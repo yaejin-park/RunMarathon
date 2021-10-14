@@ -155,7 +155,7 @@ public class NoticeDAO {
 		}
 	}
 	
-	//delete
+	//공지사항 delete(삭제)
 	public void deleteNotice(String idx) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -165,6 +165,27 @@ public class NoticeDAO {
 			pstmt = conn.prepareStatement(sql);
 			//바인딩
 			pstmt.setString(1,idx);
+
+			//실행
+			pstmt.execute();
+		} catch (Exception e) {
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	//공지사항 update(수정)
+	public void updateNotice(NoticeDTO dto) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "update notice set subject=?, content=? where idx=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1, dto.getSubject());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, dto.getIdx());
 
 			//실행
 			pstmt.execute();
