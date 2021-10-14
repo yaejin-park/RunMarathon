@@ -78,7 +78,7 @@ $(function(){
 	<tbody>
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" class="form-control" name="id" id="id" required="required" autofocus="autofocus" maxlength="8"></td>
+			<td><input type="text" class="form-control" name="id" id="id" required="required" autofocus="autofocus" maxlength="10"></td>
 			<td><button type="button" class="btn btn-info" id="checkId" value="<%=request.getParameter("id")%>">확인</button>
 		</tr>
 		<tr>

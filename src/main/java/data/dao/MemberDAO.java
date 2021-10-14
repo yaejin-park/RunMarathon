@@ -11,17 +11,17 @@ import mysql.db.DBConnect;
 public class MemberDAO {
 	DBConnect db = new DBConnect();
 	MemberDTO dto = new MemberDTO();
-	
-	//회원가입
+
+	// 회원가입
 	public void insertMember(MemberDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		
+
 		String sql = "insert into member(name, nick, hp, id, pass, addr1, addr2, auth1, auth2, opt) values (?,?,?,?,?,?,?,?,?,?)";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, dto.getName());
 			pstmt.setString(2, dto.getNick());
 			pstmt.setString(3, dto.getHp());
@@ -32,7 +32,7 @@ public class MemberDAO {
 			pstmt.setString(8, dto.getAuth1());
 			pstmt.setString(9, dto.getAuth2());
 			pstmt.setString(10, dto.getOpt());
-			
+
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -40,28 +40,27 @@ public class MemberDAO {
 		} finally {
 			db.dbClose(pstmt, conn);
 		}
-		
-		
+
 	}
-	
-	//로그인 확인
+
+	// 로그인 확인
 	public boolean isMember(String id, String pass) {
 		boolean flag = false;
-		
+
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String sql = "select * from member where id=? and pass=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, id);
 			pstmt.setString(2, pass);
-			
+
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				flag = true;
 			}
 		} catch (SQLException e) {
@@ -72,22 +71,22 @@ public class MemberDAO {
 		}
 		return flag;
 	}
-	
-	//아이디 중복체크(중복이면 true)
+
+	// 아이디 중복체크(중복이면 true)
 	public boolean isIdCheck(String id) {
 		boolean isId = false;
-		
-		Connection conn =  db.getConnection();
+
+		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String sql = "select * from member where id=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				isId = true;
 			}
 		} catch (SQLException e) {
@@ -98,22 +97,22 @@ public class MemberDAO {
 		}
 		return isId;
 	}
-	
-	//아이디로 이름 얻기
+
+	// 아이디로 이름 얻기
 	public String getName(String id) {
-		String name =null;
-		
+		String name = null;
+
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String sql = "select name from member where id=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				name = rs.getString("name");
 			}
 		} catch (SQLException e) {
@@ -124,22 +123,48 @@ public class MemberDAO {
 		}
 		return name;
 	}
-	
-	//닉네임 검색해서 중복 닉네임 찾기
-	public String getNick(String nick) {
-		String isNick =null;
-		
+
+	// 아이디로 닉네임 얻기
+	public String getIdNick(String id) {
+		String nick = null;
+
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
+		String sql = "select nick from member where id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				nick = rs.getString("nick");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return nick;
+	}
+
+	// 닉네임 검색해서 중복 닉네임 찾기
+	public String getNick(String nick) {
+		String isNick = null;
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
 		String sql = "select nick from member where nick=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, nick);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				isNick = rs.getString("nick");
 			}
 		} catch (SQLException e) {
@@ -150,23 +175,22 @@ public class MemberDAO {
 		}
 		return isNick;
 	}
-	
-	
-	//회원정보 가져오기
+
+	// 회원정보 가져오기
 	public MemberDTO getAllMember(String id) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		ResultSet rs =null;
+		ResultSet rs = null;
 
 		MemberDTO dto = new MemberDTO();
-		
+
 		String sql = "select * from member where id=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				dto.setName(rs.getString("name"));
 				dto.setNick(rs.getString("nick"));
 				dto.setHp(rs.getString("hp"));
@@ -178,7 +202,7 @@ public class MemberDAO {
 				dto.setAuth2(rs.getString("auth2"));
 				dto.setOpt(rs.getString("opt"));
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -187,10 +211,38 @@ public class MemberDAO {
 		}
 		return dto;
 	}
+
 	
-	/*
-	 * //비밀번호 찾기 public MemberDTO findLogin(String name, String hp, String id,
-	 * String auth1, String auth2) { MemberDTO dto = new MemberDTO(); }
-	 */
-	
+	//비밀번호 찾기
+	public String findLogin(String id, String name, String hp, String auth1, String auth2) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select pass from where id=? and name=?, hp=?, auth1=?, auth2=?";
+		
+		String pass= null;
+		
+		try {
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			pstmt.setString(3, hp);
+			pstmt.setString(4, auth1);
+			pstmt.setString(5, auth2);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pass = rs.getString("pass");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pass;
+	}
+	 
+
 }

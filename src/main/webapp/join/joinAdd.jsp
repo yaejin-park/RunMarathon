@@ -32,5 +32,6 @@
 	MemberDAO dao = new MemberDAO();
 	dao.insertMember(dto);
 	
-	response.sendRedirect("../index.jsp?go=join/joinSuccess.jsp?id="+id);
+	response.sendRedirect("../index.jsp?go=join/joinSuccess.jsp?id="+id+"&menu_one=21");
+	
 %>

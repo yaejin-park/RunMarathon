@@ -115,7 +115,7 @@ $(function(){
 	//취소 버튼
 	$("#joinNo").click(function() {
 		//로그인 페이지로 이동
-		
+		history.back();
 	});
 	
 	

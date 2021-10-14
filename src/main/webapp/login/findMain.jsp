@@ -30,12 +30,16 @@ $(function(){
 			$("#hp3").focus();
 		} 
 	});	
+	
+	//아이디, 비번 메뉴 선택
+	
+	
 });	
 </script>
 </head>
 
 <body>
-<form action="login/findResult.jsp" method="post" class="form-inline">
+<form action="login/findAction.jsp" method="post" class="form-inline">
 <table class="table" style="width: 600px; padding: 30px; margin: 30px;">
 <thead>
 	<tr>
