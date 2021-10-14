@@ -1,3 +1,8 @@
+<%@page import="data.dto.AdminApplyDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="data.dao.AdminApplyDAO"%>
+<%@page import="data.dto.MemberDTO"%>
+<%@page import="data.dao.MemberDAO"%>
 <%@page import="data.dto.QuestionDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.QuestionDAO"%>
@@ -80,17 +85,28 @@
 			location.href = "index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=currentPage-1%>";
 	</script>
 <%}
-	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	//각 페이지에 출력한 시작 번호
 	int no = totalCount - (currentPage-1) * perPage;
-%>
 	
-<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
-	onclick="location.href='index.jsp?go=questionBoard/questionForm.jsp&menu_one=12&menu_two=19'">
-	<span class="glyphicon glyphicon-pencil"></span>글추가
-</button>
+	/*로그인 세션 처리에 필요한 변수 선언*/
+	MemberDTO mdto = new MemberDTO();
+	MemberDAO mdao = new MemberDAO();
+	String id = (String)session.getAttribute("sessionId");
+	String nick = mdao.getNick(id);
+	
+	String sessionLogin = (String)session.getAttribute("sessionLogin");
+	if(sessionLogin!=null){
+	%>	
+		<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
+			onclick="location.href='index.jsp?go=questionBoard/questionForm.jsp&menu_one=12&menu_two=19'">
+			<span class="glyphicon glyphicon-pencil"></span>글추가
+		</button>
+	<%
+	}
+%>
+
 
 <div class="accor-all">
 	<div class="qna-title">
@@ -113,7 +129,7 @@
 	</div>
 	<%
 	}else{
-			for(QuestionDTO dto:list){
+		for(QuestionDTO dto:list){
 	%>
 	<div class="accor-div">
 		<div class="qna-title">
@@ -132,18 +148,27 @@
 		</div>
 		<div class="accor-content">
 			<%=dto.getContent() %>
-			<button type="button" onclick="location.href='index.jsp?go=questionBoard/updateForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
-			<button type="button" 
-			onclick="
 			<%
-			if(dto.getStep()==0){%>
-				location.href='questionBoard/questionDelete.jsp?&menu_one=12&menu_two=19&ref=<%=dto.getRef()%>&currentPage=<%=currentPage%>'
-			<%} else{%>
-				location.href='questionBoard/answerDelete.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'
-			<%}%>
-			">삭제
-			</button>
-			<button type="button" onclick="location.href='index.jsp?go=questionBoard/answerForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">답변</button>
+			if(sessionLogin!=null && nick.equals(dto.getWriter())){%>
+				<button type="button" onclick="location.href='index.jsp?go=questionBoard/updateForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
+				<button type="button" 
+				onclick="
+				<%
+				if(dto.getStep()==0){%>
+					location.href='questionBoard/questionDelete.jsp?&menu_one=12&menu_two=19&ref=<%=dto.getRef()%>&currentPage=<%=currentPage%>'
+				<%} else{%>
+					location.href='questionBoard/answerDelete.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'
+				<%}%>
+				">삭제
+				</button>
+			<%}
+			
+			if(sessionLogin!=null && id.equals("admin")){
+			%>
+				<button type="button" onclick="location.href='index.jsp?go=questionBoard/answerForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">답변</button>
+			<%
+			}
+			%>
 		</div>
 	</div>
 		<%}

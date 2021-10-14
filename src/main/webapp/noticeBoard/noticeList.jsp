@@ -66,7 +66,6 @@
 
 <!-- noticeList -->
 <%
-	
 	if(sessionLogin!=null && id.equals("admin")){
 %>
 	<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
