@@ -9,6 +9,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <style>
 	.qna-title{
 		display: table;
@@ -94,7 +95,7 @@
 	MemberDTO mdto = new MemberDTO();
 	MemberDAO mdao = new MemberDAO();
 	String id = (String)session.getAttribute("sessionId");
-	String nick = mdao.getNick(id);
+	String nick = mdao.getIdNick(id);
 	
 	String sessionLogin = (String)session.getAttribute("sessionLogin");
 	if(sessionLogin!=null){
@@ -136,7 +137,7 @@
 			<div class="qna-no">
 				<%=no-- %>
 			</div>
-			<div class="qna-subject accor-title">
+			<div class="qna-subject accor-title" id="subject">
 				<%=dto.getSubject() %>
 			</div>
 			<div class="qna-writer">
