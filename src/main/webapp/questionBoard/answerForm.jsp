@@ -6,11 +6,13 @@
 	QuestionDTO dto = new QuestionDTO();
 	QuestionDAO dao = new QuestionDAO();
 	String idx = request.getParameter("idx");
+	String currentPage = request.getParameter("currentPage");
 	dto = dao.getSubPass(idx);
 	String root = request.getContextPath();
 %>
 
 <form action="questionBoard/answerAction.jsp" method="post">
+	<input type="hidden" name="currentPage" value="<%=currentPage%>">
 	<table class="table table-bordered" style="width: 800px;">
 		<caption>Answer</caption>
 		<thead>
@@ -41,7 +43,7 @@
 		
 		<tr>
 			<td colspan="2">
-				<input type="text" name="content" class="form-control" required="required" style="width: 780px; height: 300px;" value="<%=dto.getRef()%>">
+				<input type="text" name="content" class="form-control" required="required" style="width: 780px; height: 300px;">
 				<input type="hidden" name="ref" value="<%=dto.getRef()%>">	
 				<input type="hidden" name="step" value="<%=dto.getStep()%>">
 				<input type="hidden" name="reforder" value="<%=dto.getReforder()%>">

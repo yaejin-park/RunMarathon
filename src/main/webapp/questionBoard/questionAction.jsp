@@ -20,6 +20,6 @@
 	//db insert
 	dao.insertQuestion(dto);
 	
-	String path = "../index.jsp?go=questionBoard/questionList.jsp";
+	String path = "../index.jsp?go=questionBoard/questionList.jsp&menu_one=12&menu_two=19";
 	response.sendRedirect(path);
 %>

@@ -20,6 +20,7 @@
 				for(MenuDTO oneDto:oneDepthList) {
 					String parent_idx = oneDto.getMenu_idx(); 
 					List<MenuDTO> twoDepthList = dao.getTwoDepth(parent_idx);
+					if(!oneDto.getMenu_name().equals("로그인") && !oneDto.getMenu_name().equals("회원가입") && !oneDto.getMenu_name().equals("마이페이지")){
 				%>
 					<li>
 						<a href="javascript:" class="one-depth"><%= oneDto.getMenu_name() %></a>
@@ -34,6 +35,7 @@
 						</ul>
 					</li>
 				<%}
+				}
 			%>
 		</ul>
 	</div>

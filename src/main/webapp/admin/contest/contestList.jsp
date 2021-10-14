@@ -57,7 +57,7 @@ $(function(){
 			url:"./admin/contest/deleteContestAction.jsp",
 			dataType:"html",
 			data:{name:s},
-			success:function(result){
+			success:function(){
 				location.reload(true);
 			},
 		});

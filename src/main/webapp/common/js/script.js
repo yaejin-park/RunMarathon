@@ -47,6 +47,7 @@ $(function(){
 	$(".accor-title").mouseover(function(){
 		$(this).css("cursor", "pointer");
 	});
+
 	$(".accor-content").slideUp(0);
 	$(".accor-title").click(function(){
 		if(!$(this).parents(".accor-div").find(".accor-content").is(":visible")){

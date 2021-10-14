@@ -1,6 +1,11 @@
+<%@page import="data.dao.MemberDAO"%>
+<%@page import="data.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+	MemberDAO mdao = new MemberDAO();
+	String id = (String)session.getAttribute("sessionId");
+%>
 <form action="questionBoard/questionAction.jsp" method="post">
 	<table class="table table-bordered" style="width: 800px;">
 		<caption>Question</caption>
@@ -12,7 +17,7 @@
 			<tr>
 				<th>작성자</th>
 				<td>
-					<input type="text" name="writer" class="form-control" required="required" style="width: 130px;">
+					<input type="text" name="writer" class="form-control" required="required" style="width: 130px;" value="<%=mdao.getNick(id)%>">
 				</td>
 			</tr>
 			<tr>
@@ -37,7 +42,7 @@
 		<tr>
 			<td colspan="2" align="center">
 				<button type="submit" class="btn btn-warning" style="width: 120px;">저장하기</button>
-				<button type="button" class="btn btn-warning" style="width: 120px;" onclick="location.href='index.jsp?go=questionBoard/questionList.jsp'">목록</button>
+				<button type="button" class="btn btn-warning" style="width: 120px;" onclick="location.href='index.jsp?go=questionBoard/questionList.jsp&menu_one=12&menu_two=19'">목록</button>
 			</td>
 		</tr>
 	</table>   

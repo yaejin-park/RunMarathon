@@ -1,3 +1,8 @@
+<%@page import="data.dto.AdminApplyDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="data.dao.AdminApplyDAO"%>
+<%@page import="data.dto.MemberDTO"%>
+<%@page import="data.dao.MemberDAO"%>
 <%@page import="data.dto.QuestionDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.QuestionDAO"%>
@@ -5,31 +10,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
-	table th,td{
-		border: 1px solid;
-		text-align: center;
-	}
-	tbody tr{
-		border: 1px solid;
-		height: 30px;
-		
-	}
-	.content div{
-		border: 1px solid black;
-		width: 350px;
-		height: 200px;
-		margin: 20px 0px 20px 80px;
-	}
-	
-	#subject{
-		padding-left: 20px;
-		text-align: left;
-	}
-	
 	.qna-title{
 		display: table;
 		width: 100%;
 		table-layout: fixed;
+		border-top: 1px solid gray;
 	}
 	.qna-title > * {
 		display:table-cell;	
@@ -37,6 +22,8 @@
 	
 	.qna-no{
 		width: 75px;
+		height: 40px;
+		text-align: center;
 	}
 	
 	.qna-subject{
@@ -49,6 +36,7 @@
 	
 	.qna-day{
 		width: 160px;
+		text-align: center;
 	}
 </style>
 
@@ -97,27 +85,51 @@
 			location.href = "index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=currentPage-1%>";
 	</script>
 <%}
-	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	//각 페이지에 출력한 시작 번호
 	int no = totalCount - (currentPage-1) * perPage;
-%>
 	
-<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
-	onclick="location.href='index.jsp?go=questionBoard/questionForm.jsp'">
-	<span class="glyphicon glyphicon-pencil"></span>글추가
-</button>
+	/*로그인 세션 처리에 필요한 변수 선언*/
+	MemberDTO mdto = new MemberDTO();
+	MemberDAO mdao = new MemberDAO();
+	String id = (String)session.getAttribute("sessionId");
+	String nick = mdao.getNick(id);
+	
+	String sessionLogin = (String)session.getAttribute("sessionLogin");
+	if(sessionLogin!=null){
+	%>	
+		<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
+			onclick="location.href='index.jsp?go=questionBoard/questionForm.jsp&menu_one=12&menu_two=19'">
+			<span class="glyphicon glyphicon-pencil"></span>글추가
+		</button>
+	<%
+	}
+%>
+
 
 <div class="accor-all">
-
+	<div class="qna-title">
+		<div class="qna-no">
+			번호
+		</div>
+		<div class="qna-subject" style="text-align: center;">
+			제목
+		</div>
+		<div class="qna-writer">
+			작성자
+		</div>
+		<div class="qna-day">
+			날짜
+		</div>
+	</div>
 	<%if(totalCount==0){%>
-	<div height="40">
+	<div>
 		<b>등록된 글이 없습니다.</b>
 	</div>
 	<%
 	}else{
-			for(QuestionDTO dto:list){
+		for(QuestionDTO dto:list){
 	%>
 	<div class="accor-div">
 		<div class="qna-title">
@@ -136,9 +148,27 @@
 		</div>
 		<div class="accor-content">
 			<%=dto.getContent() %>
-			<button type="button" onclick="">수정</button>
-				<button type="button" onclick="">삭제</button>
-				<button type="button" onclick="location.href='index.jsp?go=questionBoard/answerForm.jsp?idx=<%=dto.getIdx()%>'">답변</button>
+			<%
+			if(sessionLogin!=null && nick.equals(dto.getWriter())){%>
+				<button type="button" onclick="location.href='index.jsp?go=questionBoard/updateForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
+				<button type="button" 
+				onclick="
+				<%
+				if(dto.getStep()==0){%>
+					location.href='questionBoard/questionDelete.jsp?&menu_one=12&menu_two=19&ref=<%=dto.getRef()%>&currentPage=<%=currentPage%>'
+				<%} else{%>
+					location.href='questionBoard/answerDelete.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'
+				<%}%>
+				">삭제
+				</button>
+			<%}
+			
+			if(sessionLogin!=null && id.equals("admin")){
+			%>
+				<button type="button" onclick="location.href='index.jsp?go=questionBoard/answerForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">답변</button>
+			<%
+			}
+			%>
 		</div>
 	</div>
 		<%}
@@ -153,19 +183,19 @@
 		//이전
 		if(startPage>1){
 		%>
-			<li><a href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=startPage-1%>">◀</a>
+			<li><a href="index.jsp?go=questionBoard/questionList.jsp?&menu_one=12&menu_two=19&currentPage=<%=startPage-1%>">◀</a>
 		<%
 		}
 		for(int pp = startPage; pp<=endPage; pp++){
 			if(pp==currentPage){//만약에 현재페이지면 액티브를 주겠다.%>
-				<li class="active"><a href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
+				<li class="active"><a href="index.jsp?go=questionBoard/questionList.jsp?&menu_one=12&menu_two=19&currentPage=<%=pp%>"><%=pp %></a></li>
 			<%} else{%>
-				<li><a href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=pp%>"><%=pp %></a></li>
+				<li><a href="index.jsp?go=questionBoard/questionList.jsp?&menu_one=12&menu_two=19&currentPage=<%=pp%>"><%=pp %></a></li>
 			<%}
 		}
 		//다음
 		if(endPage<totalPage){%>
-			<li><a href="index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=endPage+1%>">▶</a>
+			<li><a href="index.jsp?go=questionBoard/questionList.jsp?&menu_one=12&menu_two=19&currentPage=<%=endPage+1%>">▶</a>
 		<%}%>
 	</ul>
 </div>
