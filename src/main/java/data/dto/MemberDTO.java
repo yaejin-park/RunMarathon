@@ -7,7 +7,8 @@ public class MemberDTO {
 	private String hp;
 	private String id;
 	private String pass;
-	private String addr;
+	private String addr1;
+	private String addr2;
 	private String auth1;
 	private String auth2;
 	private String opt;
@@ -48,11 +49,17 @@ public class MemberDTO {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	public String getAddr() {
-		return addr;
+	public String getAddr1() {
+		return addr1;
 	}
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
 	}
 	public String getAuth1() {
 		return auth1;
@@ -72,5 +79,4 @@ public class MemberDTO {
 	public void setOpt(String opt) {
 		this.opt = opt;
 	}
-
 }

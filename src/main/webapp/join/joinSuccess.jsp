@@ -15,6 +15,10 @@
 	
 	String name = dao.getName(id);
 %>
+<script type="text/javascript">
+	alert("<%=id%>");
+	alert("<%=name%>");
+</script>
 <div style="margin: 0 auto; width: 100%;">
 	<b><%=name%>님의 회원가입을 축하합니다</b>
 	<br><br>

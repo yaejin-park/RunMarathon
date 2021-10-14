@@ -61,22 +61,36 @@ $(function(){
 			$("#optAll").prop("checked",false);
 		}
 	});
+	
+	$(".apply-type").click(function() {
+		$("#type").val($(this).val());
+	});
 });
 
-//약관 체크됐는지 확인
+//약관 체크됐는지 / 로그인 중인지
 function check() {
-	if($("#opt1").is(":checked")&&$("#opt2").is(":checked")){
+	//로그인 경고
+	<%String sessionLogin = (String)session.getAttribute("sessionLogin");
+	if(sessionLogin==null){%>
+		alert("로그인 이후, 이용가능합니다");
 		return true;
-	} else{
-		alert("약관에 동의해주세요");
-		return false;
-	}
+		<%} else{ %>
+		//약관 동의 경고
+		if($("#opt1").is(":checked") && $("#opt2").is(":checked")){
+			return true;
+		} else{
+			alert("약관에 동의해주세요");
+			return false;
+		}
+ 	<%}%>  
 }
 </script>
 </head>
 <body>
+
 <div>
-<form action="index.jsp?go=apply/applyForm.jsp" method="post" class="form-inline" name="apply-main" onsubmit="return check()">
+<form action="apply/applyAction.jsp" method="post" class="form-inline" onsubmit="return check()">
+<input type="hidden" id="type" name="type" value="">
 <table class="table table-bordered" style="width: 760px; float: left;">
 	<tbody>
 		<tr>
@@ -102,7 +116,7 @@ function check() {
 					<input type="checkbox" id="optAll">&nbsp;&nbsp;<b>전체동의</b>
 				</td>
 			</tr>
-			<tr>
+			<tr class="accor-div">
 				<td>
 					<input type="checkbox" class="opt" id="opt1" style="float: left;">
 					<div class="accor-title" >
@@ -112,11 +126,13 @@ function check() {
 						<div style="text-align: right;"><span class="glyphicon glyphicon-menu-down detail-icon" style="font-weight: bold;">자세히보기</span></div>
 					</div>
 					<div class="accor-content">
-						<jsp:include page="./applyTerms.jsp?term=1"></jsp:include>
+						<jsp:include page="applyTerms.jsp">
+							<jsp:param value="1" name="term"/>
+						</jsp:include>
 					</div>
 				</td>
 			</tr>
-			<tr>
+			<tr class="accor-div">
 				<td>
 					<input type="checkbox" class="opt" id="opt2" style="float: left;">
 					<div class="accor-title" >
@@ -126,14 +142,16 @@ function check() {
 						<div style="text-align: right;"><span class="glyphicon glyphicon-menu-down detail-icon" style="font-weight: bold;">자세히보기</span></div>
 					</div>
 					<div class="accor-content">
-						<jsp:include page="./applyTerms.jsp?term=2"></jsp:include>
+						<jsp:include page="applyTerms.jsp">
+							<jsp:param value="2" name="term"/>
+						</jsp:include>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td style="text-align: center;">
-					<button type="submit" class="btn btn-info" id="soloApply" value="1">개인 참가</button>
-					<button type="submit" class="btn btn-info" id="groupApply" value="2">단체 참가</button>
+					<button type="submit" class="btn btn-info apply-type" id="soloApply" value="1">개인 참가</button>
+					<button type="submit" class="btn btn-info apply-type" id="groupApply" value="2">단체 참가</button>
 				</td>
 			</tr>
 		</tbody>

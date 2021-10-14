@@ -147,7 +147,7 @@ $(function() {
 			</td>
 			<td>
 				<div align="right">
-					<a href="javascript:">아이디/비밀번호 찾기</a>
+					<a href="index.jsp?go=login/findMain.jsp&menu_one=21&menu_two=29">아이디/비밀번호 찾기</a>
 				</div>
 			</td>
 		</tr>

@@ -93,30 +93,57 @@ $(function(){
 		}
 	});
 
-		//아이디 중복 체크
-		$("#idDouble").click(function() {
-			//window.open("join/idSearch.jsp","중복체크","width=550px, height=350px, left=500px, top=100px");
-			popup("join/idSearchForm.jsp", 550, 350);
-		});
-		
-		//주소 검색
-		$("#searchAddr").click(function() {
-			new daum.Postcode({
-	            oncomplete: function(data) { //선택시 입력값 세팅
-	                $("#addr1").val(data.address); // 주소 넣기
-	                $("#addr2").focus(); //상세입력 포커싱
-	            }
-	        }).open();
-		});
+	//아이디 중복 체크
+	$("#idDouble").click(function() {
+		popup("join/idSearchForm.jsp", 550, 350);
+	});
+	//닉네임 중복 체크
+	$("#nickDouble").click(function() {
+		popup("join/nickSearchForm.jsp", 550, 350);
+	});
+	
+	//주소 검색
+	$("#searchAddr").click(function() {
+		new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                $("#addr1").val(data.address); // 주소 넣기
+                $("#addr2").focus(); //상세입력 포커싱
+            }
+        }).open();
+	});
 
-		//취소 버튼
-		$("#joinNo").click(function() {
-			//로그인 페이지로 이동
-			
-		});
+	//취소 버튼
+	$("#joinNo").click(function() {
+		//로그인 페이지로 이동
 		
+	});
+	
+	
+	//비번 유효성 검사
+	$("#pass1, pass2").change(function() {
+		var pw = $(this).val();
+		var num = pw.search(/[0-9]/g);
+		var eng = pw.search(/[a-z]/g);
+		var engB = pw.search(/[A-Z]/g);
+		var spe = pw.search(/[`~!@@#$%^&*|\\\'\";:\/?]/gi);
+
+		if(pw.length < 8 || pw.length > 20){
+		 alert("8자리 ~ 20자리 이내로 입력해주세요.");
+		 return false;
+		 }else if(pw.search(/\s/) != -1){
+		  alert("비밀번호는 공백 없이 입력해주세요.");
+		  return false;
+		 }else if(num < 0 || eng < 0 || engB < 0 || spe < 0 ){
+		  alert("영문 대소문자+숫자+특수문자를 포함하여 입력해주세요.");
+		  return false;
+		 }else {
+			console.log("통과"); 
+		    return true;
+		 }
+	});
 		
-		
+	
+	
 });
 
 	function check(f){
@@ -135,50 +162,7 @@ $(function(){
 		} else{
 			return true;
 		}
-		
-		 var pw = $("#pass").val();
-		 var num = pw.search(/[0-9]/g);
-		 var eng = pw.search(/[a-z]/ig);
-		 var spe = pw.search(/[`~!@@#$%^&*|\\\'\";:\/?]/gi);
-
-		 if(pw.length < 8 || pw.length > 20){
-		 	alert("8자리 ~ 20자리 이내로 입력해주세요.");
-		 	return false;
-		 }else if(pw.search(/\s/) != -1){
-		 	alert("비밀번호는 공백 없이 입력해주세요.");
-		 	return false;
-		 }else if(num < 0 || eng < 0 || spe < 0 ){
-		 	alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
-		 	return false;
-		 }else {
-			console.log("통과"); 
-		    return true;
-		 }
-		
 	}
-	
-	/* function chekPass(){
-		 var pw = $("#pass").val();
-		 var num = pw.search(/[0-9]/g);
-		 var eng = pw.search(/[a-z]/ig);
-		 var spe = pw.search(/[`~!@@#$%^&*|\\\'\";:\/?]/gi);
-
-		 if(pw.length < 8 || pw.length > 20){
-		 	alert("8자리 ~ 20자리 이내로 입력해주세요.");
-		 	return false;
-		 }else if(pw.search(/\s/) != -1){
-		 	alert("비밀번호는 공백 없이 입력해주세요.");
-		 	return false;
-		 }else if(num < 0 || eng < 0 || spe < 0 ){
-		 	alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
-		 	return false;
-		 }else {
-			console.log("통과"); 
-		    return true;
-		 }
-
-	} */
-
 </script>
 </head>
 
@@ -193,7 +177,7 @@ $(function(){
 					<input type="checkbox" id="optAll">&nbsp;&nbsp;전체동의
 				</td>
 			</tr>
-			<tr>
+			<tr class="accor-div">
 				<td>
 					<input type="checkbox" class="opt" style="float: left;">
 					<div class="accor-title" >
@@ -203,11 +187,13 @@ $(function(){
 						<div style="text-align: right;"><span class="glyphicon glyphicon-menu-down detail-icon" style="font-weight: bold;">자세히보기</span></div>
 					</div>
 					<div class="accor-content">
-						<jsp:include page="./terms.jsp?term=1"></jsp:include>
+						<jsp:include page="terms.jsp">
+							<jsp:param value="1" name="term"/>
+						</jsp:include>
 					</div>
 				</td>
 			</tr>
-			<tr>
+			<tr class="accor-div">
 				<td>
 					<input type="checkbox" class="opt" style="float: left;">
 					<div class="accor-title" >
@@ -217,13 +203,15 @@ $(function(){
 						<div style="text-align: right;"><span class="glyphicon glyphicon-menu-down detail-icon" style="font-weight: bold;">자세히보기</span></div>
 					</div>
 					<div class="accor-content">
-						<jsp:include page="./terms.jsp?term=2"></jsp:include>
+						<jsp:include page="terms.jsp">
+							<jsp:param value="2" name="term"/>
+						</jsp:include>
 					</div>
 				</td>
 			</tr>
-			<tr>
+			<tr class="accor-div">
 				<td>
-					<input type="checkbox" class="opt" name="opt" style="float: left;">
+					<input type="checkbox" class="opt" name="opt" id="opt" style="float: left;">
 					<div class="accor-title" >
 						<div style="float: left;">
 							&nbsp;&nbsp;마케팅정보 동의<span class="plus"> (선택)</span>
@@ -231,7 +219,9 @@ $(function(){
 						<div style="text-align: right;"><span class="glyphicon glyphicon-menu-down detail-icon" style="font-weight: bold;">자세히보기</span></div>
 					</div>
 					<div class="accor-content">
-						<jsp:include page="./terms.jsp?term=3"></jsp:include>
+						<jsp:include page="terms.jsp">
+							<jsp:param value="3" name="term"/>
+						</jsp:include>
 					</div>
 				</td>
 			</tr>
@@ -255,8 +245,8 @@ $(function(){
 				<th>전화번호</th>
 				<td>
 					<input type="text" name="hp1" id="hp1" class="form-control" required="required" maxlength="4" style="width: 100px;" value="">
-					<select id="selHp1" class="form-control" style="width: 100px; background-color: #BDD6FF">
-						<option value="-" selected="selected">직접입력</option> 
+					<select id="selHp1" class="form-control" style="width: 100px; background-color: #eeeeee">
+						<option value="-" selected="selected" disabled="disabled">직접입력</option> 
 						<option value="010">010</option>
 						<option value="011">011</option>
 						<option value="016">016</option>
@@ -303,7 +293,7 @@ $(function(){
 				<th>닉네임</th>
 				<td>
 				<input type="text" name="nick" id="nick" class="form-control" required="required" readonly="readonly">
-				<button type="button" class="btn btn-info" id="idNickDouble">중복체크</button>
+				<button type="button" class="btn btn-info" id="nickDouble">중복체크</button>
 				</td>
 			</tr>
 			
@@ -311,7 +301,7 @@ $(function(){
 				<th>본인인증 질문</th>
 				<td>
 					<select name="selAuth" id="selAuth" class="form-control">
-						<option value="-" disabled="disabled">선택</option>
+						<option value="-" disabled="disabled" selected="selected">선택</option>
 						<option value="character">좋아하는 캐릭터는?</option>
 						<option value="school">초등학교 이름은?</option>
 						<option value="movie">좋아하는 영화는?</option>

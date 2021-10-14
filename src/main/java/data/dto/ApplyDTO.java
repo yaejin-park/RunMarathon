@@ -3,6 +3,7 @@ package data.dto;
 public class ApplyDTO {
 	private String marathon;
 	private String name;
+	private String id;
 	private String addr;
 	private String hp;
 	private String course;
@@ -19,6 +20,12 @@ public class ApplyDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getAddr() {
 		return addr;

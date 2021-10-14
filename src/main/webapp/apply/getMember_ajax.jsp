@@ -7,13 +7,22 @@
 	String id = request.getParameter("id");
 	
 	MemberDAO dao = new MemberDAO();
-	
-	String name = dao.getName(id);
+	MemberDTO dto = dao.getAllMember(id);
 	
 	JSONObject ob = new JSONObject();
 	
-	ob.put("name",name);
-	ob.put("id",id);
+	String hp = dto.getHp();
+	
+	String[] hpSplit = hp.split("-");
+	String hp1 = hpSplit[0];
+	String hp2 = hpSplit[1];
+	String hp3 = hpSplit[2];
+	
+	ob.put("name",dto.getName());
+	ob.put("hp1",hp1);
+	ob.put("hp2",hp2);
+	ob.put("hp3",hp3);
+	ob.put("addr1",dto.getAddr1());
+	ob.put("addr2",dto.getAddr2()); 
 %>
-
 <%= ob.toString()%>

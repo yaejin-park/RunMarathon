@@ -11,29 +11,51 @@
 <script type="text/javascript" src="../common/js/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 	table {
-		margin: 10px;
+		margin: 30px;
 	}
 </style>
+
 <script type="text/javascript">
 $(function(){
 	//중복체크 확인 버튼
 	$("#checkId").click(function() {
 		var id = $("#id").val();
+		console.log("id:"+id);
 		
-		$.ajax({
-			type:"post",
-			dataType: "json",
-			url:"idSearchAction.jsp",
-			data:{"id":id},
-			success:function(data) {
-				var s="";
-				console.log("hi");
-			}
-			$("#idResult").html(s);
-		});
+	  	var idRegExp = /^[a-zA-z0-9]{4,12}$/; //아이디 유효성 검사
+
+		if(id==""){
+			$("#idResult").html("아이디를 입력해주세요"); 
+			$("#id").focus();
+		} else if(!idRegExp.test(id)) {
+	            alert("영문 대소문자와 숫자 4~12자리로 입력해주세요");
+	            $("#id").val("");
+	            $("#id").focus();
+		} else{
+			$.ajax({
+				type:"post",
+				dataType: "json",
+				url:"idSearchAction.jsp",
+				data:{"id":id},
+				success:function(data) {
+					var s="";
+					console.log("name:"+data.name);
+					if(data.name!=null){/* 존재하면 */
+						s+= '입력하신 아이디 <span style="font-weight: bold; color: #9D9DFA;">'+data.id+'</span>는 중복된 아이디 입니다.<br>';
+						s+= '다시 입력해주시기 바랍니다.';
+					} else{
+						s+= '입력하신 아이디 <span style="font-weight: bold; color: #9D9DFA;">'+data.id+'</span>는 사용가능합니다.<br>';
+						s+= '이 아이디를 사용하시겠습니까?<br>';
+						s+= '<button type="button" id="idUse" myid='+data.id+' class="btn btn-info" style="margin: 10px; width: 100px; height: 40px; font-size: 1em;">사용하기</button>';
+					}
+					$("#idResult").html(s); 
+				}
+			});
+		}
 	});
 	
-	$("#idUse").click(function() {
+	//아이디 사용 버튼
+	$(document).on("click","#idUse", function() {
 		var id = $(this).attr("myid");
 		opener.joinfrm.id.value = id;
 		window.close();
@@ -46,7 +68,7 @@ $(function(){
 	request.setCharacterEncoding("utf-8");
 	String key = request.getParameter("key");
 %>
-<form action="idSearch.jsp" method="post" class="form-inline">
+<form action="idSearchAction.jsp" method="post" class="form-inline">
 <table class="table" style="width: 500px; text-align: center;">
 	<thead>
 		<tr>

@@ -4,16 +4,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String id = request.getParameter("id");
+	String nick = request.getParameter("nick");
 	
 	MemberDAO dao = new MemberDAO();
 	
-	String name = dao.getName(id);
+	String isNick = dao.getNick(nick);
 	
 	JSONObject ob = new JSONObject();
 	
-	ob.put("name",name);
-	ob.put("id",id);
+	ob.put("isNick",isNick);
+	ob.put("nick",nick);
 %>
 
 <%= ob.toString()%>

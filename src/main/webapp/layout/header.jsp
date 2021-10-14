@@ -45,9 +45,6 @@
 		</div>
 	<%
 	} else{
-		String id = (String)session.getAttribute("sessionId");
-		MemberDAO mdao = new MemberDAO();
-		String nick = mdao.getNick(id);
 	%>
 		<div class="util">
 			<a href="login/logoutAction.jsp">로그아웃</a>
