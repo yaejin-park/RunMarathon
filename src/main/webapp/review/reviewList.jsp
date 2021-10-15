@@ -4,8 +4,13 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
 .search-div>* {
 	vertical-align: top;
@@ -40,6 +45,9 @@ table.maintd {
 
 table.maintd tr {
 	height: 180px;
+}
+#modalNick{
+	text-align: right;
 }
 </style>
 <%
@@ -76,8 +84,22 @@ table.maintd tr {
 	if (list.size() == 0 && totalCount>0) 
 	{%>
 <script type="text/javascript">
-				location.href="reviewList.jsp?currentPage=<%=currentPage - 1%>";
-	</script>
+	location.href="reviewList.jsp?currentPage=<%=currentPage - 1%>";
+	/* function reviewForm(){
+		alert("asd");
+ 		$("#myModal").modal();
+ 		 $("span.camera").click(function(){
+			$("#photo").trigger("click");//이벤트 강제호출
+		});
+ 		//저장버튼 이벤트
+ 		$("button.saveBTN").click(function(){
+
+ 			//저장 파일호출
+ 			location.href="review/reviewInsert.jsp";
+ 		}); 
+ 	} */
+	
+</script>
 <%}
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	//각페이지에 출력할 시작번호
@@ -86,36 +108,101 @@ table.maintd tr {
 
 <body>
 	<table class="maintd">
-	<tbody>
+		<tbody>
 			<%
 			if(totalCount==0)
 			{%>
-				<tr height="40">
-					<td colspan="5" align="center">
-						<b>등록된 게시글이 없습니다</b>
-					</td>
-				</tr>
+			<tr height="40">
+				<td colspan="5" align="center"><b>등록된 게시글이 없습니다</b></td>
+			</tr>
 			<%}else{
 				for(int row=1;row<=4;row++)
 				{%>
-					<tr>
-					<%for(ReviewDTO dto:list)
+			<tr>
+				<%for(ReviewDTO dto:list)
 					{
 					%>
-						<td>
-							<img src="<%=dto.getPhoto()%>" >
-						</td>
-					<%}%>
-					</tr>
-				<%}
+				<td><img src="<%=dto.getPhoto()%>"></td>
+				<%}%>
+			</tr>
+			<%}
 			}
 				%>
 		</tbody>
 	</table>
-	<button type="button" class="btn btn-info"
-	style="width: 130px;margin-left: 700px;"
-	onclick="location.href=''">
-	<span class="glyphicon glyphicon-pencil"></span>후기작성하기</button>
+	<div class="container">
+		<!-- Trigger the modal with a button -->
+		<button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+			data-target="#myModal" onclick="reviewForm()"
+			style="width: 130px; margin-left: 700px;">
+			<span class="glyphicon glyphicon-pencil"></span>후기작성하기
+		</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">후기 작성하기</h4>
+					</div>
+					<div class="modal-body">
+						<table width="400px" height="400px">
+							
+							<tr>
+								<td style="width: 70px;  height: 30px;">
+									
+								</td>
+								<td id="modalNick">
+									<b>닉네임,작성시간</b> 
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<b>제목</b>
+								</td>
+								<td>
+									<textarea style="width: 400px; height: 30px;" class="form-control"
+										name="content" required="required"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td width="70">
+									<span
+									class="glyphicon glyphicon-camera camera"><b>사진첨부</b></span> 
+									<input type="file" name="photo" id="photo" style="visibility: hidden;"
+									onchange="readUrl(this)"> 
+								</td>
+								<td>
+									<div style="width: 300px; height: 300px; border: 1px solid skyblue;">
+										<img id="showimg" style="position: absolute; left: 800px;top: 100px; max-width: 300px;">
+									</div>
+								</td>
+							</tr>
+							
+							<tr height="100">
+								<td width="70">
+									<b>후기내용</b>
+								</td>
+								<td>
+									<textarea style="width: 400px; height: 100px;" class="form-control"
+										name="content" required="required"></textarea>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default saveBTN"
+							data-dismiss="modal">저장하기</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
 
 	<!-- 페이징 -->
 	<div style="width: 900px; text-align: center;">

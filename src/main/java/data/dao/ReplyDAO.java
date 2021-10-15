@@ -65,15 +65,15 @@ public class ReplyDAO {
 		}
 		return list;
 	}
-	public void deleteReply(String num)
+	public void deleteReply(String idx)
 	{
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
-		String sql="delete from reply where num=?";
+		String sql="delete from reply where idx=?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			//諛붿씤�뵫
-			pstmt.setString(1, num);
+			pstmt.setString(1, idx);
 			//�떎�뻾
 			pstmt.execute();
 		} catch (SQLException e) {

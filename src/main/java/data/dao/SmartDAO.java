@@ -70,6 +70,41 @@ public class SmartDAO {
 		}
 		return list;
 	}
+	public List<SmartDTO> SearchSubList(String search,int start,int perPage,String column,String words)
+	{
+		List<SmartDTO> list1=new Vector<SmartDTO>();
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from community where "+column+" like ? order by idx desc limit ?,?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//獄쏅뗄�뵥占쎈뎃
+			pstmt.setString(1, "%"+words+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, perPage);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				SmartDTO dto=new SmartDTO();
+				dto.setIdx(rs.getString("idx"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setChu_count(rs.getInt("chu_count"));
+				dto.setRead_count(rs.getInt("read_count"));
+				dto.setWrite_day(rs.getTimestamp("write_day"));
+				list1.add(dto);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list1;
+	}
 	//num�뿉 �빐�떦�븯�뒗 dto諛섑솚
 	public SmartDTO getData(String idx)
 	{
@@ -102,37 +137,7 @@ public class SmartDAO {
 		}
 		return dto;
 	}
-	public SmartDTO getSearchData(String search)
-	{
-		SmartDTO dto=new SmartDTO();
-		Connection conn=db.getConnection();
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql="select * from community where subject like '%?%'";
-		try {
-			pstmt=conn.prepareStatement(sql);
-			//獄쏅뗄�뵥占쎈뎃
-			pstmt.setString(1, search);
-			rs=pstmt.executeQuery();
-			if(rs.next()) 
-			{
-				dto.setIdx(rs.getString("idx"));
-				dto.setNickname(rs.getString("nickname"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setContent(rs.getString("content"));
-				dto.setChu_count(rs.getInt("chu_count"));
-				dto.setRead_count(rs.getInt("read_count"));
-				dto.setWrite_day(rs.getTimestamp("write_day"));
-
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			db.dbClose(rs, pstmt, conn);
-		}
-		return dto;
-	}
+	
 	//�쟾泥� 媛��닔
 	public int getTotalCount()
 	{
@@ -218,5 +223,23 @@ public class SmartDAO {
 			db.dbClose(rs, pstmt, conn);
 		}
 		return idx;
+	}
+	public void deleteCommunity(String idx)
+	{
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		String sql="delete from guest where idx=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//諛붿씤�뵫
+			pstmt.setString(1, idx);
+			//�떎�뻾
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
 	}
 }

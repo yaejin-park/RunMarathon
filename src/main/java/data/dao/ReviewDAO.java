@@ -12,7 +12,7 @@ import mysql.db.DBConnect;
 
 public class ReviewDAO {
 	DBConnect db=new DBConnect();
-	public void insertMember(ReviewDTO dto)
+	public void insertReview(ReviewDTO dto)
 	{
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;

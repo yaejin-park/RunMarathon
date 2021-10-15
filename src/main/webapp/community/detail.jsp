@@ -1,4 +1,4 @@
-<%@page import="data.dto.ReplyDTO"%>
+ <%@page import="data.dto.ReplyDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.ReplyDAO"%>
 <%@page import="data.dto.SmartDTO"%>
@@ -23,6 +23,22 @@
 					location.reload();
 				}
 			}); 
+		});
+		$("span.adel").click(function(){
+			var idx=$(this).attr("idx");
+			//alert(idx);
+			$.ajax({
+				type:"get",
+				dataType:"html",
+				url:"community/replyDelete.jsp",
+				data:{"idx":idx},
+				success:function(){
+					//새로고침
+					location.reload();
+					/* $(this).parent().find("div.answer").show(); */
+				}
+			});
+			
 		});
 	});
 </script>
@@ -136,18 +152,16 @@
 				</div>
 					<tr>
 						<td align="center">
-							<button type="button" class="like" style="width: 80px;"
+							<button type="button" class="like btn btn-info" style="width: 80px;"
 							idx="<%=dto.getIdx()%>">추천</button>
 
 							<button type="button" class="btn btn-sm btn-info"
 								style="width: 80px;"
 								onclick="location.href='index.jsp?go=community/communityList.jsp?currentPage=<%=currentPage%>'">목록</button>
 
-							<button type="button" class="btn btn-sm btn-info"
-								style="width: 80px;" onclick="location.href=''">수정</button>
 
 							<button type="button" class="btn btn-sm btn-info"
-								style="width: 80px;" onclick="location.href=''">삭제</button>
+								style="width: 80px;" onclick="index.jsp?go=community/comDelete.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>">삭제</button>
 						</td>
 					</tr>
 		</tdody>

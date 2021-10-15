@@ -22,23 +22,12 @@
 }
 </style>
 <script type="text/javascript">
-	/* $(function(){
-		$("#selSearch").change(function(){
-			var s=$(this).val();
-			//alert(s);
-			if(s=="onlySub"){
-				$(".selDefault").hide()
-				
-			}else if(s==".onleCon"){
-				
-			}else if(s==".onlyNick"){
-				
-			}
-			
-		});
-	}); */
 </script>
 <%
+request.setCharacterEncoding("UTF-8");
+String column=request.getParameter("selSearch");
+String words=request.getParameter("textSearch");
+System.out.println(column+","+words);
 SmartDAO dao = new SmartDAO();
 int perPage = 7;//한페이지에 보여질 갯수
 int chuPage = 3;//페이지마다 출력될 3개의 추천게시물
@@ -69,6 +58,8 @@ if (endPage > totalPage)
 start = (currentPage - 1) * perPage;
 //각페이지에서 필요한 게시글 가져오기
 List<SmartDTO> list = dao.getList(start, perPage);
+//제목 검색한 게시물 가져오기
+//List<SmartDTO> list1= dao.SearchSubList(search, start, perPage);
 
 if (list.size() == 0 && totalCount > 0) {
 %>
@@ -83,69 +74,70 @@ int no = totalCount - (currentPage - 1) * perPage;
 %>
 
 <body>
-	<div class="search-div">
-		<select id="selSearch">
+<form action="index.jsp?go=community/communityList.jsp" method="post">
+	<div>
+		<select name="selSearch">
 			<option value="-">--검색타입</option>
-			<option value="onlySub" class="onlySub">제목만</option>
-			<option value="onleCon" class="onleCon">내용만</option>
-			<option value="onlyNick" class="onlyNick">닉네임</option>
-		</select>
-		<input id="textSearch"/>
-		<button type="button" class="btn btn-success" style="width: 70px;">검색</button>
+			<option value="subject" class="onlySub">제목만</option>
+			<option value="content" class="onleCon">내용만</option>
+			<option value="nickname" class="onlyNick">닉네임</option>
+		</select> <input name="textSearch" />
+		<button type="submit" class="btn btn-success searchBTN" style="width: 70px;">검색</button>
 	</div>
+</form>	
 	<!-- 게시판 출력 -->
-		<table class="table table-bordered" style="width: 800px;">
-			<colgroup>
-				<col width="70">
-				<col width="350">
-				<col width="100">
-				<col width="150">
-				<col width="70">
-				<col width="70">
-			</colgroup>
-			<thead>
-				<tr bgcolor="#ddd">
-					<th>번호</th>
-					<th>제목</th>
-					<th>닉네임</th>
-					<th>작성일</th>
-					<th>조회</th>
-					<th>추천</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
+	<table class="table table-bordered" style="width: 800px;">
+		<colgroup>
+			<col width="70">
+			<col width="350">
+			<col width="100">
+			<col width="150">
+			<col width="70">
+			<col width="70">
+		</colgroup>
+		<thead>
+			<tr bgcolor="#ddd">
+				<th>번호</th>
+				<th>제목</th>
+				<th>닉네임</th>
+				<th>작성일</th>
+				<th>조회</th>
+				<th>추천</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
 				if (totalCount == 0) {
 				%>
-				<tr height="40">
-					<td colspan="5" align="center"><b>등록된 게시글이 없습니다</b></td>
-				</tr>
-				<%
+			<tr height="40">
+				<td colspan="5" align="center"><b>등록된 게시글이 없습니다</b></td>
+			</tr>
+			<%
 				} else{
 				for (SmartDTO dto : list) {
 				%>
-				<tr class="">
-					<td align="center"><%=no--%></td>
-					<td><a style="color: black;"
-						href="index.jsp?go=community/detail.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>&key=list">
-							<%=dto.getSubject()%>
-					</a></td>
-					<td><%=dto.getNickname()%></td>
-					<td><%=sdf.format(dto.getWrite_day())%></td>
-					<td><%=dto.getRead_count()%></td>
-					<td><%=dto.getChu_count()%></td>
-				</tr>
-				<%
+			<tr id="selShow">
+				<td align="center"><%=no--%></td>
+				<td><a style="color: black;"
+					href="index.jsp?go=community/detail.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>&key=list">
+						<%=dto.getSubject()%>
+				</a></td>
+				<td><%=dto.getNickname()%></td>
+				<td><%=sdf.format(dto.getWrite_day())%></td>
+				<td><%=dto.getRead_count()%></td>
+				<td><%=dto.getChu_count()%></td>
+			</tr>
+			<%
 					}
 				}
 				%>
-			</tbody>
-		</table>
-		<button type="button" class="btn btn-info"
-			style="width: 100px; margin-left: 700px;"
-			onclick="location.href='index.jsp?go=community/smartform.jsp'">
-			<span class="glyphicon glyphicon-pencil"></span>글쓰기
-		</button>
+		</tbody>
+	</table>
+	<button type="button" class="btn btn-info"
+		style="width: 100px; margin-left: 700px;"
+		onclick="location.href='index.jsp?go=community/smartform.jsp'">
+		<span class="glyphicon glyphicon-pencil"></span>글쓰기
+	</button>
 
 	<!-- 페이징 -->
 	<div style="width: 900px; text-align: center;">
@@ -165,11 +157,11 @@ int no = totalCount - (currentPage - 1) * perPage;
 			{
 			%>
 			<li class="active"><a
-				href="community/communityList.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+				href="index.jsp?go=community/communityList.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
 			<%
 			} else {
 			%>
-			<li><a href="community/communityList.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+			<li><a href="index.jsp?go=community/communityList.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
 			<%
 			}
 			}
@@ -178,7 +170,7 @@ int no = totalCount - (currentPage - 1) * perPage;
 			if (endPage < totalPage) {
 			%>
 			<li><a
-				href="community/communityList.jsp?currentPage=<%=endPage + 1%>">다음</a>
+				href="index.jsp?go=community/communityList.jsp?currentPage=<%=endPage + 1%>">다음</a>
 			</li>
 			<%
 			}
