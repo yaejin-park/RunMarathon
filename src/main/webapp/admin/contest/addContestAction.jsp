@@ -1,3 +1,4 @@
+<%@page import="java.util.Enumeration"%>
 <%@page import="data.dao.GiftDAO"%>
 <%@page import="data.dto.GiftDTO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -31,18 +32,18 @@
 		String money = multi.getParameter("money");
 	
 		String gift_check = multi.getParameter("gift_check");
-		if(request.getParameter("gift_check") == null) {
+		if(multi.getParameter("gift_check") == null) {
 			gift_check = "0";	
 		}else{
 			gift_check = "1";
 		}
 		String gift_start = multi.getParameter("gift_start");
-		if(request.getParameter("gift_start") == "") {
+		if(multi.getParameter("gift_start") == "" || gift_check.equals("0")) {
 			gift_start = "2000-01-01";
 		} 
 		
 		String gift_end = multi.getParameter("gift_end");
-		if(request.getParameter("gift_end") == "") {
+		if(multi.getParameter("gift_end") == "" || gift_check.equals("0")) {
 			gift_end = "2000-01-01";
 		}
 		
@@ -60,20 +61,28 @@
 		
 		ContestDAO dao = new ContestDAO();
 		dao.insertContest(contest);
-		
+
 		// 기념품
-		String giftName = multi.getParameter("giftName");
-		String giftContent = multi.getParameter("giftContent");
-		String photo = multi.getFilesystemName("photo");
-		
-		GiftDTO gift = new GiftDTO();
-		gift.setName(giftName);
-		gift.setContent(giftContent);
-		gift.setContest_name(name);
-		gift.setPhoto(photo);
-		
-		GiftDAO giftDao = new GiftDAO();
-		giftDao.insertGift(gift);
+		if(gift_check.equals("1")) {		
+			int giftCnt = Integer.parseInt(multi.getParameter("giftCnt"));
+
+			GiftDAO giftDao = new GiftDAO();
+			for(int i=1; i<=giftCnt; i++){
+				System.out.println(i);
+				String giftName = multi.getParameter("giftName" + i);
+				String giftContent = multi.getParameter("giftContent" + i);
+				String photo = multi.getFilesystemName("photo" + i);
+				System.out.println(giftContent);
+				GiftDTO gift = new GiftDTO();
+				gift.setName(giftName);
+				gift.setContent(giftContent);
+				gift.setContest_name(name);
+				gift.setPhoto(photo);
+				
+				
+				giftDao.insertGift(gift);
+			}
+		}
 
 		response.sendRedirect("../../index.jsp?go=admin/contest/contestList.jsp&menu_one=13&menu_two=20");
 	} catch(Exception e){

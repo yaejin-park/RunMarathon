@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.dto.GiftDTO;
 import mysql.db.DBConnect;
@@ -34,7 +36,7 @@ public class GiftDAO {
 	public void updateGift(GiftDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "update gift set name=?, content=?, contest_name=?, photo=?";
+		String sql = "update ignore gift set name=?, content=?, contest_name=?, photo=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -51,8 +53,8 @@ public class GiftDAO {
 		}
 	}
 	
-	public GiftDTO getGift(String name) {
-		GiftDTO dto = new GiftDTO();
+	public List<GiftDTO> getGiftList(String name) {
+		List<GiftDTO> list = new ArrayList<GiftDTO>();
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -62,12 +64,14 @@ public class GiftDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
+				GiftDTO dto = new GiftDTO();
 				dto.setNum(rs.getString("num"));
 				dto.setName(rs.getString("name"));
 				dto.setContent(rs.getString("content"));
 				dto.setContest_name(rs.getString("contest_name"));
 				dto.setPhoto(rs.getString("photo"));
+				list.add(dto);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -76,6 +80,6 @@ public class GiftDAO {
 			db.dbClose(rs, pstmt, conn);
 		}
 		
-		return dto;
+		return list;
 	}
 }

@@ -40,10 +40,10 @@
 		font-size:14px;
 	}
 	.gift-box .form-list .form-control {
-		width:605px;
+		width:585px;
 	}
 	.gift-box .file-attach {
-		width:605px;
+		width:585px;
 	}
 	.gift-box .file-attach .file-txt {
 		display:inline-block;
@@ -100,10 +100,11 @@
 		$("#checkGift").change(function(){
 			if($("#checkGift").is(":checked")){
 				$(this).parents("td").find(".form-inline").show();
-				$(this).parents("td").find(".form-inline").find("input").attr("required", "required");
+				$(this).parents("td").find(".form-inline").find("input").attr("required", true);
 				$(".gift-div").show();
 			}else{
 				$(this).parents("td").find(".form-inline").hide();
+				$(this).parents("td").find(".form-inline").find("input").attr("required", false);
 				$(".gift-div").hide();
 			}
 		});
@@ -112,13 +113,33 @@
 			$(this).prev("input").trigger("click");
 		});
 
-		$(".plus-btn").click(function(){
+		var tot = parseInt($("#gift_cnt").val());
+		$(document).on("click", ".plus-btn", function(){
 			var plusItem = $(this).parents("tr").find(".gift-box").eq(0).clone();
+			tot+=1;
+			$("#gift_cnt").val(tot);
 			
-			$(this).parents("tr").find("td").append(plusItem);
+			if(tot <= 5){
+				$(this).show();
+				$(plusItem).find("input[name=giftName1]").attr("name", "giftName" + tot);
+				$(plusItem).find("input[name=photo1]").attr("name", "photo" + tot);
+				$(plusItem).find("input[name=giftContent1]").attr("name", "giftContent" + tot);
+				$(this).parents("tr").find("td").append(plusItem);
+			}
+			
+			if(tot == 5){
+				$(this).hide();
+			}
 		});
 		
 		$(document).on("click", ".minus-btn", function(){
+			tot-=1;
+			$("#gift_cnt").val(tot);
+			if(tot < 6) {
+				$(".plus-btn").show();
+			}else{
+				$(".plus-btn").hide();
+			}
 			$(this).parents(".gift-box").remove();
 		});
 	});
@@ -129,7 +150,6 @@
 			reader.onload = function(e){
 				var filename = input.files[0].name;
 				$(input).parents(".form-list").find(".file-txt").html("<span class='glyphicon glyphicon-remove'>" + filename + "</span>");
-				//console.log(filename);
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
@@ -137,6 +157,7 @@
 </script>
 <div class="admin-area">
 	<form action="./admin/contest/addContestAction.jsp" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="giftCnt" id="gift_cnt" value="1">
 		<div class="contest-add-div">
 			<p class="title">대회 추가</p>
 			<table class="table table-bordered">
@@ -216,16 +237,16 @@
 							<div class="gift-box">
 								<div class="form-list">
 									<p class="txt1">타이틀</p>
-									<input type="text" class="form-control" name="giftName" required="required">
+									<input type="text" class="form-control" name="giftName1">
 								</div>
 								<div class="form-list">
 									<p class="txt1">설명</p>
-									<textarea class="form-control" name="giftContent" required="required"></textarea>
+									<input class="form-control" name="giftContent1" />
 								</div>
 								<div class="form-list">
 									<p class="txt1">첨부파일</p>
 									<div class="file-attach">
-										<input type="file" class="form-control" name="photo" onchange="readUrl(this)" multiple>
+										<input type="file" class="form-control" name="photo1" onchange="readUrl(this)" multiple>
 										<button type="button" class="file-btn">파일 선택</button>
 										<p class="file-txt"></p>
 									</div>

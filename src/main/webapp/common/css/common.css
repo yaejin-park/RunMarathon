@@ -336,3 +336,10 @@ footer .sns .twitter {
 footer .sns .instagram {
     background-image:url("../image/sns-instagram.png");
 }
+
+.accor-content{
+	background-color: #ECECEC;
+	border-radius: 5px;
+	margin: 10px 10px 10px 20px;
+	padding: 15px;
+}

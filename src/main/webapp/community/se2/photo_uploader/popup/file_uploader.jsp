@@ -7,7 +7,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 
-String path =getServletContext().getRealPath("/save"); // 이미지가 저장될 주소
+String path = getServletContext().getRealPath("/save2"); // 이미지가 저장될 주소
 String filename = "";
 
 if(request.getContentLength() > 10*1024*1024 ){
@@ -19,8 +19,6 @@ if(request.getContentLength() > 10*1024*1024 ){
 } else {
 
 	try {
-
-		
 		MultipartRequest multi=new MultipartRequest(request, path, 15*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
 	
 		java.text.SimpleDateFormat formatter2 = new java.text.SimpleDateFormat ("yyyy_MM_dd_HHmmss", java.util.Locale.KOREA);
