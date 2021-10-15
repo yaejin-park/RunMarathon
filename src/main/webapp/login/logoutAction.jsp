@@ -3,5 +3,5 @@
 
 <%
 	session.removeAttribute("sessionLogin");
-	response.sendRedirect("../index.jsp?go=login/loginMain.jsp");
+	response.sendRedirect("../index.jsp?go=login/loginMain.jsp&menu_one=21");
 %>	

@@ -31,12 +31,22 @@ $(function() {
 	
 	//아이디저장시,
 	if(sessionSave!=null){
+		//아이디 자동 입력
 		idValue = sessionId;
+		//체크표시 자동
 	%>
 	$("#idSave").prop("checked", true);
-	<% 
+	<%}
+	
+	//아이디 찾기에서 아이디 불러오기
+	String findId = request.getParameter("find-id");
+	
+	//비밀번호 찾고 왔을 때,
+	if(findId!=null){
+		idValue = findId;
 	}
 	%>
+	
 	//네이버 로그인
 	var naverLogin = new naver.LoginWithNaverId(
 			{
@@ -133,7 +143,8 @@ $(function() {
 	<tbody>
 		<tr>
 			<td colspan="2">
-				<input type="text" name="id" id="id" class="form-control" required="required" maxlength="15" placeholder="아이디" value=<%= idValue%>>
+				<input type="text" name="id" id="id" class="form-control" required="required" maxlength="15" placeholder="아이디" value="<%=idValue%>">
+>>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 			</td>
 		</tr>
 		<tr>

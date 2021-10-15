@@ -2,14 +2,11 @@ package data.dto;
 
 import java.sql.Timestamp;
 
-public class SmartDTO {
+public class ReviewDTO {
 	private String idx;
-
 	private String nickname;
-	private String subject;
+	private String photo;
 	private String content;
-	private int chu_count;
-	private int read_count;
 	private Timestamp write_day;
 	public String getIdx() {
 		return idx;
@@ -23,11 +20,11 @@ public class SmartDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getSubject() {
-		return subject;
+	public String getPhoto() {
+		return photo;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	public String getContent() {
 		return content;
@@ -35,22 +32,11 @@ public class SmartDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getChu_count() {
-		return chu_count;
-	}
-	public void setChu_count(int chu_count) {
-		this.chu_count = chu_count;
-	}
-	public int getRead_count() {
-		return read_count;
-	}
-	public void setRead_count(int read_count) {
-		this.read_count = read_count;
-	}
 	public Timestamp getWrite_day() {
 		return write_day;
 	}
 	public void setWrite_day(Timestamp write_day) {
 		this.write_day = write_day;
 	}
+	
 }

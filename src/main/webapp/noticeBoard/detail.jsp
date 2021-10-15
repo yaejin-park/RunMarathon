@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@page import="java.util.List"%>
 <%@page import="data.dto.NoticeDTO"%>
 <%@page import="data.dao.NoticeDAO"%>

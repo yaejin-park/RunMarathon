@@ -19,5 +19,6 @@
 	<br><br>
 	<button type="button" class="btn btn-warning" onclick="location.href='login/logoutAction.jsp'">로그아웃</button>
 	<button type="button" class="btn btn-info" onclick="location.href='index.jsp'">메인페이지</button>
+	<button type="button" class="btn btn-info" onclick="location.href='index.jsp?go=apply/applyMain.jsp&menu_one=8&menu_two=9'">참가신청 페이지</button>
 </div>
 </html>

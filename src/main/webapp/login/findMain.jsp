@@ -14,10 +14,47 @@
 	.form-control{
 		height: 43px;
 	}
-
+	
+	nav {
+	  position: relative;
+	  display: flex;
+	  width: 640px;
+	  margin: 4em auto;
+	}
+	nav a {
+	  display: block;
+	  width: 30%;
+	  padding: .75em 0;
+	  text-decoration: none;
+	  text-align: center;
+	}
+	.nav-underline {
+	  position: absolute;
+	  left: 5%;
+	  bottom: -2px;
+	  width: 20%;
+	  height: 3px;
+	  background: #4d4439;
+	}
+	nav a:nth-child(1).is-current ~ .nav-underline {
+	  left: 10;
+	}
+	nav a:nth-child(2).is-current ~ .nav-underline {
+	  left: 35%;
+	}
 </style>
+<%
+//아이디 찾기에서 들어오면 아이디 들어오게하는 매개값(안돼ㅠ)
+String findPass = request.getParameter("findPass");
+%>
 <script type="text/javascript">
 $(function(){
+	<%-- alert(<%=findPass%>);
+	if(<%=findPass%>){
+		findPass();
+		alert("hi");
+	} --%>
+	
 	//핸드폰 선택 이벤트
 	$("#selHp1").change(function() {
 		$("#hp1").val($(this).val());
@@ -32,22 +69,40 @@ $(function(){
 	});	
 	
 	//아이디, 비번 메뉴 선택
-	
+	$(".findType").click(function() {
+		$(this).addClass("is-current");
+		$(this).siblings().removeClass("is-current");
+		
+		if($(this).text()=="비밀번호 찾기"){
+			findPass();
+		} else{
+			$("#passFindForm").html("");
+			$("#findType").val("findId");
+		}
+	});
 	
 });	
+
+	function findPass() {
+		var s ='<td colspan="2">';
+		s+='<input type="text" class="form-control"  name="id" required="required" placeholder="아이디" style="width: 412px;">';
+		s+='</td>';
+		$("#passFindForm").html(s);
+		$("#findType").val("findPass");
+	}
 </script>
+
 </head>
 
 <body>
+<nav>
+	<a href="#" class="is-current findType">아이디 찾기</a>
+	<a href="#" class="findType">비밀번호 찾기</a>
+	<div class="nav-underline"></div>
+</nav>
 <form action="login/findAction.jsp" method="post" class="form-inline">
+<input type="hidden" id="findType" name="find-type" value="findId">
 <table class="table" style="width: 600px; padding: 30px; margin: 30px;">
-<thead>
-	<tr>
-		<th>아이디 찾기</th>
-		<th>비밀번호 찾기</th>
-	</tr>
-<thead>
-
 <tbody>
 	<tr id="question" style="padding: 30px;">
 		<td colspan="2" style="font-size: 1.3em; padding: 30px;">
@@ -61,6 +116,8 @@ $(function(){
 			<input type="text" class="form-control"  name="name" required="required" placeholder="이름" style="width: 412px;">
 		</td>
 	</tr>
+	
+	<tr id="passFindForm"></tr>
 	
 	<tr>
 		<td colspan="2">
@@ -84,12 +141,12 @@ $(function(){
 	<tr>
 		<td colspan="2">
 			<select name="selAuth" id="selAuth" class="form-control">
-						<option value="-" disabled="disabled" selected="selected">본인확인 질문</option>
-						<option value="character">좋아하는 캐릭터는?</option>
-						<option value="school">초등학교 이름은?</option>
-						<option value="movie">좋아하는 영화는?</option>
-						<option value="freind">친한 친구의 이름은?</option>
-						<option value="hobby">나의 취미는?</option>
+					<option value="-" disabled="disabled" selected="selected">본인확인 질문</option>
+					<option value="character">좋아하는 캐릭터는?</option>
+					<option value="school">초등학교 이름은?</option>
+					<option value="movie">좋아하는 영화는?</option>
+					<option value="freind">친한 친구의 이름은?</option>
+					<option value="hobby">나의 취미는?</option>
 			</select>
 			<input type="text" name="auth" class="form-control" required="required" maxlength="20" placeholder="답변" style="width: 250px;">
 			
@@ -97,7 +154,8 @@ $(function(){
 	</tr>
 	<tr>
 		<td colspan="2">
-			<button type="submit" id="findBtn" class="btn btn-default" style="width: 412px; height: 45px; border: 2px grey solid">확인</button>
+			<button type="submit" id="findBtn" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">확인</button>
+>>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 		</td>
 	</tr>
 </tbody>

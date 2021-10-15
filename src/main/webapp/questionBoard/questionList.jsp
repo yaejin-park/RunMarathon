@@ -40,6 +40,7 @@
 		text-align: center;
 	}
 </style>
+<<<<<<< HEAD
 <script type="text/javascript">
 	$(function(){
 		$("#subject").click(function(){

@@ -53,11 +53,18 @@ $(function(){
 			});
 		}
 	});
-	
+
 	//닉네임 사용 버튼
 	$(document).on("click","#nickUse", function() {
 		var nick = $(this).attr("myNick");
-		opener.joinfrm.nick.value = nick;
+		<%if((String)session.getAttribute("from")=="join"){
+		%>
+			opener.joinfrm.nick.value = nick;
+		<%
+		} else{
+		%>
+			opener.modifyfrm.nick.value = nick;
+		<%}%>
 		window.close();
 	});
 });

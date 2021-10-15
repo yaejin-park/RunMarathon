@@ -1,8 +1,3 @@
-<%@page import="java.io.Console"%>
-<%@page import="java.util.Vector"%>
-<%@page import="java.util.List"%>
-<%@page import="data.dto.MemberDTO"%>
-<%@page import="data.dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,46 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<style type="text/css">
-	.course{
-		margin-right: 20px;
-		width: 80px;
-	}
-	
-</style>
 <script type="text/javascript">
 $(function(){
 	<%
 	String id = (String)session.getAttribute("sessionId");
 	String type = request.getParameter("type");
 	%>
-	//회원정보 동일
-	$("#memberData").click(function() {
-		var id = $(this).val();
-		//체크 됐으면
-		if($("#memberData").is(":checked")){
-			$.ajax({
-				type: "get",
-				dataType: "json",
-				data: {"id":id},
-				url: "./apply/getMember_ajax.jsp",
-				success: function(data) {
-					$("#name").val(data.name);
-					$("#hp1").val(data.hp1);
-					$("#hp2").val(data.hp2);
-					$("#hp3").val(data.hp3);
-					$("#addr1").val(data.addr1);
-					$("#addr2").val(data.addr2);
-				}
-			});
-		} else{
-			$("#name").val("");
-			$("#hp1").val("");
-			$("#hp2").val("");
-			$("#hp3").val("");
-			$("#addr1").val("");
-			$("#addr2").val("");
+	
+	$.ajax({
+		type: "get",
+		dataType: "json",
+		data: {"id":id},
+		url: "./apply/getMember_ajax.jsp",
+		success: function(data) {
+			$("#name").val(data.name);
+			$("#hp1").val(data.hp1);
+			$("#hp2").val(data.hp2);
+			$("#hp3").val(data.hp3);
+			$("#addr1").val(data.addr1);
+			$("#addr2").val(data.addr2);
 		}
 	});
 	
@@ -110,7 +84,6 @@ function check(p) {
 }
 
 </script>
-
 </head>
 <body>
 <form action="apply/applyAddAction.jsp" method="post" class="form-inline" name="joinfrm" onsubmit="return check(this)">
@@ -126,12 +99,6 @@ function check(p) {
 			<col width="80%">
 		</colgroup>
 		<tbody>
-			<tr>
-				<td colspan="2" style="font-size: 0.8em">
-					<input type="checkbox" name="member-data" id="memberData" value="<%=id%>">&nbsp;&nbsp;회원정보와 동일
-				</td>
-			</tr>
-			
 			<tr>
 				<th>이름</th>
 				<td>
@@ -182,17 +149,10 @@ function check(p) {
 				<td>
 					<select name="time" id="time" class="form-control">
 						<option value="-" disabled="disabled" selected="selected">선택</option>
-<<<<<<< HEAD
-						<option value="15">2021/11/15 10:00</option>
-						<option value="16">2021/11/16 10:00</option>
-						<option value="17">2021/11/17 10:00</option>
-						<option value="18">2021/11/18 10:00</option>
-=======
 						<option value="2021/11/15 10:00">2021/11/15 10:00</option>
 						<option value="2021/11/16 10:00">2021/11/16 10:00</option>
 						<option value="2021/11/17 10:00">2021/11/17 10:00</option>
 						<option value="2021/11/18 10:00">2021/11/18 10:00</option>
->>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 					</select>
 				</td>
 			</tr>

@@ -1,3 +1,4 @@
+<%@page import="data.dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -39,22 +40,45 @@
 </style>
 <script type="text/javascript">
 $(function(){
-	//약관 전체동의
-	$("#optAll").click(function() {
-		//체크 true
-		 if($("#optAll").prop("checked")){
-			$(this).parent().parent().siblings().find(".opt").prop("checked",true);
-		} else{
-			$(this).parent().parent().siblings().find(".opt").prop("checked",false);
+	//회원 정보 불러오기
+	$.ajax({
+		type: "get",
+		dataType: "json",
+		url: "./myPage/getMember_ajax.jsp",
+		success: function(data) {
+			$("#nick").val(data.nick);
+			$("#hp1").val(data.hp1);
+			$("#hp2").val(data.hp2);
+			$("#hp3").val(data.hp3);
+			$("#addr1").val(data.addr1);
+			$("#addr2").val(data.addr2);
+			$("#selAuth").val(data.auth1);
+			$("#auth").val(data.auth2);
 		}
 	});
 	
-	//하위 체크 해제
-	$(".opt").click(function() {
-		if(!$(this).prop("checked")){
-			$("#optAll").prop("checked",false);
-		}
+	//수정 버튼 눌렀을 때,
+	$("#modifyYes").click(function() {
+		var nick = $("#nick").val();
+		var hp1 = $("#hp1").val();
+		var hp2 = $("#hp2").val();
+		var hp3 = $("#hp3").val();
+		var addr1 = $("#addr1").val();
+		var addr2 = $("#addr2").val();
+		var selAuth = $("#selAuth").val();
+		var auth = $("#auth").val();
+		
+		$.ajax({
+			type: "post",
+			dataType: "html",
+			data:{"nick":nick,"hp1":hp1,"hp2":hp2,"hp3":hp3,"addr1":addr1,"addr2":addr2,"selAuth":selAuth,"auth":auth},
+			url: "./myPage/modifyMember_ajax.jsp",
+			success: function() {
+				alert("수정완료");
+			}
+		});
 	});
+	
 	
 	//핸드폰 선택 이벤트
 	$("#selHp1").change(function() {
@@ -100,7 +124,7 @@ $(function(){
 	//닉네임 중복 체크
 	$("#nickDouble").click(function() {
 		popup("join/nickSearchForm.jsp", 550, 350);
-		<% session.setAttribute("from", "join"); %>
+		<% session.setAttribute("from", "modify"); %>
 	});
 	
 	//주소 검색
@@ -166,77 +190,15 @@ $(function(){
 </head>
 
 <body>
-<form action="join/joinAdd.jsp" method="post" class="form-inline" name="joinfrm" onsubmit="return check(this)">
-<div>
-	<table class="table table-bordered option accor-all" style="width: 760px;">
-		<tbody>
-			<tr>
-				<th rowspan="4">약관동의</th>
-				<td>
-					<input type="checkbox" id="optAll">&nbsp;&nbsp;전체동의
-				</td>
-			</tr>
-			<tr class="accor-div">
-				<td>
-					<input type="checkbox" class="opt" style="float: left;">
-					<div class="accor-title" >
-						<div style="float: left;">
-							&nbsp;&nbsp;이용약관 동의<span class="plus"> (필수)</span>
-						</div>
-						<div style="text-align: right;"><span class="glyphicon glyphicon-menu-down detail-icon" style="font-weight: bold;">자세히보기</span></div>
-					</div>
-					<div class="accor-content">
-						<jsp:include page="terms.jsp">
-							<jsp:param value="1" name="term"/>
-						</jsp:include>
-					</div>
-				</td>
-			</tr>
-			<tr class="accor-div">
-				<td>
-					<input type="checkbox" class="opt" style="float: left;">
-					<div class="accor-title" >
-						<div style="float: left;">
-							&nbsp;&nbsp;개인정보처리방침 동의<span class="plus"> (필수)</span>
-						</div>
-						<div style="text-align: right;"><span class="glyphicon glyphicon-menu-down detail-icon" style="font-weight: bold;">자세히보기</span></div>
-					</div>
-					<div class="accor-content">
-						<jsp:include page="terms.jsp">
-							<jsp:param value="2" name="term"/>
-						</jsp:include>
-					</div>
-				</td>
-			</tr>
-			<tr class="accor-div">
-				<td>
-					<input type="checkbox" class="opt" name="opt" id="opt" style="float: left;">
-					<div class="accor-title" >
-						<div style="float: left;">
-							&nbsp;&nbsp;마케팅정보 동의<span class="plus"> (선택)</span>
-						</div>
-						<div style="text-align: right;"><span class="glyphicon glyphicon-menu-down detail-icon" style="font-weight: bold;">자세히보기</span></div>
-					</div>
-					<div class="accor-content">
-						<jsp:include page="terms.jsp">
-							<jsp:param value="3" name="term"/>
-						</jsp:include>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
-<hr>
-
+<form action="myPage/modifyMember.jsp" method="post" class="form-inline" name="modifyfrm" onsubmit="return check(this)">
 <div>
 	<table class="table table-bordered" style="width: 760px; float: left;">
 		<tbody>
 			<tr>
-				<th>이름</th>
+				<th>닉네임</th>
 				<td>
-					<input type="text" name="name" class="form-control" autofocus="autofocus" required="required">
+					<input type="text" name="nick" id="nick" class="form-control" required="required" readonly="readonly">
+					<button type="button" class="btn btn-info" id="nickDouble">중복체크</button>
 				</td>
 			</tr>
 			
@@ -261,24 +223,6 @@ $(function(){
 			</tr>
 
 			<tr>
-				<th>아이디</th>
-				<td>
-				<input type="text" name="id" id="id" class="form-control" required="required" readonly="readonly">
-				<button type="button" class="btn btn-info" id="idDouble">중복체크</button>
-				</td>
-			</tr>
-			
-			<tr>
-				<th>비밀번호</th>
-				<td>
-					<input type="password" name="pass1" id="pass1" class="form-control" required="required" maxlength="15" placeholder="비밀번호">
-					<div class="plus" id="passCheck" style="font-size: 0.8em;"></div>
-					<input type="password" name="pass2" id="pass2" class="form-control" required="required" maxlength="15" placeholder="비밀번호 확인">
-					<div class="plus" id="passSame" style="font-size: 0.8em;"></div>
-				</td>
-			</tr>
-			
-			<tr>
 				<th>주소</th>
 				<td>
 					<input type="text" name="addr1" id="addr1" class="form-control" required="required"  placeholder="주소" readonly="readonly">
@@ -286,14 +230,6 @@ $(function(){
 					<br><br>
 					<input type="text" name="addr2" id="addr2" class="form-control" required="required"  placeholder="상세주소 입력" style="width: 300px;">
 				</td>					
-			</tr>
-			
-			<tr>
-				<th>닉네임</th>
-				<td>
-				<input type="text" name="nick" id="nick" class="form-control" required="required" readonly="readonly">
-				<button type="button" class="btn btn-info" id="nickDouble">중복체크</button>
-				</td>
 			</tr>
 			
 			<tr>
@@ -307,13 +243,13 @@ $(function(){
 						<option value="freind">친한 친구의 이름은?</option>
 						<option value="hobby">나의 취미는?</option>
 					</select>
-					<input type="text" name="auth" class="form-control" required="required" maxlength="20">
+					<input type="text" name="auth" id="auth" class="form-control" required="required" maxlength="20">
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<button type="submit" id="joinYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">회원가입하기</button>&nbsp;&nbsp;
-					<button type="reset" id="joinNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;">취소</button>
+					<button type="button" id="modifyYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">저장</button>&nbsp;&nbsp;
+					<button type="button" id="modifyNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;" onclick="location.href='./index.jsp'">메인</button>
 				</td>
 			</tr>
 		</tbody>
