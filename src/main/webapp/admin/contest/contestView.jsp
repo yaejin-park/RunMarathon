@@ -15,14 +15,26 @@
 <script type="text/javascript">
 	$(function(){
 		if($("#checkGift").val() == "1"){
-			console.log("체크")
 			$("#checkGift").prop("checked", true);
 			$("#checkGift").parents(".checkbox").next().show();
 		}else{
-			console.log("체크xxx")
 			$("#checkGift").prop("checked", false);
 			$("#checkGift").parents(".checkbox").next().hide();
 		}
+		
+		$(".delete-btn").click(function(){
+			var s = $(this).val();
+			
+			$.ajax({
+				type:"get",
+				url:"./admin/contest/deleteContestAction.jsp",
+				dataType:"html",
+				data:{name:s},
+				success:function(){
+					location.href="index.jsp?go=admin/contest/contestList.jsp&menu_one=13&menu_two=20";
+				}
+			});
+		});
 	});
 </script>
 <%
@@ -86,7 +98,7 @@
 		
 		<div classs="btn-div">
 			<button type="submit" class="btn btn-info update-btn">수정</button>
-			<button type="button" class="btn btn-info delete-btn">삭제</button>
+			<button type="button" class="btn btn-info delete-btn" value="<%= dto.getName() %>">삭제</button>
 		</div>
 	</form>
 </div>
