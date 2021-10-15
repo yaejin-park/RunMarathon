@@ -42,7 +42,7 @@
 		</th>
 	</tr>
 	<tr>
-		<td>
+		<td height="500px">
 			<%=dto.getContent() %>
 		</td>
 	</tr>

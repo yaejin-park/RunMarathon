@@ -9,8 +9,11 @@ import java.sql.Statement;
 
 public class DBConnect {
 	static final String MYSQLDRIVER = "com.mysql.jdbc.Driver";
-	
+
+
 	static final String MYSQL_URL = "jdbc:mysql://db-semi5.cnkpw8i7gzb8.ap-northeast-2.rds.amazonaws.com:3306/semi";
+
+
 	
 	public DBConnect() {
 		try {
