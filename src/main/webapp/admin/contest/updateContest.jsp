@@ -97,7 +97,6 @@
 	.gift-box:first-child .minus-btn {
 		display:none;
 	}
-	
 </style>
 <script type="text/javascript">
 	$(function(){
