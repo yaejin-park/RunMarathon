@@ -20,7 +20,7 @@
 %>
 <body>
 <div style="margin: 0 auto; width: 100%; font-size: 1.1em;" >
-	<b><%=name%>님의 <%=dto.getMarathon() %> 신청이 완료되었습니다.</b>
+	<b><%=name%>님의 <%=dto.getMarathon()%> 신청 내역</b>
 	<br><br>
 </div>
 <form class="form-inline" name="joinfrm">
@@ -39,7 +39,7 @@
 			
 			<tr>
 				<th>주소</th>
-				<td><%=dto.getAddr()%></td>				
+				<td><%=dto.getAddr1()%> <%= dto.getAddr2()%></td>				
 			</tr>
 			
 			<tr>
