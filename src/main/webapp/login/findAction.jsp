@@ -18,13 +18,13 @@
 	//아이디 찾을 때,
 	if(findType.equals("findId")){
 		findId = dao.findId(name, hp, auth1, auth2);
-		response.sendRedirect("../index.jsp?go=login/findResult.jsp&menu_one=21&menu_two=29&id="+findId);
+		response.sendRedirect("../index.jsp?go=login/findResult.jsp&menu_one=21&menu_two=29&id="+findId+"&find-type="+findType);
 	} else{ //비번찾을 때,
 		String id = request.getParameter("id");
 		
 		findPass =dao.findPass(id, name, hp, auth1, auth2);
 		
-		response.sendRedirect("../index.jsp?go=login/findResult.jsp&menu_one=21&menu_two=29&pass="+findPass);
+		response.sendRedirect("../index.jsp?go=login/findResult.jsp&menu_one=21&menu_two=29&pass="+findPass+"&find-type="+findType);
 	}
 	
 	

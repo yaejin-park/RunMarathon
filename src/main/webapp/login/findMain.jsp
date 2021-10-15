@@ -43,18 +43,16 @@
 	  left: 35%;
 	}
 </style>
-<%
-//아이디 찾기에서 들어오면 아이디 들어오게하는 매개값(안돼ㅠ)
-String findPass = request.getParameter("findPass");
-%>
+
 <script type="text/javascript">
+<%-- <%
+//아이디 찾기에서 들어오면 아이디 들어오게하는 매개값(안돼ㅠ)
+String findType = request.getParameter("find-type");
+if(findType.equals("fidnId")){
+	String findPass = request.getParameter("findPass");
+}
+%> --%>
 $(function(){
-	<%-- alert(<%=findPass%>);
-	if(<%=findPass%>){
-		findPass();
-		alert("hi");
-	} --%>
-	
 	//핸드폰 선택 이벤트
 	$("#selHp1").change(function() {
 		$("#hp1").val($(this).val());
@@ -69,6 +67,7 @@ $(function(){
 	});	
 	
 	//아이디, 비번 메뉴 선택
+	//비밀번호 찾기 클릭하면 아이디 인풋도 보이게
 	$(".findType").click(function() {
 		$(this).addClass("is-current");
 		$(this).siblings().removeClass("is-current");
