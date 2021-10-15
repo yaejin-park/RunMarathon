@@ -109,7 +109,7 @@ public class ContestDAO {
 	public void updateContest(ContestDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "update ignore contest set name=? , content=?, contest_start=?, contest_end=?, apply_start=?, apply_end=?, gift_check=?, gift_start=?, gift_end=?, money=?";
+		String sql = "update ignore contest set name=? , content=?, contest_start=?, contest_end=?, apply_start=?, apply_end=?, gift_check=?, gift_start=?, gift_end=?, money=? where name=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -123,6 +123,7 @@ public class ContestDAO {
 			pstmt.setString(8, dto.getGift_start());
 			pstmt.setString(9, dto.getGift_end());
 			pstmt.setString(10, dto.getMoney());
+			pstmt.setString(11, dto.getName());
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

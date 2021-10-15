@@ -68,17 +68,15 @@
 
 			GiftDAO giftDao = new GiftDAO();
 			for(int i=1; i<=giftCnt; i++){
-				System.out.println(i);
 				String giftName = multi.getParameter("giftName" + i);
 				String giftContent = multi.getParameter("giftContent" + i);
 				String photo = multi.getFilesystemName("photo" + i);
-				System.out.println(giftContent);
+				
 				GiftDTO gift = new GiftDTO();
 				gift.setName(giftName);
 				gift.setContent(giftContent);
 				gift.setContest_name(name);
 				gift.setPhoto(photo);
-				
 				
 				giftDao.insertGift(gift);
 			}

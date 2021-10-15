@@ -58,7 +58,7 @@
 						</div>
 					</div>	
 				</div>
-			<% } else{%>
+			<% } else{ %>
 				<jsp:include page="<%= goPage %>"></jsp:include>
 			<% } %>
 		</div>

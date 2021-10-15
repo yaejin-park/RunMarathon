@@ -63,24 +63,31 @@
 		dao.updateContest(contest);
 
 		// 기념품
-		if(gift_check.equals("1")) {		
+		if(gift_check.equals("1")) {	
+			
+			int beforeGiftCnt = Integer.parseInt(multi.getParameter("beforeGiftCnt"));
 			int giftCnt = Integer.parseInt(multi.getParameter("giftCnt"));
 
 			GiftDAO giftDao = new GiftDAO();
 			for(int i=1; i<=giftCnt; i++){
 				System.out.println(i);
+				String giftNum = multi.getParameter("giftNum" + i);
 				String giftName = multi.getParameter("giftName" + i);
 				String giftContent = multi.getParameter("giftContent" + i);
 				String photo = multi.getFilesystemName("photo" + i);
-				System.out.println(giftContent);
+
 				GiftDTO gift = new GiftDTO();
+				gift.setNum(giftNum);
 				gift.setName(giftName);
 				gift.setContent(giftContent);
 				gift.setContest_name(name);
 				gift.setPhoto(photo);
 				
-				
-				giftDao.updateGift(gift);
+				if(beforeGiftCnt == 0){
+					giftDao.insertGift(gift);
+				}else{
+					giftDao.updateGift(gift);
+				}
 			}
 		}
 

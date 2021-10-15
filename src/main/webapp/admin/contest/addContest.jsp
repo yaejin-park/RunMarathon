@@ -113,11 +113,11 @@
 			$(this).prev("input").trigger("click");
 		});
 
-		var tot = parseInt($("#gift_cnt").val());
+		var tot = parseInt($("#giftCnt").val());
 		$(document).on("click", ".plus-btn", function(){
 			var plusItem = $(this).parents("tr").find(".gift-box").eq(0).clone();
 			tot+=1;
-			$("#gift_cnt").val(tot);
+			$("#giftCnt").val(tot);
 			
 			if(tot <= 5){
 				$(this).show();
@@ -134,7 +134,7 @@
 		
 		$(document).on("click", ".minus-btn", function(){
 			tot-=1;
-			$("#gift_cnt").val(tot);
+			$("#giftCnt").val(tot);
 			if(tot < 6) {
 				$(".plus-btn").show();
 			}else{
@@ -157,7 +157,7 @@
 </script>
 <div class="admin-area">
 	<form action="./admin/contest/addContestAction.jsp" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="giftCnt" id="gift_cnt" value="1">
+		<input type="hidden" name="giftCnt" id="giftCnt" value="1">
 		<div class="contest-add-div">
 			<p class="title">대회 추가</p>
 			<table class="table table-bordered">

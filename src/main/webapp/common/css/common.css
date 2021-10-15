@@ -141,14 +141,16 @@ header .menu-div .menu-btn span:nth-child(3) {
 }
 header .menu {
 	display:none;
-    width:1020px;
+    width:950px;
     margin:0 auto;
     padding:110px 0;
+}
+header .menu.admin {
+    width:1020px;
 }
 header .menu:after {
 	content:"";
 	display:block;
-	clear:both;
 	position:fixed; 
 	top:0;
 	left:0;
