@@ -41,6 +41,27 @@
 	}
 </style>
 
+<script type="text/javascript">
+	$(function(){
+		$("#subject").click(function(){
+			$(this).siblings("#subject")
+				alert("ㅇㅇㅇㅇㅇ");
+		});
+		
+		/* $(".accor-title").click(function(){
+			if(!$(this).parents(".accor-div").find(".accor-content").is(":visible")){
+				$(this).parents(".accor-div").siblings().find(".accor-content").slideUp();
+				$(this).parents(".accor-div").find(".accor-content").slideDown();
+				$(this).find('.glyphicon-menu-down').css('color','#659EFF').removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
+				$(this).parents(".accor-div").siblings().find('.glyphicon-menu-up').css('color','gray').removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
+			} else{
+				$(this).parents(".accor-div").find(".accor-content").slideUp();
+				$(this).find(".glyphicon-menu-up").css('color','gray').removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
+			}
+		}); */
+		
+	});
+</script>
 <%
 	QuestionDAO dao = new QuestionDAO();
 
@@ -91,7 +112,7 @@
 	//각 페이지에 출력한 시작 번호
 	int no = totalCount - (currentPage-1) * perPage;
 	
-	/*로그인 세션 처리에 필요한 변수 선언*/
+	//로그인 세션 처리에 필요한 변수 선언
 	MemberDTO mdto = new MemberDTO();
 	MemberDAO mdao = new MemberDAO();
 	String id = (String)session.getAttribute("sessionId");
@@ -153,14 +174,13 @@
 			if(sessionLogin!=null && nick.equals(dto.getWriter())){%>
 				<button type="button" onclick="location.href='index.jsp?go=questionBoard/updateForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
 				<button type="button" 
-				onclick="
-				<%
-				if(dto.getStep()==0){%>
-					location.href='questionBoard/questionDelete.jsp?&menu_one=12&menu_two=19&ref=<%=dto.getRef()%>&currentPage=<%=currentPage%>'
-				<%} else{%>
-					location.href='questionBoard/answerDelete.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'
-				<%}%>
-				">삭제
+				onclick="<%
+					if(dto.getStep()==0){%>
+						location.href='questionBoard/questionDelete.jsp?&menu_one=12&menu_two=19&ref=<%=dto.getRef()%>&currentPage=<%=currentPage%>'
+					<%} else{%>
+						location.href='questionBoard/answerDelete.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'
+					<%}%>">
+				삭제
 				</button>
 			<%}
 			
