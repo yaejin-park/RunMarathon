@@ -27,6 +27,7 @@
 	dto.setPerson(person);
 	dto.setTime(time);
 	
-	
 	dao.insertApply(dto);
+	
+	response.sendRedirect("../index.jsp?go=apply/applySuccess.jsp&menu_one=8&menu_two=9&type=2");
 %>

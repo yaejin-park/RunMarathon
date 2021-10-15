@@ -18,13 +18,15 @@ public class SmartDAO {
 	{
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
-		String sql="insert into community (subject,content,write_day) values (?,?,now())";
+	String sql="insert into community (num,nickname,subject,content,write_day) values (?,?,?,?,now())";
 		try {
 			pstmt=conn.prepareStatement(sql);
-			//諛붿 ���뵫
-			pstmt.setString(1, dto.getSubject());
-			pstmt.setString(2, dto.getContent());
-			//�떎�뻾
+			//獄쏅뗄�뵥占쎈뎃
+			pstmt.setString(1, dto.getIdx());
+			pstmt.setString(2, dto.getNickname());
+			pstmt.setString(3, dto.getSubject());
+			pstmt.setString(4, dto.getContent());
+			//占쎈뼄占쎈뻬
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -43,7 +45,7 @@ public class SmartDAO {
 		String sql="select * from community order by idx desc limit ?,?";
 		try {
 			pstmt=conn.prepareStatement(sql);
-			//諛붿 ���뵫
+			//獄쏅뗄�뵥占쎈뎃
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, perpage);
 			rs=pstmt.executeQuery();
@@ -51,6 +53,7 @@ public class SmartDAO {
 			{
 				SmartDTO dto=new SmartDTO();
 				dto.setIdx(rs.getString("idx"));
+				dto.setNickname(rs.getString("nickname"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setChu_count(rs.getInt("chu_count"));
@@ -67,7 +70,42 @@ public class SmartDAO {
 		}
 		return list;
 	}
-	//num ��  �� �� �� �� dto반환
+	public List<SmartDTO> SearchSubList(String search,int start,int perPage,String column,String words)
+	{
+		List<SmartDTO> list1=new Vector<SmartDTO>();
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from community where "+column+" like ? order by idx desc limit ?,?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//獄쏅뗄�뵥占쎈뎃
+			pstmt.setString(1, "%"+words+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, perPage);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				SmartDTO dto=new SmartDTO();
+				dto.setIdx(rs.getString("idx"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setChu_count(rs.getInt("chu_count"));
+				dto.setRead_count(rs.getInt("read_count"));
+				dto.setWrite_day(rs.getTimestamp("write_day"));
+				list1.add(dto);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list1;
+	}
+	//num�뿉 �빐�떦�븯�뒗 dto諛섑솚
 	public SmartDTO getData(String idx)
 	{
 		SmartDTO dto=new SmartDTO();
@@ -77,12 +115,13 @@ public class SmartDAO {
 		String sql="select * from community where idx=?";
 		try {
 			pstmt=conn.prepareStatement(sql);
-			//諛붿 ���뵫
+			//獄쏅뗄�뵥占쎈뎃
 			pstmt.setString(1, idx);
 			rs=pstmt.executeQuery();
-			if(rs.next())
+			if(rs.next()) 
 			{
 				dto.setIdx(rs.getString("idx"));
+				dto.setNickname(rs.getString("nickname"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setChu_count(rs.getInt("chu_count"));
@@ -98,7 +137,8 @@ public class SmartDAO {
 		}
 		return dto;
 	}
-	// ����  �  ��
+	
+	//�쟾泥� 媛��닔
 	public int getTotalCount()
 	{
 		int n=0;
@@ -122,16 +162,34 @@ public class SmartDAO {
 		return n;
 	}
 
-	//조회 �� �ם� 
-	public void updateReadcount(String num)
+	//議고쉶�닔 利앷�
+	public void updateReadcount(String idx)
 	{
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		String sql="update community set read_count=read_count+1 where idx=?";
 		try {
 			pstmt=conn.prepareStatement(sql);
-			//諛붿 ���뵫
-			pstmt.setString(1, num);
+			//獄쏅뗄�뵥占쎈뎃
+			pstmt.setString(1, idx);
+			//占쎈뼄占쎈뻬
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	public void updateChu(String idx)
+	{
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		String sql="update community set chu_count=chu_count+1 where idx=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//諛붿씤�뵫
+			pstmt.setString(1, idx);
 			//�떎�뻾
 			pstmt.execute();
 		} catch (SQLException e) {
@@ -141,7 +199,7 @@ public class SmartDAO {
 			db.dbClose(pstmt, conn);
 		}
 	}
-	//방금 추�  �� ��종  ��   �� num�  리턴
+	//諛⑷툑 異붽��맂 理쒖쥌 �떆���뒪 num媛� 由ы꽩
 	public String getMaxNum()
 	{
 		SmartDTO dto=new SmartDTO();
@@ -165,5 +223,23 @@ public class SmartDAO {
 			db.dbClose(rs, pstmt, conn);
 		}
 		return idx;
+	}
+	public void deleteCommunity(String idx)
+	{
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		String sql="delete from guest where idx=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//諛붿씤�뵫
+			pstmt.setString(1, idx);
+			//�떎�뻾
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
 	}
 }

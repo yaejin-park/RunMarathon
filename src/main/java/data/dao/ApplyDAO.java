@@ -2,6 +2,7 @@ package data.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import data.dto.ApplyDTO;
@@ -40,6 +41,37 @@ public class ApplyDAO {
 		
 	}
 	
+	//신청정보 가져오기
+	public ApplyDTO getApply(String id) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
+		ApplyDTO dto = new ApplyDTO();
+
+		String sql = "select * from apply where id=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				
+				dto.setMarathon(rs.getString("marathon"));
+				dto.setName(rs.getString("name"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setHp(rs.getString("hp"));
+				dto.setCourse(rs.getString("course"));
+				dto.setTime(rs.getString("time"));
+				dto.setPerson(rs.getString("person"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
+	}
 	
 }

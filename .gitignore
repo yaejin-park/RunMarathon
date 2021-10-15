@@ -112,6 +112,8 @@ hs_err_pid*
 .ionide
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,visualstudiocode
 =======
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,visualstudiocode
@@ -230,5 +232,10 @@ hs_err_pid*
 ### DBConnect ###
 DBConnect.java
 
+>>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,visualstudiocode
+<<<<<<< HEAD
+
+=======
 >>>>>>> kmj
+>>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
