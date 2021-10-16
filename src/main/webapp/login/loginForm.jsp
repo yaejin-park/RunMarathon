@@ -144,7 +144,6 @@ $(function() {
 		<tr>
 			<td colspan="2">
 				<input type="text" name="id" id="id" class="form-control" required="required" maxlength="15" placeholder="아이디" value="<%=idValue%>">
->>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 			</td>
 		</tr>
 		<tr>

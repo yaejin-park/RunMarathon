@@ -156,6 +156,7 @@ public class QuestionDAO {
 				dto.setWriter(rs.getString("writer"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
+				dto.setPass(rs.getString("pass"));
 				dto.setWriteDay(rs.getTimestamp("write_day"));
 			}
 		} catch (Exception e) {
@@ -270,5 +271,30 @@ public class QuestionDAO {
 		} finally {
 			db.dbClose(pstmt, conn);
 		}
+	}
+	
+	// idx로 작성자 얻기
+	public String getPass(String idx) {
+		String pass = "1";
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select pass from question where idx=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				pass = rs.getString("pass");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return pass;
 	}
 }

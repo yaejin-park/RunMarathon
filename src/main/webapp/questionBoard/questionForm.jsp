@@ -17,7 +17,6 @@
 			<tr>
 				<th>작성자</th>
 				<td>
-<<<<<<< HEAD
 					<input type="text" name="writer" class="form-control" required="required" style="width: 130px;"
 					readonly="readonly" value="<%=mdao.getIdNick(id)%>">
 				</td>

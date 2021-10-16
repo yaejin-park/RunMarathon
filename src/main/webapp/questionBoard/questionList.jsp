@@ -40,26 +40,15 @@
 		text-align: center;
 	}
 </style>
-<<<<<<< HEAD
 <script type="text/javascript">
+//var pass = $("input[name:pass]").val();
 	$(function(){
-		$("#subject").click(function(){
-			$(this).siblings("#subject")
-				alert("ㅇㅇㅇㅇㅇ");
+		$(".subject").click(function(){		
+		var a=$(this).next().value();
+			alert(a);
+			//prompt("비밀번호를 입력해주세요.", "000");
+			//if()
 		});
-		
-		/* $(".accor-title").click(function(){
-			if(!$(this).parents(".accor-div").find(".accor-content").is(":visible")){
-				$(this).parents(".accor-div").siblings().find(".accor-content").slideUp();
-				$(this).parents(".accor-div").find(".accor-content").slideDown();
-				$(this).find('.glyphicon-menu-down').css('color','#659EFF').removeClass("glyphicon-menu-down").addClass("glyphicon-menu-up");
-				$(this).parents(".accor-div").siblings().find('.glyphicon-menu-up').css('color','gray').removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
-			} else{
-				$(this).parents(".accor-div").find(".accor-content").slideUp();
-				$(this).find(".glyphicon-menu-up").css('color','gray').removeClass("glyphicon-menu-up").addClass("glyphicon-menu-down");
-			}
-		}); */
-		
 	});
 </script>
 <%
@@ -102,7 +91,8 @@
 	List<QuestionDTO> list = dao.getList(start, perPage);
 	
 	//현재 페이지의 리스트가 더 이상 없을 경우(삭제해서) 이전 페이지로 이동한다
-	if(list.size()==0 && totalCount>0){%>
+	if(list.size()==0 && totalCount>0){
+%>
 	<script type="text/javascript">
 			location.href = "index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=currentPage-1%>";
 	</script>
@@ -117,7 +107,6 @@
 	MemberDAO mdao = new MemberDAO();
 	String id = (String)session.getAttribute("sessionId");
 	String nick = mdao.getIdNick(id);
-	
 	String sessionLogin = (String)session.getAttribute("sessionLogin");
 	if(sessionLogin!=null){
 	%>	
@@ -158,9 +147,11 @@
 			<div class="qna-no">
 				<%=no-- %>
 			</div>
-			<div class="qna-subject accor-title" id="subject">
+			<div class="qna-subject accor-title subject">
 				<%=dto.getSubject() %>
+				<%=dao.getPass(dto.getIdx()) %>
 			</div>
+			<input type="hidden" style="position: absolute;" name="pass" value="<%=dao.getPass(dto.getIdx()) %>" />
 			<div class="qna-writer">
 				<%=dto.getWriter() %>
 			</div>
