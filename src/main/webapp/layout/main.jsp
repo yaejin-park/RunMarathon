@@ -150,6 +150,6 @@
 			</div>
 		</a>
 	</div>
-	<div class="swiper-button-prev"></div>
-  	<div class="swiper-button-next"></div>
+	<div class="swiper-button-prev"><span></span></div>
+  	<div class="swiper-button-next"><span></span></div>
 </div><!-- main-vis -->

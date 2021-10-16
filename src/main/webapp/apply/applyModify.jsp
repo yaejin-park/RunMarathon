@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 $(function(){
 	<%
@@ -15,8 +16,7 @@ $(function(){
 	$.ajax({
 		type: "get",
 		dataType: "json",
-		data: {"id":id},
-		url: "./apply/getMember_ajax.jsp",
+		url: "./apply/getApply_ajax.jsp",
 		success: function(data) {
 			$("#name").val(data.name);
 			$("#hp1").val(data.hp1);
@@ -24,6 +24,10 @@ $(function(){
 			$("#hp3").val(data.hp3);
 			$("#addr1").val(data.addr1);
 			$("#addr2").val(data.addr2);
+			$("#person").val(data.person);
+			$('time').val(data.time).prop("selected",true);
+			$("#courseData").val(data.course);
+			$("#"+data.course+"").css("background-color", "rgb(91 192 222)").css("box-shadow","0px 0px 10px #bebfbd").css("color","white");
 		}
 	});
 	
@@ -50,46 +54,21 @@ $(function(){
         }).open();
 	});
 	
- 	//코스 버튼 선택
+	//코스 버튼 선택
 	$(".course").click(function() {
 		$(this).css("background-color", "rgb(91 192 222)").css("box-shadow","0px 0px 10px #bebfbd").css("color","white");
 	    $(this).siblings().css("background-color", "").css("box-shadow","").css("color","");
 	   	//선택한 코스값 넘기기
 	    $("#courseData").val($(this).val());
 	});
- 
- 	//무통장 버튼 선택
-	$("#pay").click(function() {
-		//한번더 클릭시(색깔이 있을때)
-		if($(this).attr("result")!="yes"){
-			$(this).css("background-color", "rgb(91 192 222)").css("box-shadow","0px 0px 10px #bebfbd").css("color","white").attr("result","yes");
-		  	//무통장 버튼 클릭 여부 넘기기
-			 $("#payData").val($(this).val());
-		  	console.log($("#payData").val());
-		} else{
-		    $(this).css("background-color", "").css("box-shadow","").css("color","").attr("result","");
-		    $("#payData").val("");
-		    console.log($("#payData").val());
-		}
-	});
+ 	
 });
-
-function check(p) {
-	if(p.payData.value.length==0){
-		alert("무통장입금 버튼을 눌러주세요.");
-		return false;
-	}else{
-		return true;
-	}
-}
 
 </script>
 </head>
 <body>
-<form action="apply/applyAddAction.jsp" method="post" class="form-inline" name="joinfrm" onsubmit="return check(this)">
-<input hidden="hidden" name="marathon" value="런마라톤_2021">
+<form action="apply/applyModifyAction.jsp" method="post" class="form-inline" name="applyfrm" id="applyForm">
 <input hidden="hidden" id="courseData" name="course" value="">
-<input hidden="hidden" id="payData" name="pay" value="">
 <input hidden="hidden" id="id" name="id" value="<%=id%>">
 
 <div>
@@ -139,16 +118,16 @@ function check(p) {
 			<tr>
 				<th>코스</th>
 				<td>
-					<button type="button" id="course42" value="42K" class="btn btn-default course">42K</button>
-					<button type="button" id="course25" value="25K" class="btn btn-default course">25K</button>
-					<button type="button" id="course15" value="15K" class="btn btn-default course">15K</button>
+					<button type="button" id="42K" value="42K" class="btn btn-default course course-clicked">42K</button>
+					<button type="button" id="25K" value="25K" class="btn btn-default course">25K</button>
+					<button type="button" id="15K" value="15K" class="btn btn-default course">15K</button>
 				</td>
 			</tr>
 			<tr>
 				<th>일정</th>
 				<td>
 					<select name="time" id="time" class="form-control">
-						<option value="-" disabled="disabled" selected="selected">선택</option>
+						<option value="-" disabled="disabled">선택</option>
 						<option value="2021/11/15 10:00">2021/11/15 10:00</option>
 						<option value="2021/11/16 10:00">2021/11/16 10:00</option>
 						<option value="2021/11/17 10:00">2021/11/17 10:00</option>
@@ -160,7 +139,7 @@ function check(p) {
 			<tr>
 				<th>총 인원수</th>
 				<td>
-					<input type="number" name="person" id="person" class="form-control" required="required" max="50" min="2" value="2">명
+					<input type="number" name="person" id="person" class="form-control" required="required" max="50" min="1">명
 				</td>
 			</tr>
 			<%} else{%>
@@ -168,17 +147,9 @@ function check(p) {
 			<%
 			}%>
 			<tr>
-				<th>결제방법</th>
-				<td>
-					<div class="btn-group">
-						<button type="button" id="pay" value="pay" class="btn btn-default">무통장입금</button>
-					</div>
-				</td>
-			</tr>
-			<tr>
 				<td colspan="2" align="center">
 					<button type="button" id="applyNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;" onclick="history.go(-1);">취소</button>
-					<button type="submit" id="applyYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">참가신청</button>&nbsp;&nbsp;
+					<button type="submit" id="applyYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">수정완료</button>&nbsp;&nbsp;
 				</td>
 			</tr>
 		</tbody>

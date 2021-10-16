@@ -13,7 +13,8 @@
 	String id = request.getParameter("id");
 	String name = request.getParameter("name");
 	String hp = request.getParameter("hp1")+"-"+request.getParameter("hp2")+"-"+request.getParameter("hp3");
-	String addr = request.getParameter("addr1")+" "+request.getParameter("addr2");
+	String addr1 = request.getParameter("addr1");
+	String addr2 = request.getParameter("addr2");
 	String course = request.getParameter("course");
 	String person = request.getParameter("person");
 	String time = request.getParameter("time");
@@ -22,7 +23,8 @@
 	dto.setId(id);
 	dto.setName(name);
 	dto.setHp(hp);
-	dto.setAddr(addr);
+	dto.setAddr1(addr1);
+	dto.setAddr2(addr2);
 	dto.setCourse(course);
 	dto.setPerson(person);
 	dto.setTime(time);

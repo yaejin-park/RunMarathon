@@ -59,7 +59,7 @@ mon/js/gsap.min.js"></script><!-- Green Sock (모션) -->
 						</div>
 					</div>	
 				</div>
-			<% } else{%>
+			<% } else{ %>
 				<jsp:include page="<%= goPage %>"></jsp:include>
 			<% } %>
 		</div>
