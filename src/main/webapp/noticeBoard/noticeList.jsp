@@ -69,7 +69,7 @@
 	if(sessionLogin!=null && id.equals("admin")){
 %>
 	<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
-		onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp&menu_one=12&menu_two=18'">
+		onclick="location.href='index.jsp?go=noticeBoard/noticeForm.jsp&menu_one=12&menu_two=18'">
 		<span class="glyphicon glyphicon-pencil"></span>글추가
 	</button>
 <%
@@ -80,12 +80,19 @@
 		<b>공지사항</b>
 	</caption>
 	<thead>
+		<colgroup>
+			<col width="50px">
+			<col width="350px">
+			<col width="100px">
+			<col width="100px">
+			<col width="50px">
+		</colgroup>
 		<tr bgcolor="#dda0dd">
-			<th width="50px">번호</th>
-			<th width="350px">제목</th>
-			<th width="100px">작성자</th>
-			<th width="150px">작성일</th>
-			<th width="70px">조회</th>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<th>조회</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -136,7 +143,7 @@
 		//다음
 		if(endPage<totalPage){
 		%>
-			<li><ahref="index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=endPage+1%>">▶</a>
+			<li><a href="index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=endPage+1%>">▶</a>
 		<%}
 		%>
 	</ul>

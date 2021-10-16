@@ -40,7 +40,38 @@
 		text-align: center;
 	}
 </style>
-
+<script type="text/javascript">
+	
+	$(function(){
+		var writer0 = document.getElementsByClassName("writer")[0].value;
+		var writer1 = document.getElementsByClassName("writer")[1].value;
+		var writer2 = document.getElementsByClassName("writer")[2].value;
+		
+		var sessionNick = document.getElementById("sessionNick").value;
+		$(".subject").click(function(){
+			//alert(sessionNick);
+			if(sessionNick!="관리자"){
+				alert("aaaa")
+				$(this).parents(".accor-div").find(".accor-content").slideUp();
+			}
+			/* var writer = document.getElementsByClassName("writer");
+			for(var i = 0; i<writer.length; i++){
+				writer = document.getElementsByClassName("writer")[i].value;
+				
+				if(sessionNick!=writer){
+					return;
+				}
+				
+				if(sessionNick==writer){
+					alert("안녕");	
+				}
+			} */
+			
+		});
+		
+		
+	});
+</script>
 <%
 	QuestionDAO dao = new QuestionDAO();
 
@@ -81,7 +112,8 @@
 	List<QuestionDTO> list = dao.getList(start, perPage);
 	
 	//현재 페이지의 리스트가 더 이상 없을 경우(삭제해서) 이전 페이지로 이동한다
-	if(list.size()==0 && totalCount>0){%>
+	if(list.size()==0 && totalCount>0){
+%>
 	<script type="text/javascript">
 			location.href = "index.jsp?go=questionBoard/questionList.jsp?currentPage=<%=currentPage-1%>";
 	</script>
@@ -91,12 +123,11 @@
 	//각 페이지에 출력한 시작 번호
 	int no = totalCount - (currentPage-1) * perPage;
 	
-	/*로그인 세션 처리에 필요한 변수 선언*/
+	//로그인 세션 처리에 필요한 변수 선언
 	MemberDTO mdto = new MemberDTO();
 	MemberDAO mdao = new MemberDAO();
 	String id = (String)session.getAttribute("sessionId");
 	String nick = mdao.getIdNick(id);
-	
 	String sessionLogin = (String)session.getAttribute("sessionLogin");
 	if(sessionLogin!=null){
 	%>	
@@ -137,8 +168,11 @@
 			<div class="qna-no">
 				<%=no-- %>
 			</div>
-			<div class="qna-subject accor-title" id="subject">
+			<div class="qna-subject accor-title subject">
 				<%=dto.getSubject() %>
+				<%=dao.getNick(dto.getIdx()) %>
+				<input type="hidden" style="position: absolute;" class="writer" value="<%=dao.getNick(dto.getIdx()) %>" />
+				<input type="hidden" style="position: absolute;" id="sessionNick" value="<%=nick %>" />
 			</div>
 			<div class="qna-writer">
 				<%=dto.getWriter() %>
@@ -150,17 +184,19 @@
 		<div class="accor-content">
 			<%=dto.getContent() %>
 			<%
-			if(sessionLogin!=null && nick.equals(dto.getWriter())){%>
+			if(sessionLogin!=null && nick.equals(dto.getWriter())){
+			%>
 				<button type="button" onclick="location.href='index.jsp?go=questionBoard/updateForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
 				<button type="button" 
 				onclick="
-				<%
-				if(dto.getStep()==0){%>
+			<%
+				if(dto.getStep()==0){
+			%>
 					location.href='questionBoard/questionDelete.jsp?&menu_one=12&menu_two=19&ref=<%=dto.getRef()%>&currentPage=<%=currentPage%>'
 				<%} else{%>
 					location.href='questionBoard/answerDelete.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'
-				<%}%>
-				">삭제
+				<%}%>">
+				삭제
 				</button>
 			<%}
 			

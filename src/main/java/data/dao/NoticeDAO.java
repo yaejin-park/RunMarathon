@@ -45,6 +45,7 @@ public class NoticeDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+		
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				n = rs.getInt(1);
@@ -66,9 +67,10 @@ public class NoticeDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//바인딩
+
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, perpage);
+			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				NoticeDTO dto = new NoticeDTO();
@@ -98,8 +100,9 @@ public class NoticeDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//바인딩
+
 			pstmt.setString(1, idx);
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				dto.setIdx(rs.getString("idx"));
@@ -126,6 +129,7 @@ public class NoticeDAO {
 		String idx="";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				idx = rs.getString(1);
@@ -145,9 +149,9 @@ public class NoticeDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//바인딩
+
 			pstmt.setString(1, idx);
-			//실행
+
 			pstmt.execute();
 		} catch (Exception e) {
 		} finally {
@@ -163,10 +167,9 @@ public class NoticeDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//바인딩
+
 			pstmt.setString(1,idx);
 
-			//실행
 			pstmt.execute();
 		} catch (Exception e) {
 		} finally {
@@ -182,16 +185,49 @@ public class NoticeDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//바인딩
+
 			pstmt.setString(1, dto.getSubject());
 			pstmt.setString(2, dto.getContent());
 			pstmt.setString(3, dto.getIdx());
 
-			//실행
 			pstmt.execute();
 		} catch (Exception e) {
 		} finally {
 			db.dbClose(pstmt, conn);
 		}
+	}
+	
+	//이전글, 다음글 출력. idx를 받아와서 idx에 대한 이전 데이터, 다음 데이터 뽑아옴
+	public List<NoticeDTO> getSubject(String idx) {
+		List<NoticeDTO> list = new Vector<NoticeDTO>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT idx, subject FROM notice WHERE idx = ? "
+				+ "UNION ALL (SELECT idx, subject FROM notice WHERE idx < ? ORDER BY idx DESC LIMIT 1) "
+				+ "UNION ALL (SELECT idx, subject FROM notice WHERE idx > ? ORDER BY idx ASC LIMIT 1) "
+				+ "ORDER BY idx DESC";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, idx);
+			pstmt.setString(2, idx);
+			pstmt.setString(3, idx);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				NoticeDTO dto = new NoticeDTO();
+				dto.setIdx(rs.getString("idx"));
+				dto.setSubject(rs.getString("subject"));
+				//list에 추가
+				list.add(dto);
+			}
+		} catch (Exception e) {
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list;
 	}
 }
