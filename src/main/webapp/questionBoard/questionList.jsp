@@ -162,15 +162,18 @@
 		<div class="accor-content">
 			<%=dto.getContent() %>
 			<%
-			if(sessionLogin!=null && nick.equals(dto.getWriter())){%>
+			if(sessionLogin!=null && nick.equals(dto.getWriter())){
+			%>
 				<button type="button" onclick="location.href='index.jsp?go=questionBoard/updateForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
 				<button type="button" 
-				onclick="<%
-					if(dto.getStep()==0){%>
-						location.href='questionBoard/questionDelete.jsp?&menu_one=12&menu_two=19&ref=<%=dto.getRef()%>&currentPage=<%=currentPage%>'
-					<%} else{%>
-						location.href='questionBoard/answerDelete.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'
-					<%}%>">
+				onclick="
+			<%
+				if(dto.getStep()==0){
+			%>
+					location.href='questionBoard/questionDelete.jsp?&menu_one=12&menu_two=19&ref=<%=dto.getRef()%>&currentPage=<%=currentPage%>'
+				<%} else{%>
+					location.href='questionBoard/answerDelete.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'
+				<%}%>">
 				삭제
 				</button>
 			<%}
