@@ -274,27 +274,28 @@ public class QuestionDAO {
 	}
 	
 	// idx로 작성자 얻기
-	public String getPass(String idx) {
-		String pass = "1";
+	public String getNick(String idx) {
+		String nick = "1";
 
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select pass from question where idx=?";
+		String sql = "select writer from question where idx=?";
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, idx);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				pass = rs.getString("pass");
+				nick = rs.getString("writer");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			db.dbClose(rs, pstmt, conn);
 		}
-		return pass;
+		return nick;
 	}
 }

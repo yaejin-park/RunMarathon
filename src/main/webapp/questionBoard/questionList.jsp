@@ -41,14 +41,35 @@
 	}
 </style>
 <script type="text/javascript">
-//var pass = $("input[name:pass]").val();
+	
 	$(function(){
-		$(".subject").click(function(){		
-		var a=$(this).next().value();
-			alert(a);
-			//prompt("비밀번호를 입력해주세요.", "000");
-			//if()
+		var writer0 = document.getElementsByClassName("writer")[0].value;
+		var writer1 = document.getElementsByClassName("writer")[1].value;
+		var writer2 = document.getElementsByClassName("writer")[2].value;
+		
+		var sessionNick = document.getElementById("sessionNick").value;
+		$(".subject").click(function(){
+			//alert(sessionNick);
+			if(sessionNick!="관리자"){
+				alert("aaaa")
+				$(this).parents(".accor-div").find(".accor-content").slideUp();
+			}
+			/* var writer = document.getElementsByClassName("writer");
+			for(var i = 0; i<writer.length; i++){
+				writer = document.getElementsByClassName("writer")[i].value;
+				
+				if(sessionNick!=writer){
+					return;
+				}
+				
+				if(sessionNick==writer){
+					alert("안녕");	
+				}
+			} */
+			
 		});
+		
+		
 	});
 </script>
 <%
@@ -149,9 +170,10 @@
 			</div>
 			<div class="qna-subject accor-title subject">
 				<%=dto.getSubject() %>
-				<%=dao.getPass(dto.getIdx()) %>
+				<%=dao.getNick(dto.getIdx()) %>
+				<input type="hidden" style="position: absolute;" class="writer" value="<%=dao.getNick(dto.getIdx()) %>" />
+				<input type="hidden" style="position: absolute;" id="sessionNick" value="<%=nick %>" />
 			</div>
-			<input type="hidden" style="position: absolute;" name="pass" value="<%=dao.getPass(dto.getIdx()) %>" />
 			<div class="qna-writer">
 				<%=dto.getWriter() %>
 			</div>
