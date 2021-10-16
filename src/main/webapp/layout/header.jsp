@@ -17,7 +17,7 @@
 			<span></span>
 			<span></span>
 		</a>
-		<ul class="menu <%=sessionId.equals("admin")&&sessionLogin!=null?"admin":""%>">
+		<ul class="menu <%=sessionId == null || !sessionId.equals("admin") || sessionLogin == null?"":"admin"%>">
 			<%
 				MenuDAO dao = new MenuDAO();
 				List<MenuDTO> oneDepthList = dao.getAllOneDepth();
