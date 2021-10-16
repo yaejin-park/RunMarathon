@@ -38,13 +38,14 @@ $(function() {
 	$("#idSave").prop("checked", true);
 	<%}
 	
-	//아이디 찾기에서 아이디 불러오기
+	/* //아이디 찾기에서 아이디 불러오기
+	String findType = request.getParameter("find-type");
 	String findId = request.getParameter("find-id");
 	
-	//비밀번호 찾고 왔을 때,
-	if(findId!=null){
+	//아이디 찾고 왔을 때,
+	if(findType.equals("findId")){
 		idValue = findId;
-	}
+	} */
 	%>
 	
 	//네이버 로그인

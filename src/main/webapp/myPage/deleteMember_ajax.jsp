@@ -16,6 +16,7 @@
 		session.removeAttribute("sessionId");
 		session.removeAttribute("sessionLogin");
 		session.removeAttribute("sessionSave");
+	
 	} else{%>
 		<script type="text/javascript">
 			alert("회원정보와 일치하지 않은 비밀번호입니다");
