@@ -41,10 +41,6 @@
 	}
 	
 </style>
-<<<<<<< HEAD
-
-=======
->>>>>>> kmj
 <script type="text/javascript">
 	$(function(){
 		$(".subject").click(function(){
@@ -173,7 +169,6 @@
 			</div>
 			<div class="qna-subject accor-title subject">
 				<%=dto.getSubject() %>
-				<%=sessionLogin %>
 				<input type="hidden" style="position: absolute;" class="writer" value="<%=dao.getNick(dto.getIdx()) %>" />
 				<input type="hidden" style="position: absolute;" id="sessionNick" value="<%=nick %>" />
 				<input type="hidden" style="position: absolute;" id="sessionLogin" value="<%=sessionLogin %>" />
