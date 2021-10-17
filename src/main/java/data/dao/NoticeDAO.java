@@ -45,7 +45,7 @@ public class NoticeDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-		
+
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				n = rs.getInt(1);
@@ -230,4 +230,5 @@ public class NoticeDAO {
 		}
 		return list;
 	}
+
 }

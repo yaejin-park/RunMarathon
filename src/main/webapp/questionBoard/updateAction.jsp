@@ -24,6 +24,6 @@
 	
 	//수정했던 페이지로 이동
 	String idx = request.getParameter("idx");
-	String path = "../index.jsp?go=questionBoard/questionList.jsp?&menu_one=12&menu_two=19";
+	String path = "../index.jsp?go=questionBoard/questionList.jsp?&menu_one=12&menu_two=19&currentPage=" + currentPage;
 	response.sendRedirect(path);
 %>

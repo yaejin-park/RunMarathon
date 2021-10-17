@@ -46,7 +46,7 @@
 		
 		<tr>
 			<td colspan="2">
-				<input type="text" name="content" class="form-control" required="required" style="width: 780px; height: 300px;">
+				<textarea name="content" class="form-control" required="required" style="width: 780px; height: 300px;"></textarea>
 				<input type="hidden" name="ref" value="<%=dto.getRef()%>">	
 				<input type="hidden" name="step" value="<%=dto.getStep()%>">
 				<input type="hidden" name="reforder" value="<%=dto.getReforder()%>">

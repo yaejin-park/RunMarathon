@@ -5,9 +5,17 @@ import java.sql.Timestamp;
 public class ReviewDTO {
 	private String idx;
 	private String nickname;
+	private String subject;
 	private String photo;
 	private String content;
 	private Timestamp write_day;
+	
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 	public String getIdx() {
 		return idx;
 	}

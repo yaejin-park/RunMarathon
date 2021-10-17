@@ -1,9 +1,11 @@
+<%@page import="data.dto.MemberDTO"%>
+<%@page import="data.dao.MemberDAO"%>
 <%@page import="data.dto.SmartDTO"%>
 <%@page import="data.dao.SmartDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -29,6 +31,12 @@ request.setCharacterEncoding("UTF-8");
 String column=request.getParameter("selSearch");
 String words=request.getParameter("textSearch");
 System.out.println(column+","+words);
+
+//세션
+MemberDTO mdto = new MemberDTO();
+MemberDAO mdao = new MemberDAO();
+String sessionLogin = (String)session.getAttribute("sessionLogin");
+
 SmartDAO dao = new SmartDAO();
 int perPage = 7;//한페이지에 보여질 갯수
 int chuPage = 3;//페이지마다 출력될 3개의 추천게시물
@@ -120,7 +128,7 @@ int no = totalCount - (currentPage - 1) * perPage;
 			<tr id="selShow">
 				<td align="center"><%=no--%></td>
 				<td><a style="color: black;"
-					href="index.jsp?go=community/detail.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>&key=list">
+					href="index.jsp?go=community/detail.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>&key=list&menu_one=11&menu_two=27">
 						<%=dto.getSubject()%>
 				</a></td>
 				<td><%=dto.getNickname()%></td>
@@ -134,11 +142,17 @@ int no = totalCount - (currentPage - 1) * perPage;
 				%>
 		</tbody>
 	</table>
+	<%
+	if(sessionLogin!=null){
+	%>
 	<button type="button" class="btn btn-info"
 		style="width: 100px; margin-left: 700px;"
-		onclick="location.href='index.jsp?go=community/smartform.jsp'">
+		onclick="location.href='index.jsp?go=community/comForm.jsp&menu_one=11&menu_two=27'">
 		<span class="glyphicon glyphicon-pencil"></span>글쓰기
 	</button>
+	<%
+	}
+	%>
 
 	<!-- 페이징 -->
 	<div style="width: 900px; text-align: center;">
@@ -148,7 +162,7 @@ int no = totalCount - (currentPage - 1) * perPage;
 			if (startPage > 1) {
 			%>
 			<li><a
-				href="community/communityList.jsp?currentPage=<%=startPage - 1%>">이전</a>
+				href="community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=startPage - 1%>">이전</a>
 			</li>
 			<%
 			}
@@ -158,11 +172,11 @@ int no = totalCount - (currentPage - 1) * perPage;
 			{
 			%>
 			<li class="active"><a
-				href="index.jsp?go=community/communityList.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+				href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=pp%>"><%=pp%></a></li>
 			<%
 			} else {
 			%>
-			<li><a href="index.jsp?go=community/communityList.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+			<li><a href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=pp%>"><%=pp%></a></li>
 			<%
 			}
 			}
@@ -171,7 +185,7 @@ int no = totalCount - (currentPage - 1) * perPage;
 			if (endPage < totalPage) {
 			%>
 			<li><a
-				href="index.jsp?go=community/communityList.jsp?currentPage=<%=endPage + 1%>">다음</a>
+				href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=endPage + 1%>">다음</a>
 			</li>
 			<%
 			}
