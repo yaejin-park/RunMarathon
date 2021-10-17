@@ -9,7 +9,6 @@
 	<%
 		String sessionId = (String)session.getAttribute("sessionId");
 		String sessionLogin = (String)session.getAttribute("sessionLogin");
-		System.out.println(sessionId + "," + sessionLogin);
 	%>
 	<div class="menu-div">
 		<a href="javascript:" class="menu-btn">
@@ -17,7 +16,7 @@
 			<span></span>
 			<span></span>
 		</a>
-		<ul class="menu <%=sessionId.equals("admin")&&sessionLogin!=null?"admin":""%>">
+		<ul class="menu <%=sessionId == null || !sessionId.equals("admin") || sessionLogin == null?"":"admin"%>">
 			<%
 				MenuDAO dao = new MenuDAO();
 				List<MenuDTO> oneDepthList = dao.getAllOneDepth();
@@ -25,7 +24,7 @@
 				if(sessionId == null || !sessionId.equals("admin") || sessionLogin == null){
 					for(MenuDTO oneDto:oneDepthList) {
 						String parent_idx = oneDto.getMenu_idx(); 
-						List<MenuDTO> twoDepthList = dao.getTwoDepth(parent_idx);
+						List<MenuDTO> twoDepthList = dao.getTwoDepthList(parent_idx);
 						if(!oneDto.getMenu_name().equals("관리자") && !oneDto.getMenu_name().equals("로그인") && !oneDto.getMenu_name().equals("회원가입") && !oneDto.getMenu_name().equals("마이페이지")){
 					%>
 						<li>
@@ -45,7 +44,7 @@
 				}else{
 					for(MenuDTO oneDto:oneDepthList) {
 						String parent_idx = oneDto.getMenu_idx(); 
-						List<MenuDTO> twoDepthList = dao.getTwoDepth(parent_idx);
+						List<MenuDTO> twoDepthList = dao.getTwoDepthList(parent_idx);
 						if(!oneDto.getMenu_name().equals("로그인") && !oneDto.getMenu_name().equals("회원가입") && !oneDto.getMenu_name().equals("마이페이지")){
 					%>
 						<li>

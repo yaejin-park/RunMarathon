@@ -83,4 +83,27 @@ public class GiftDAO {
 		
 		return list;
 	}
+	
+	public String getNewGift() {
+		String name = "";
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select name from contest order by abs(DATEDIFF(contest_start, now())) limit 1;";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				name = rs.getString("name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return name;
+	}
 }

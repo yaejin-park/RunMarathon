@@ -7,11 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<!-- 페이징 처리에 필요한 변수 선언 -->
 <%
-	/*페이징 처리*/
-	NoticeDAO dao = new NoticeDAO();
-
-	//페이징 처리에 필요한 변수 선언
 	int perPage = 10; //한페이지에 보여질 글의 갯수
 	int totalCount; //총 글의 수
 	int currentPage; //현재 페이지 번호
@@ -22,6 +19,7 @@
 	int endPage; //각 블럭에 표시할 마지막 페이지
 	
 	//총 데이터 갯수
+	NoticeDAO dao = new NoticeDAO();
 	totalCount = dao.getTotalCount();
 	
 	//현재 페이지 번호 읽기.(null일 경우 1페이지로 설정)
@@ -52,15 +50,14 @@
 	<script type="text/javascript">
 			location.href = "index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=currentPage-1%>";
 	</script>
-	
 <%}
+	
 	//각 페이지에 출력한 시작 번호
 	int no = totalCount - (currentPage-1) * perPage;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
-	/*로그인 세션 처리에 필요한 변수 선언*/
+	//로그인 세션 처리에 필요한 변수 선언
 	String sessionLogin = (String)session.getAttribute("sessionLogin");
-	
 	String id = (String)session.getAttribute("sessionId");
 %>
 
@@ -69,7 +66,7 @@
 	if(sessionLogin!=null && id.equals("admin")){
 %>
 	<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
-		onclick="location.href='index.jsp?go=noticeBoard/writeForm.jsp&menu_one=12&menu_two=18'">
+		onclick="location.href='index.jsp?go=noticeBoard/noticeForm.jsp&menu_one=12&menu_two=18'">
 		<span class="glyphicon glyphicon-pencil"></span>글추가
 	</button>
 <%
@@ -80,12 +77,19 @@
 		<b>공지사항</b>
 	</caption>
 	<thead>
+		<colgroup>
+			<col width="50px">
+			<col width="350px">
+			<col width="100px">
+			<col width="100px">
+			<col width="50px">
+		</colgroup>
 		<tr bgcolor="#dda0dd">
-			<th width="50px">번호</th>
-			<th width="350px">제목</th>
-			<th width="100px">작성자</th>
-			<th width="150px">작성일</th>
-			<th width="70px">조회</th>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<th>조회</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -115,6 +119,7 @@
 		%>
 	</tbody>
 </table>
+
 <!-- 페이징 처리-->
 <div style="width: 900px; text-align: center;">
 	<ul class="pagination">
@@ -136,7 +141,7 @@
 		//다음
 		if(endPage<totalPage){
 		%>
-			<li><ahref="index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=endPage+1%>">▶</a>
+			<li><a href="index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=endPage+1%>">▶</a>
 		<%}
 		%>
 	</ul>

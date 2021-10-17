@@ -154,6 +154,7 @@ $(function(){
 	<tr>
 		<td colspan="2">
 			<button type="submit" id="findBtn" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">확인</button>
+>>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 		</td>
 	</tr>
 </tbody>

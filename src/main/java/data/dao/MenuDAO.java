@@ -65,8 +65,32 @@ public class MenuDAO {
 		return name;
 	} 
 	
+	public String getTwoDepth(String num) {
+		String name = "";
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select menu_name from menu_db where menu_idx=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				name = rs.getString("menu_name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return name;
+	} 
+	
 	// twoµª½º ¸Þ´º
-	public List<MenuDTO> getTwoDepth(String num) {
+	public List<MenuDTO> getTwoDepthList(String num) {
 		List<MenuDTO> list = new ArrayList<MenuDTO>();
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;

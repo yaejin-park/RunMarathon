@@ -1,4 +1,6 @@
- <%@page import="data.dto.ReplyDTO"%>
+<%@page import="data.dao.MemberDAO"%>
+<%@page import="data.dto.MemberDTO"%>
+<%@page import="data.dto.ReplyDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.ReplyDAO"%>
 <%@page import="data.dto.SmartDTO"%>
@@ -51,6 +53,11 @@
 	//key는 목록에서만 값이 넘어오고 그 이외는 null값
 	String key=request.getParameter("key");
 	
+	MemberDTO mdto = new MemberDTO();
+	MemberDAO mdao = new MemberDAO();
+	String id = (String)session.getAttribute("sessionId");
+	String nickname = mdao.getIdNick(id);
+	String sessionLogin = (String)session.getAttribute("sessionLogin");
 	SmartDAO dao=new SmartDAO();
 	//목록에서 올경우에만 조회수 1 증가한다
 	if(key!=null)
@@ -67,7 +74,7 @@
 			<tr>
 				<th><span style="font-size: 1.7em;"><%=dto.getSubject()%></span>
 					<span style="color: black; font-size: 12pt; margin-left: 30px;">
-						닉네임</span><br> <span
+						<%=dto.getNickname()%></span><br> <span
 					style="color: gray; font-size: 10pt; margin-left: 30px;"> <%=sdf.format(dto.getWrite_day())%>
 						&nbsp;&nbsp;&nbsp; 조회 <%=dto.getRead_count() %> 추천 <%=dto.getChu_count() %>
 				</span></th>
@@ -88,12 +95,12 @@
 			<td><span>댓글 <%=alist.size() %></span>
 				<div style="margin-left: 30px;">
 					<%
-					 		//if(loginok!=null){//입력폼은 로그인한 경우에만 보이게하기
+					 		if(sessionLogin!=null){//입력폼은 로그인한 경우에만 보이게하기
 					 		%>
 					<div>
 						<form action="community/replyInsert.jsp" method="post">
 							<input type="hidden" name="idx" value="<%=dto.getIdx()%>">
-							<input type="hidden" name="nickname" value="<%=dto.getNickname()%>">
+							<input type="hidden" name="nickname" value="<%=nickname%>">
 							<input type="hidden" name="currentPage" value="<%=currentPage%>">
 							
 							<table>
@@ -109,8 +116,8 @@
 							</table>
 						</form>
 					</div>
-					<%//} %>
-					<div style="background-color: skyblue;">
+					<%} %>
+					<div>
 						<table style="width: 500px;">
 							<%
 					 			for(ReplyDTO adto:alist)
@@ -121,25 +128,24 @@
 								</td>
 								<td>
 									<%
-					 						//닉네임 얻기
-					 						String aname=adto.getNickname();
-					 						%> <br> <b><%=aname%></b> &nbsp; <%
+					 				
+					 						%> <br> <b><%=adto.getNickname()%></b> &nbsp; <%
 					 						//글 작성자와 댓글쓴 작성자가 같을경우
-					 						//if(dto.getNickname().equals(adto.getNickname())){%> 
+					 						if(dto.getNickname().equals(adto.getNickname())){%> 
 					 			<span style="color: red;">작성자</span> 
 					 			<%
-					 			//}
+					 			}
 					 			%> 
 					 			<span style="font-size: 9pt; color: gray; margin-left: 20px;">
 										<%=sdf.format(adto.getWrite_day())%>
 								</span> <%
 					 						//댓글삭제는 로그인 중이면서 로그인한 아이디와 같을 경우에만
 					 						//삭제 아이콘 보이게 하기
-					 						//if(loginok!=null && adto.getNickname().equals(nickname)){%>
+					 						if(sessionLogin!=null && adto.getNickname().equals(nickname)){%>
 									<span class="adel glyphicon glyphicon-remove" idx="<%=adto.getIdx()%>"
 									style="font-size: 12pt; cursor: pointer; margin-left: 10px;"></span>
 									<%
-									//}
+									}
 					 				%> <br> <span style="font-size: 10pt;"> <%=adto.getContent().replace("\n", "<br>")%>
 											</span> <br>
 								</td>
@@ -157,11 +163,18 @@
 
 							<button type="button" class="btn btn-sm btn-info"
 								style="width: 80px;"
-								onclick="location.href='index.jsp?go=community/communityList.jsp?currentPage=<%=currentPage%>'">목록</button>
+								onclick="location.href='index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=currentPage%>'">목록</button>
 
-
+							<%
+							if(sessionLogin!=null && dto.getNickname().equals(nickname)){
+							%>
 							<button type="button" class="btn btn-sm btn-info"
-								style="width: 80px;" onclick="index.jsp?go=community/comDelete.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>">삭제</button>
+								style="width: 80px;" onclick="location.href='index.jsp?go=community/updateForm.jsp&menu_one=11&menu_two=27&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
+							<button type="button" class="btn btn-sm btn-info"
+								style="width: 80px;" onclick="location.href='index.jsp?go=community/comDelete.jsp&menu_one=11&menu_two=27&idx=<%=dto.getIdx()%>'">삭제</button>
+							<%
+							} 
+							%>
 						</td>
 					</tr>
 		</tdody>

@@ -60,27 +60,6 @@ public class QuestionDAO {
 		return ref;
 	}
 	
-	public int updateParentInfo(String idx) {
-		Connection conn = db.getConnection();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "update question set ref=max(ref)+1";
-		int num=0;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				num = rs.getInt(1);
-			}
-		} catch (Exception e) {
-		} finally {
-			db.dbClose(rs, pstmt, conn);
-		}
-		
-		return num;
-	}
-	
 	//전체 데이터 갯수 (페이징을 위해 데이터 갯수를 알아야함)
 	public int getTotalCount() {
 		int n = 0;
@@ -124,6 +103,7 @@ public class QuestionDAO {
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setWriter(rs.getString("writer"));
+				dto.setPass(rs.getString("pass"));
 				dto.setRef(rs.getInt("ref"));
 				dto.setStep(rs.getInt("step"));
 				dto.setWriteDay(rs.getTimestamp("write_day"));
@@ -156,6 +136,7 @@ public class QuestionDAO {
 				dto.setWriter(rs.getString("writer"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
+				dto.setPass(rs.getString("pass"));
 				dto.setWriteDay(rs.getTimestamp("write_day"));
 			}
 		} catch (Exception e) {
@@ -238,6 +219,7 @@ public class QuestionDAO {
 		}
 	}
 	
+	//질문 삭제하기(ref값 받아서 질문에 달린 답글도 삭제되게)
 	public void deleteQuestion(int ref) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -255,6 +237,7 @@ public class QuestionDAO {
 		}
 	}
 	
+	//답변 삭제하기
 	public void deleteAnswer(String idx) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -270,5 +253,31 @@ public class QuestionDAO {
 		} finally {
 			db.dbClose(pstmt, conn);
 		}
+	}
+	
+	// idx로 작성자 얻기
+	public String getNick(String idx) {
+		String nick = "1";
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select writer from question where idx=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				nick = rs.getString("writer");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return nick;
 	}
 }

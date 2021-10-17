@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%
 	String idx=request.getParameter("idx");
-	String currentPage=request.getParameter("currentPage");
 	
 
 	SmartDAO dao=new SmartDAO();
@@ -11,6 +10,6 @@
 	//db삭제
 	dao.deleteCommunity(idx);
 	
-	String path="index.jsp?go=community/communityList.jsp?currentPage="+currentPage;
+	String path="../index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27";
 	response.sendRedirect(path);
 %>

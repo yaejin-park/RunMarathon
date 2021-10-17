@@ -3,11 +3,23 @@
 <%@page import="data.dao.MenuDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String goPage = "layout/main.jsp";
+	String menu_pt = request.getParameter("menu_one");
+	String menu_idx = request.getParameter("menu_two");
+	MenuDAO dao = new MenuDAO();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인페이지</title>
+<% if(request.getParameter("go") != null){ %>
+	<title><%=dao.getOneDepth(menu_pt)%> | <%=dao.getTwoDepth(menu_idx)%></title>
+<% }else{%>
+	<title>Run&Fun 2021</title>
+<%}%>
+<title><%=dao.getOneDepth(menu_pt)%> | <%=dao.getOneDepth(menu_idx)%></title>
+<link rel="icon" href="./common/image/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="./common/css/swiper.min.css">
 <link rel="stylesheet" href="./common/css/common.css">
@@ -17,10 +29,6 @@
 <script type="text/javascript" src="./common/js/script.js"></script><!-- Script (공통) -->
 </head>
 <%
-	String goPage = "layout/main.jsp";
-	String menu_pt = request.getParameter("menu_one");
-	String menu_idx = request.getParameter("menu_two");
-	
 	if(request.getParameter("go") != null){
 		goPage = request.getParameter("go");
 	}else{
@@ -39,13 +47,12 @@
 					<div class="sub-content">
 						<div class="nav-area">
 							<%
-								MenuDAO dao = new MenuDAO();
 								String oneDepth = dao.getOneDepth(menu_pt);
 							%>
 							<p><%= oneDepth %></p>
 							<div class="two-depth">
 								<%
-									List<MenuDTO> twoDepthList = dao.getTwoDepth(menu_pt);
+									List<MenuDTO> twoDepthList = dao.getTwoDepthList(menu_pt);
 									for(MenuDTO twoD:twoDepthList){
 									%>
 										<a href="index.jsp?go=<%= twoD.getMenu_url() %>&menu_one=<%= twoD.getParent_idx() %>&menu_two=<%= twoD.getMenu_idx() %>" class="<%= twoD.getMenu_idx().equals(menu_idx)?"active":""%>"><%= twoD.getMenu_name() %></a>

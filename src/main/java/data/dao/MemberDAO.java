@@ -212,7 +212,6 @@ public class MemberDAO {
 		return dto;
 	}
 
-	
 	//아이디 찾기
 	public String findId(String name, String hp, String auth1, String auth2) {
 		Connection conn = db.getConnection();
