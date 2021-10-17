@@ -182,10 +182,17 @@ function check(p) {
 				<td>
 					<select name="time" id="time" class="form-control">
 						<option value="-" disabled="disabled" selected="selected">선택</option>
+<<<<<<< HEAD
 						<option value="15">2021/11/15 10:00</option>
 						<option value="16">2021/11/16 10:00</option>
 						<option value="17">2021/11/17 10:00</option>
 						<option value="18">2021/11/18 10:00</option>
+=======
+						<option value="2021/11/15 10:00">2021/11/15 10:00</option>
+						<option value="2021/11/16 10:00">2021/11/16 10:00</option>
+						<option value="2021/11/17 10:00">2021/11/17 10:00</option>
+						<option value="2021/11/18 10:00">2021/11/18 10:00</option>
+>>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 					</select>
 				</td>
 			</tr>

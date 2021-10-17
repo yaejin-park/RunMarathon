@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="./common/css/swiper.min.css">
 <link rel="stylesheet" href="./common/css/common.css">
 <script type="text/javascript" src="./common/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="./common/js/gsap.min.js"></script><!-- Green Sock (모션) -->
+<script type="text/javascript" src="./com
+mon/js/gsap.min.js"></script><!-- Green Sock (모션) -->
 <script type="text/javascript" src="./common/js/swiper.min.js"></script><!-- Swiper (롤링) -->
 <script type="text/javascript" src="./common/js/script.js"></script><!-- Script (공통) -->
 </head>
@@ -58,7 +59,7 @@
 						</div>
 					</div>	
 				</div>
-			<% } else{%>
+			<% } else{ %>
 				<jsp:include page="<%= goPage %>"></jsp:include>
 			<% } %>
 		</div>

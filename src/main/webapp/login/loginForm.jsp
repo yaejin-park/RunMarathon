@@ -31,12 +31,23 @@ $(function() {
 	
 	//아이디저장시,
 	if(sessionSave!=null){
+		//아이디 자동 입력
 		idValue = sessionId;
+		//체크표시 자동
 	%>
 	$("#idSave").prop("checked", true);
-	<% 
-	}
+	<%}
+	
+	/* //아이디 찾기에서 아이디 불러오기
+	String findType = request.getParameter("find-type");
+	String findId = request.getParameter("find-id");
+	
+	//아이디 찾고 왔을 때,
+	if(findType.equals("findId")){
+		idValue = findId;
+	} */
 	%>
+	
 	//네이버 로그인
 	var naverLogin = new naver.LoginWithNaverId(
 			{
@@ -133,7 +144,7 @@ $(function() {
 	<tbody>
 		<tr>
 			<td colspan="2">
-				<input type="text" name="id" id="id" class="form-control" required="required" maxlength="15" placeholder="아이디" value=<%= idValue%>>
+				<input type="text" name="id" id="id" class="form-control" required="required" maxlength="15" placeholder="아이디" value="<%=idValue%>">
 			</td>
 		</tr>
 		<tr>

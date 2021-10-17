@@ -121,7 +121,7 @@
 			if($("#checkGift").is(":checked")){
 				$(this).parents("td").find(".form-inline").show();
 				$(this).parents("td").find(".form-inline").find("input").attr("required", true);
-				$(".gift-div").show();
+				$(".gift-div").show();W
 			}else{
 				$(this).parents("td").find(".form-inline").hide();
 				$("#checkGift").parents("td").find(".form-inline").find("input").val("");
@@ -134,29 +134,35 @@
 			$(this).prev("input").trigger("click");
 		});
 
-		var tot = parseInt($("#gift_cnt").val());
+		var tot = parseInt($("#giftCnt").val());
 		$(document).on("click", ".plus-btn", function(){
 			var plusItem = $(this).parents("tr").find(".gift-box").eq(0).clone();
 			tot+=1;
-			$("#gift_cnt").val(tot);
+			$("#giftCnt").val(tot);
 			
-			if(tot <= 5){
+			if(tot <= 4){
 				$(this).show();
-				$(plusItem).find("input[name=giftName1]").attr("name", "giftName" + tot);
-				$(plusItem).find("input[name=photo1]").attr("name", "photo" + tot);
-				$(plusItem).find("input[name=giftContent1]").attr("name", "giftContent" + tot);
 				$(this).parents("tr").find("td").append(plusItem);
+				if($("#beforeGiftCnt").val() == 0){
+					$(plusItem).find("input[name=giftName1]").attr("name", "giftName" + (tot+1));
+					$(plusItem).find("input[name=photo1]").attr("name", "photo" + (tot+1));
+					$(plusItem).find("input[name=giftContent1]").attr("name", "giftContent" + (tot+1));	
+				}else{
+					$(plusItem).find("input[name=giftName1]").attr("name", "giftName" + tot);
+					$(plusItem).find("input[name=photo1]").attr("name", "photo" + tot);
+					$(plusItem).find("input[name=giftContent1]").attr("name", "giftContent" + tot);
+				}
 			}
 			
-			if(tot == 5){
+			if(tot == 4){
 				$(this).hide();
 			}
 		});
 		
 		$(document).on("click", ".minus-btn", function(){
 			tot-=1;
-			$("#gift_cnt").val(tot);
-			if(tot < 6) {
+			$("#giftCnt").val(tot);
+			if(tot < 5) {
 				$(".plus-btn").show();
 			}else{
 				$(".plus-btn").hide();
@@ -186,7 +192,8 @@
 %>
 <div class="admin-area">
 	<form action="./admin/contest/updateContestAction.jsp" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="giftCnt" id="gift_cnt" value="<%= giftList.size() %>">
+		<input type="hidden" name="beforeGiftCnt" id="beforeGiftCnt" value="<%= giftList.size() %>">
+		<input type="hidden" name="giftCnt" id="giftCnt" value="<%= giftList.size() %>">
 		<div class="contest-add-div">
 			<p class="title">대회 수정</p>
 			<table class="table table-bordered">
@@ -263,7 +270,7 @@
 					<tr>
 						<th style="vertical-align:middle;">선택<a href="javascript:" class="plus-btn">+</a></th>
 						<td>
-							<% if(dto.getGift_check().equals("0") || giftList.size() < 5){%>
+							<% if(dto.getGift_check().equals("0")){%>
 								<div class="gift-box copy">
 									<div class="form-list">
 										<p class="txt1">타이틀</p>
@@ -284,21 +291,24 @@
 									<a href="javascript:" class="minus-btn">-</a>
 								</div>
 							<% } else{
+									int cnt = 0;
 									for(GiftDTO giftDto:giftList){
+										++cnt;
 								%>
 									<div class="gift-box">
+										<input type="hidden" name="giftNum<%= cnt %>" value="<%= giftDto.getNum() %>">
 										<div class="form-list">
 											<p class="txt1">타이틀</p>
-											<input type="text" class="form-control" name="giftName1" value="<%= giftDto.getName() %>">
+											<input type="text" class="form-control" name="giftName<%= cnt %>" value="<%= giftDto.getName() %>">
 										</div>
 										<div class="form-list">
 											<p class="txt1">설명</p>
-											<input class="form-control" name="giftContent1" value="<%= giftDto.getContent() %>" />
+											<input class="form-control" name="giftContent<%= cnt %>" value="<%= giftDto.getContent() %>" />
 										</div>
 										<div class="form-list">
 											<p class="txt1">첨부파일</p>
 											<div class="file-attach">
-												<input type="file" class="form-control" name="photo1" onchange="readUrl(this)" multiple>
+												<input type="file" class="form-control" name="photo<%= cnt %>" value="<%= giftDto.getPhoto() %>" onchange="readUrl(this)" multiple>
 												<button type="button" class="file-btn">파일 선택</button>
 												<p class="file-txt">
 													<span class='glyphicon glyphicon-remove'><%= giftDto.getPhoto() %></span>
@@ -316,7 +326,7 @@
 		</div>
 		
 		<div classs="btn-div">
-			<button type="submit" class="btn btn-info add-btn">수정</button>
+			<button type="submit" class="btn btn-info update-btn">수정</button>
 		</div>
 	</form>
 </div>

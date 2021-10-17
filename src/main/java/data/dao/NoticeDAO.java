@@ -45,7 +45,7 @@ public class NoticeDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				n = rs.getInt(1);
@@ -185,6 +185,7 @@ public class NoticeDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+
 			pstmt.setString(1, dto.getSubject());
 			pstmt.setString(2, dto.getContent());
 			pstmt.setString(3, dto.getIdx());
@@ -229,5 +230,5 @@ public class NoticeDAO {
 		}
 		return list;
 	}
-	
+
 }

@@ -4,11 +4,13 @@ public class ApplyDTO {
 	private String marathon;
 	private String name;
 	private String id;
-	private String addr;
+	private String addr1;
+	private String addr2;
 	private String hp;
 	private String course;
 	private String time;
 	private String person;
+	
 	public String getMarathon() {
 		return marathon;
 	}
@@ -27,11 +29,17 @@ public class ApplyDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getAddr() {
-		return addr;
+	public String getAddr1() {
+		return addr1;
 	}
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
 	}
 	public String getHp() {
 		return hp;
@@ -57,4 +65,5 @@ public class ApplyDTO {
 	public void setPerson(String person) {
 		this.person = person;
 	}
+	
 }

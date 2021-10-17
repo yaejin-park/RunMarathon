@@ -9,13 +9,15 @@ import java.sql.Statement;
 
 public class DBConnect {
 	static final String MYSQLDRIVER = "com.mysql.jdbc.Driver";
-	
+
+
 	static final String MYSQL_URL = "jdbc:mysql://db-semi5.cnkpw8i7gzb8.ap-northeast-2.rds.amazonaws.com:3306/semi";
+
+
 	
 	public DBConnect() {
 		try {
 			Class.forName(MYSQLDRIVER);
-			System.out.println("aws Mysql success");
 		} catch (ClassNotFoundException e) {
 			System.out.println("aws Mysql fail:"+e.getMessage());
 		}
@@ -25,7 +27,6 @@ public class DBConnect {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(MYSQL_URL, "admin", "asdf7890");
-			System.out.println("aws Mysql getConnection success");
 		} catch (SQLException e) {
 			System.out.println("Mysql fail :"+e.getMessage());
 		}

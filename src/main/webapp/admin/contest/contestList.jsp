@@ -13,6 +13,10 @@
 	menudao.getOneDepth(menu_one);
 %>
 <style>
+	.contest-list .btn-wrap {
+		margin-bottom:20px;
+		text-align:right;
+	}
 	.chk {
 		text-align:center;
 	}

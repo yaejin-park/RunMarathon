@@ -100,6 +100,7 @@ $(function(){
 	//닉네임 중복 체크
 	$("#nickDouble").click(function() {
 		popup("join/nickSearchForm.jsp", 550, 350);
+		<% session.setAttribute("from", "join"); %>
 	});
 	
 	//주소 검색
@@ -141,8 +142,6 @@ $(function(){
 		    return true;
 		 }
 	});
-		
-	
 	
 });
 
@@ -162,6 +161,33 @@ $(function(){
 		} else{
 			return true;
 		}
+		
+		/* var pw = f.pass.val();
+		var num = pw.search(/[0-9]/g);
+		var eng = pw.search(/[a-z]/g);
+		var engB = pw.search(/[A-Z]/g);
+		var spe = pw.search(/[`~!@@#$%^&*|\\\'\";:\/?]/gi);
+
+		if(pw.length < 8 || pw.length > 20){
+		 alert("8자리 ~ 20자리 이내로 입력해주세요.");
+		 return false;
+		 }else if(pw.search(/\s/) != -1){
+		  alert("비밀번호는 공백 없이 입력해주세요.");
+		  return false;
+		 }else if(num < 0 || eng < 0 || engB < 0 || spe < 0 ){
+		  alert("영문 대소문자+숫자+특수문자를 포함하여 입력해주세요.");
+		  return false;
+		 }else {
+		    return true;
+		 }
+		
+		//약관체크
+		if(opt1.is(":checked") && opt2.is(":checked")){
+			return true;
+		} else{
+			alert("필수약관에 동의하여 주세요.");
+			return false;
+		} */
 	}
 </script>
 </head>
@@ -179,7 +205,7 @@ $(function(){
 			</tr>
 			<tr class="accor-div">
 				<td>
-					<input type="checkbox" class="opt" style="float: left;">
+					<input type="checkbox" class="opt" id="opt1" name="opt1" style="float: left;">
 					<div class="accor-title" >
 						<div style="float: left;">
 							&nbsp;&nbsp;이용약관 동의<span class="plus"> (필수)</span>
@@ -195,7 +221,7 @@ $(function(){
 			</tr>
 			<tr class="accor-div">
 				<td>
-					<input type="checkbox" class="opt" style="float: left;">
+					<input type="checkbox" class="opt" id="opt2" name="opt2" style="float: left;">
 					<div class="accor-title" >
 						<div style="float: left;">
 							&nbsp;&nbsp;개인정보처리방침 동의<span class="plus"> (필수)</span>
@@ -244,7 +270,7 @@ $(function(){
 			<tr>
 				<th>전화번호</th>
 				<td>
-					<input type="text" name="hp1" id="hp1" class="form-control" required="required" maxlength="4" style="width: 100px;" value="">
+					<input type="text" name="hp1" id="hp1" class="form-control" required="required" maxlength="3" style="width: 100px;" value="">
 					<select id="selHp1" class="form-control" style="width: 100px; background-color: #eeeeee">
 						<option value="-" selected="selected" disabled="disabled">직접입력</option> 
 						<option value="010">010</option>

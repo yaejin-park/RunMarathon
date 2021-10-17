@@ -1,9 +1,6 @@
 <%@page import="data.dao.QuestionDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script type="text/javascript">
-	alert("aaaaaaa");
-</script>
 <%
 	String idx = request.getParameter("idx");
 	String currentPage = request.getParameter("currentPage");
