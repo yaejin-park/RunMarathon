@@ -9,7 +9,6 @@
 	<%
 		String sessionId = (String)session.getAttribute("sessionId");
 		String sessionLogin = (String)session.getAttribute("sessionLogin");
-		System.out.println(sessionId + "," + sessionLogin);
 	%>
 	<div class="menu-div">
 		<a href="javascript:" class="menu-btn">
