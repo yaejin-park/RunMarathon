@@ -41,6 +41,10 @@
 	}
 	
 </style>
+<<<<<<< HEAD
+
+=======
+>>>>>>> kmj
 <script type="text/javascript">
 	$(function(){
 		$(".subject").click(function(){
