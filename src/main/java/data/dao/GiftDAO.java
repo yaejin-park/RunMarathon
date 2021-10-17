@@ -84,25 +84,18 @@ public class GiftDAO {
 		return list;
 	}
 	
-	public List<GiftDTO> getGift(String name) {
-		List<GiftDTO> list = new ArrayList<GiftDTO>();
+	public String getNewGift() {
+		String name = "";
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from gift where contest_name=?";
+		String sql = "select name from contest order by abs(DATEDIFF(contest_start, now())) limit 1;";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				GiftDTO dto = new GiftDTO();
-				dto.setNum(rs.getString("num"));
-				dto.setName(rs.getString("name"));
-				dto.setContent(rs.getString("content"));
-				dto.setContest_name(rs.getString("contest_name"));
-				dto.setPhoto(rs.getString("photo"));
-				list.add(dto);
+			if(rs.next()) {
+				name = rs.getString("name");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -111,6 +104,6 @@ public class GiftDAO {
 			db.dbClose(rs, pstmt, conn);
 		}
 		
-		return list;
+		return name;
 	}
 }

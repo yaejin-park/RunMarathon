@@ -25,7 +25,7 @@
 				if(sessionId == null || !sessionId.equals("admin") || sessionLogin == null){
 					for(MenuDTO oneDto:oneDepthList) {
 						String parent_idx = oneDto.getMenu_idx(); 
-						List<MenuDTO> twoDepthList = dao.getTwoDepth(parent_idx);
+						List<MenuDTO> twoDepthList = dao.getTwoDepthList(parent_idx);
 						if(!oneDto.getMenu_name().equals("관리자") && !oneDto.getMenu_name().equals("로그인") && !oneDto.getMenu_name().equals("회원가입") && !oneDto.getMenu_name().equals("마이페이지")){
 					%>
 						<li>
@@ -45,7 +45,7 @@
 				}else{
 					for(MenuDTO oneDto:oneDepthList) {
 						String parent_idx = oneDto.getMenu_idx(); 
-						List<MenuDTO> twoDepthList = dao.getTwoDepth(parent_idx);
+						List<MenuDTO> twoDepthList = dao.getTwoDepthList(parent_idx);
 						if(!oneDto.getMenu_name().equals("로그인") && !oneDto.getMenu_name().equals("회원가입") && !oneDto.getMenu_name().equals("마이페이지")){
 					%>
 						<li>
