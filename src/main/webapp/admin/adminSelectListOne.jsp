@@ -34,10 +34,6 @@ td {
 	white-space: normal;
 }
 
-button {
-	font-family: Gugi;
-}
-
 .search_bar_top {
 	display: inline-block;
 }
@@ -54,10 +50,11 @@ button {
 	// dao 선언
 	AdminApplyDAO dao = new AdminApplyDAO();
 	AdminApplyDTO dto = new AdminApplyDTO();
-	List<AdminApplyDTO> list = dao.getAllMembers();
+	
+	String tname = request.getParameter("tname");	
 %>
 	<div class="cap">
-		<b>전체 회원 목록</b>
+		<b>참가 회원 목록</b>
 	</div>
 	<form class="serachform" action="adminMemberSearch.jsp">
 		<div align="center" style="margin-top: 10px">
@@ -83,67 +80,41 @@ button {
 			align="center">
 			<thead>
 				<tr>
-					<th style="width:50px">번호</th>
-					<th>이름</th>
-					<th>닉네임</th>
+					<th style="width: 50px">번호</th>
+					<th>참가대회</th>
 					<th>아이디</th>
-					<th>패스워드</th>
+					<th>이름</th>
+					<th >주소</th>
 					<th>핸드폰</th>
-					<th colspan="2">주소</th>
-					<th>본인인증질문</th>
-					<th>본인인증답변</th>
-					<th>회원관리(수정/삭제)</th>
+					<th>참가코스</th>
+					<th>참가시간</th>
+					<th>참가인원수</th>
+					<th>참가현황</th>
 				</tr>
 			</thead>
 			<tbody>
-				<%	for(AdminApplyDTO adt:list) { %>
+				<%	List<AdminApplyDTO> list = dao.getSelectMembers(tname);
+					for(AdminApplyDTO adt:list) { %>
 				<tr>
-					<td><%=adt.getIdx()%></td>
-					<td><%=adt.getName()%></td>
-					<td><%=adt.getNick()%></td>
-					<td><%=adt.getId()%></td>
-					<td><%=adt.getPass()%></td>
-					<td><%=adt.getHp()%></td>
-					<td><%=adt.getAddr1()%></td>
-					<td><%=adt.getAddr2()%></td>
-					<td><%=adt.getAuth1()%></td>
-					<td><%=adt.getAuth2()%></td>
+					<td><%=adt.getAidx()%></td>
+					<td><%=adt.getAmarathon()%></td>
+					<td><%=adt.getAid()%></td>
+					<td><%=adt.getAname()%></td>
+					<td><%=adt.getAaddr()%></td>
+					<td><%=adt.getAhp()%></td>
+					<td><%=adt.getAcourse()%></td>
+					<td><%=adt.getAtime()%></td>
+					<td><%=adt.getAperson()%></td>
 					<td>
-						<button type="button" class="btn btn-warning btn-sm">수정</button>
-						<button type="button" class="btn btn-danger btn-sm"
-							onclick="delfunc('<%=adt.getId()%>')">삭제</button>
+						<button type="button" class="btn btn-default btn-sm">기념품
+							발송</button>
+						<button type="button" class="btn btn-success btn-sm">참가 기록</button>
 					</td>
 				</tr>
 				<% } %>
 			</tbody>
 		</table>
 	</div>
-	
-	
-	<!-- 삭제 Modal -->
-	<div class="modal fade" id="myModal2" role="dialog">
-		<div class="modal-dialog modal-sm">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">삭제 확인</h4>
-				</div>
-				<div class="modal-body form-inline">
-					<input type="hidden" id="delid"><br> <b>삭제 비밀번호:</b> <input
-						type="password" id="delpass" class="form-control"
-						style="width: 120px;">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default delbtn"
-						data-dismiss="modal">삭제</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
 
 	<script type="text/javascript">
 		function delfunc(id) {

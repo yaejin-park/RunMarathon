@@ -10,8 +10,8 @@
 	dto = dao.getData(idx);
 	//프로젝트의 경로
 	String root=request.getContextPath();
-	
 %>
+
 <!-- se2 폴더에서 js 파일 가져오기 -->
 <script type="text/javascript" src="<%=root%>/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 

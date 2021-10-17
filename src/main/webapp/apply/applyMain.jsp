@@ -1,3 +1,5 @@
+<%@page import="data.dto.ApplyDTO"%>
+<%@page import="data.dao.ApplyDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -74,15 +76,27 @@ function check() {
 	if(sessionLogin==null){%>
 		alert("로그인 이후, 이용가능합니다");
 		return true;
-		<%} else{ %>
-		//약관 동의 경고
-		if($("#opt1").is(":checked") && $("#opt2").is(":checked")){
-			return true;
-		} else{
-			alert("약관에 동의해주세요");
-			return false;
-		}
- 	<%}%>  
+		<%} else{
+			//이미 신청한 아이디일 경우,
+			ApplyDAO dao = new ApplyDAO();
+			String id = (String)session.getAttribute("sessionId");
+			boolean doubleApply = dao.isDoubleApply(id);
+			if(doubleApply){
+				%>
+				alert("이미 신청한 내역이 존재합니다");
+				return false;
+				<%
+			}else{
+			%>
+			//약관 동의 경고
+			if($("#opt1").is(":checked") && $("#opt2").is(":checked")){
+				return true;
+			} else{
+				alert("약관에 동의해주세요");
+				return false;
+			}
+	 	<%}
+ 	}%>  
 }
 </script>
 </head>

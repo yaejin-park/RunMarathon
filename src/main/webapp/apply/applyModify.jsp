@@ -1,8 +1,3 @@
-<%@page import="java.io.Console"%>
-<%@page import="java.util.Vector"%>
-<%@page import="java.util.List"%>
-<%@page import="data.dto.MemberDTO"%>
-<%@page import="data.dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,45 +6,28 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<style type="text/css">
-	.course{
-		margin-right: 20px;
-		width: 80px;
-	}
-	
-</style>
 <script type="text/javascript">
 $(function(){
 	<%
 	String id = (String)session.getAttribute("sessionId");
 	String type = request.getParameter("type");
 	%>
-	//회원정보 동일
-	$("#memberData").click(function() {
-		var id = $(this).val();
-		//체크 됐으면
-		if($("#memberData").is(":checked")){
-			$.ajax({
-				type: "get",
-				dataType: "json",
-				data: {"id":id},
-				url: "./apply/getMember_ajax.jsp",
-				success: function(data) {
-					$("#name").val(data.name);
-					$("#hp1").val(data.hp1);
-					$("#hp2").val(data.hp2);
-					$("#hp3").val(data.hp3);
-					$("#addr1").val(data.addr1);
-					$("#addr2").val(data.addr2);
-				}
-			});
-		} else{
-			$("#name").val("");
-			$("#hp1").val("");
-			$("#hp2").val("");
-			$("#hp3").val("");
-			$("#addr1").val("");
-			$("#addr2").val("");
+	
+	$.ajax({
+		type: "get",
+		dataType: "json",
+		url: "./apply/getApply_ajax.jsp",
+		success: function(data) {
+			$("#name").val(data.name);
+			$("#hp1").val(data.hp1);
+			$("#hp2").val(data.hp2);
+			$("#hp3").val(data.hp3);
+			$("#addr1").val(data.addr1);
+			$("#addr2").val(data.addr2);
+			$("#person").val(data.person);
+			$('time').val(data.time).prop("selected",true);
+			$("#courseData").val(data.course);
+			$("#"+data.course+"").css("background-color", "rgb(91 192 222)").css("box-shadow","0px 0px 10px #bebfbd").css("color","white");
 		}
 	});
 	
@@ -76,47 +54,21 @@ $(function(){
         }).open();
 	});
 	
- 	//코스 버튼 선택
+	//코스 버튼 선택
 	$(".course").click(function() {
 		$(this).css("background-color", "rgb(91 192 222)").css("box-shadow","0px 0px 10px #bebfbd").css("color","white");
 	    $(this).siblings().css("background-color", "").css("box-shadow","").css("color","");
 	   	//선택한 코스값 넘기기
 	    $("#courseData").val($(this).val());
 	});
- 
- 	//무통장 버튼 선택
-	$("#pay").click(function() {
-		//한번더 클릭시(색깔이 있을때)
-		if($(this).attr("result")!="yes"){
-			$(this).css("background-color", "rgb(91 192 222)").css("box-shadow","0px 0px 10px #bebfbd").css("color","white").attr("result","yes");
-		  	//무통장 버튼 클릭 여부 넘기기
-			 $("#payData").val($(this).val());
-		  	console.log($("#payData").val());
-		} else{
-		    $(this).css("background-color", "").css("box-shadow","").css("color","").attr("result","");
-		    $("#payData").val("");
-		    console.log($("#payData").val());
-		}
-	});
+ 	
 });
 
-function check(p) {
-	if(p.payData.value.length==0){
-		alert("무통장입금 버튼을 눌러주세요.");
-		return false;
-	}else{
-		return true;
-	}
-}
-
 </script>
-
 </head>
 <body>
-<form action="apply/applyAddAction.jsp" method="post" class="form-inline" name="joinfrm" onsubmit="return check(this)">
-<input hidden="hidden" name="marathon" value="런마라톤_2021">
+<form action="apply/applyModifyAction.jsp" method="post" class="form-inline" name="applyfrm" id="applyForm">
 <input hidden="hidden" id="courseData" name="course" value="">
-<input hidden="hidden" id="payData" name="pay" value="">
 <input hidden="hidden" id="id" name="id" value="<%=id%>">
 
 <div>
@@ -126,12 +78,6 @@ function check(p) {
 			<col width="80%">
 		</colgroup>
 		<tbody>
-			<tr>
-				<td colspan="2" style="font-size: 0.8em">
-					<input type="checkbox" name="member-data" id="memberData" value="<%=id%>">&nbsp;&nbsp;회원정보와 동일
-				</td>
-			</tr>
-			
 			<tr>
 				<th>이름</th>
 				<td>
@@ -172,27 +118,20 @@ function check(p) {
 			<tr>
 				<th>코스</th>
 				<td>
-					<button type="button" id="course42" value="42K" class="btn btn-default course">42K</button>
-					<button type="button" id="course25" value="25K" class="btn btn-default course">25K</button>
-					<button type="button" id="course15" value="15K" class="btn btn-default course">15K</button>
+					<button type="button" id="42K" value="42K" class="btn btn-default course course-clicked">42K</button>
+					<button type="button" id="25K" value="25K" class="btn btn-default course">25K</button>
+					<button type="button" id="15K" value="15K" class="btn btn-default course">15K</button>
 				</td>
 			</tr>
 			<tr>
 				<th>일정</th>
 				<td>
 					<select name="time" id="time" class="form-control">
-						<option value="-" disabled="disabled" selected="selected">선택</option>
-<<<<<<< HEAD
-						<option value="15">2021/11/15 10:00</option>
-						<option value="16">2021/11/16 10:00</option>
-						<option value="17">2021/11/17 10:00</option>
-						<option value="18">2021/11/18 10:00</option>
-=======
+						<option value="-" disabled="disabled">선택</option>
 						<option value="2021/11/15 10:00">2021/11/15 10:00</option>
 						<option value="2021/11/16 10:00">2021/11/16 10:00</option>
 						<option value="2021/11/17 10:00">2021/11/17 10:00</option>
 						<option value="2021/11/18 10:00">2021/11/18 10:00</option>
->>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 					</select>
 				</td>
 			</tr>
@@ -200,7 +139,7 @@ function check(p) {
 			<tr>
 				<th>총 인원수</th>
 				<td>
-					<input type="number" name="person" id="person" class="form-control" required="required" max="50" min="2" value="2">명
+					<input type="number" name="person" id="person" class="form-control" required="required" max="50" min="1">명
 				</td>
 			</tr>
 			<%} else{%>
@@ -208,17 +147,9 @@ function check(p) {
 			<%
 			}%>
 			<tr>
-				<th>결제방법</th>
-				<td>
-					<div class="btn-group">
-						<button type="button" id="pay" value="pay" class="btn btn-default">무통장입금</button>
-					</div>
-				</td>
-			</tr>
-			<tr>
 				<td colspan="2" align="center">
 					<button type="button" id="applyNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;" onclick="history.go(-1);">취소</button>
-					<button type="submit" id="applyYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">참가신청</button>&nbsp;&nbsp;
+					<button type="submit" id="applyYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">수정완료</button>&nbsp;&nbsp;
 				</td>
 			</tr>
 		</tbody>

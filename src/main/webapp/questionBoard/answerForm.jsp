@@ -1,3 +1,4 @@
+<%@page import="data.dao.MemberDAO"%>
 <%@page import="data.dao.QuestionDAO"%>
 <%@page import="data.dto.QuestionDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,6 +9,8 @@
 	String idx = request.getParameter("idx");
 	String currentPage = request.getParameter("currentPage");
 	dto = dao.getSubPass(idx);
+	String id = (String)session.getAttribute("sessionId");
+	MemberDAO mdao = new MemberDAO();
 	String root = request.getContextPath();
 %>
 
@@ -23,7 +26,7 @@
 			<tr>
 				<th>작성자</th>
 				<td>
-					<input type="text" name="writer" class="form-control" required="required" style="width: 130px;">
+					<input type="text" name="writer" class="form-control" required="required" style="width: 130px;" value="<%=mdao.getIdNick(id)%>">
 				</td>
 			</tr>
 			<tr>
@@ -43,7 +46,7 @@
 		
 		<tr>
 			<td colspan="2">
-				<input type="text" name="content" class="form-control" required="required" style="width: 780px; height: 300px;">
+				<textarea name="content" class="form-control" required="required" style="width: 780px; height: 300px;"></textarea>
 				<input type="hidden" name="ref" value="<%=dto.getRef()%>">	
 				<input type="hidden" name="step" value="<%=dto.getStep()%>">
 				<input type="hidden" name="reforder" value="<%=dto.getReforder()%>">

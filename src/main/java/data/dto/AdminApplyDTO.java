@@ -9,8 +9,27 @@ public class AdminApplyDTO {
 	private String hp;
 	private String id;
 	private String pass;
-	private String addr;
+	private String addr1;
+	private String addr2;
+	private String auth1;
 	private String auth2;
+	
+	private String contestName;
+	private String contestStart;
+	private String contestEnd;
+	private String applyStart;
+	private String applyEnd;
+	private String money;
+	
+	private String aidx;
+	private String amarathon;
+	private String aid;
+	private String aname;
+	private String aaddr;
+	private String ahp;
+	private String acourse;
+	private String atime;
+	private String aperson;
 	
 	private String marathon;
 	private String course;
@@ -18,6 +37,42 @@ public class AdminApplyDTO {
 	private String record;
 	
 	
+	public String getContestName() {
+		return contestName;
+	}
+	public void setContestName(String contestName) {
+		this.contestName = contestName;
+	}
+	public String getContestStart() {
+		return contestStart;
+	}
+	public void setContestStart(String contestStart) {
+		this.contestStart = contestStart;
+	}
+	public String getContestEnd() {
+		return contestEnd;
+	}
+	public void setContestEnd(String contestEnd) {
+		this.contestEnd = contestEnd;
+	}
+	public String getApplyStart() {
+		return applyStart;
+	}
+	public void setApplyStart(String applyStart) {
+		this.applyStart = applyStart;
+	}
+	public String getApplyEnd() {
+		return applyEnd;
+	}
+	public void setApplyEnd(String applyEnd) {
+		this.applyEnd = applyEnd;
+	}
+	public String getMoney() {
+		return money;
+	}
+	public void setMoney(String money) {
+		this.money = money;
+	}
 	public String getRecord() {
 		return record;
 	}
@@ -60,11 +115,23 @@ public class AdminApplyDTO {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	public String getAddr() {
-		return addr;
+	public String getAddr1() {
+		return addr1;
 	}
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+	public String getAuth1() {
+		return auth1;
+	}
+	public void setAuth1(String auth1) {
+		this.auth1 = auth1;
 	}
 	public String getAuth2() {
 		return auth2;
@@ -91,4 +158,59 @@ public class AdminApplyDTO {
 	public void setContestDate(Timestamp contestDate) {
 		this.contestDate = contestDate;
 	}
+	public String getAidx() {
+		return aidx;
+	}
+	public void setAidx(String aidx) {
+		this.aidx = aidx;
+	}
+	public String getAmarathon() {
+		return amarathon;
+	}
+	public void setAmarathon(String amarathon) {
+		this.amarathon = amarathon;
+	}
+	public String getAid() {
+		return aid;
+	}
+	public void setAid(String aid) {
+		this.aid = aid;
+	}
+	public String getAname() {
+		return aname;
+	}
+	public void setAname(String aname) {
+		this.aname = aname;
+	}
+	public String getAaddr() {
+		return aaddr;
+	}
+	public void setAaddr(String aaddr) {
+		this.aaddr = aaddr;
+	}
+	public String getAhp() {
+		return ahp;
+	}
+	public void setAhp(String ahp) {
+		this.ahp = ahp;
+	}
+	public String getAcourse() {
+		return acourse;
+	}
+	public void setAcourse(String acourse) {
+		this.acourse = acourse;
+	}
+	public String getAtime() {
+		return atime;
+	}
+	public void setAtime(String atime) {
+		this.atime = atime;
+	}
+	public String getAperson() {
+		return aperson;
+	}
+	public void setAperson(String aperson) {
+		this.aperson = aperson;
+	}
+	
 }

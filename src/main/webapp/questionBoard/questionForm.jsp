@@ -17,7 +17,8 @@
 			<tr>
 				<th>작성자</th>
 				<td>
-					<input type="text" name="writer" class="form-control" required="required" style="width: 130px;" value="<%=mdao.getNick(id)%>">
+					<input type="text" name="writer" class="form-control" required="required" style="width: 130px;"
+					readonly="readonly" value="<%=mdao.getIdNick(id)%>">
 				</td>
 			</tr>
 			<tr>
@@ -36,13 +37,14 @@
 		
 		<tr>
 			<td colspan="2">
-				<input type="text" name="content" class="form-control" required="required" style="width: 780px; height: 300px;">		
+				<textarea name="content" class="form-control" required="required" style="width: 780px; height: 300px;"></textarea>		
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
 				<button type="submit" class="btn btn-warning" style="width: 120px;">저장하기</button>
-				<button type="button" class="btn btn-warning" style="width: 120px;" onclick="location.href='index.jsp?go=questionBoard/questionList.jsp&menu_one=12&menu_two=19'">목록</button>
+				<button type="button" class="btn btn-warning" style="width: 120px;" 
+				onclick="location.href='index.jsp?go=questionBoard/questionList.jsp&menu_one=12&menu_two=19'">목록</button>
 			</td>
 		</tr>
 	</table>   

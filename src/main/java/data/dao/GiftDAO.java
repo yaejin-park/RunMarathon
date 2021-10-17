@@ -36,7 +36,7 @@ public class GiftDAO {
 	public void updateGift(GiftDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "update ignore gift set name=?, content=?, contest_name=?, photo=?";
+		String sql = "update ignore gift set name=?, content=?, contest_name=?, photo=? where num=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -44,6 +44,7 @@ public class GiftDAO {
 			pstmt.setString(2, dto.getContent());
 			pstmt.setString(3, dto.getContest_name());
 			pstmt.setString(4, dto.getPhoto());
+			pstmt.setString(5, dto.getNum());
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

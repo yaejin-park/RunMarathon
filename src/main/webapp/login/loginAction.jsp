@@ -18,7 +18,7 @@
 		session.setAttribute("sessionLogin", "yes");
 		session.setAttribute("sessionSave", idSave == null?null:"yes");
 		//로그인 메인으로 이동
-		response.sendRedirect("../index.jsp?go=login/loginMain.jsp");
+		response.sendRedirect("../index.jsp?go=login/loginMain.jsp&menu_one=21");
 	} else{
 	%>
 		<script type="text/javascript">

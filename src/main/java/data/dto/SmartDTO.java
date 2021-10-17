@@ -4,13 +4,8 @@ import java.sql.Timestamp;
 
 public class SmartDTO {
 	private String idx;
+
 	private String nickname;
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
 	private String subject;
 	private String content;
 	private int chu_count;
@@ -21,6 +16,12 @@ public class SmartDTO {
 	}
 	public void setIdx(String idx) {
 		this.idx = idx;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getSubject() {
 		return subject;
