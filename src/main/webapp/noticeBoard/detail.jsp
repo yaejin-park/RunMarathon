@@ -27,7 +27,7 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 %>
-	<!-- 디테일 테이블 -->
+	<!-- detail table -->
 	<table class="table table-bordered">
 		<caption><b>내용보기</b></caption>
 		<tr>
@@ -76,7 +76,7 @@
 	        <td>
 				<a style="color: black"
 					href="index.jsp?go=noticeBoard/detail.jsp?&menu_one=12&menu_two=18&idx=<%=ssdto.getIdx()%>&currentPage=<%=currentPage%>&key=list">
-				<%=ssdto.getSubject() %></a>
+					<%=ssdto.getSubject() %></a>
 			</td>
 	     </tr>
 <%

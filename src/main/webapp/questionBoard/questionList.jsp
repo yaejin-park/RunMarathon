@@ -39,43 +39,34 @@
 		width: 160px;
 		text-align: center;
 	}
+	
 </style>
 <script type="text/javascript">
-	
 	$(function(){
-		var writer0 = document.getElementsByClassName("writer")[0].value;
-		var writer1 = document.getElementsByClassName("writer")[1].value;
-		var writer2 = document.getElementsByClassName("writer")[2].value;
-		
-		var sessionNick = document.getElementById("sessionNick").value;
 		$(".subject").click(function(){
-			//alert(sessionNick);
+	       	var sessionNick = $(this).find("#sessionNick").val();
 			if(sessionNick!="관리자"){
-				alert("aaaa")
-				$(this).parents(".accor-div").find(".accor-content").slideUp();
-			}
-			/* var writer = document.getElementsByClassName("writer");
-			for(var i = 0; i<writer.length; i++){
-				writer = document.getElementsByClassName("writer")[i].value;
-				
+				var writer = $(this).find(".writer").val();
+				var getPass = $(this).find(".pass").val();
 				if(sessionNick!=writer){
-					return;
+					var pass = prompt("비밀번호를 입력해주세요.")
+					if(pass==null){
+						$(this).parents(".accor-div").find(".accor-content").css("display","none");
+						return;
+					}
+					if(pass!=getPass){
+						alert("비밀번호가 맞지 않습니다.")
+						$(this).parents(".accor-div").find(".accor-content").css("display","none");
+						return;
+					}
 				}
-				
-				if(sessionNick==writer){
-					alert("안녕");	
-				}
-			} */
-			
+			}
 		});
-		
-		
 	});
 </script>
-<%
-	QuestionDAO dao = new QuestionDAO();
 
-	//페이징 처리에 필요한 변수 선언
+<!-- 페이징 처리에 필요한 변수 선언 -->
+<%
 	int perPage = 10; //한페이지에 보여질 글의 갯수
 	int totalCount; //총 글의 수
 	int currentPage; //현재 페이지 번호
@@ -86,6 +77,7 @@
 	int endPage; //각 블럭에 표시할 마지막 페이지
 	
 	//총 데이터 갯수
+	QuestionDAO dao = new QuestionDAO();
 	totalCount = dao.getTotalCount();
 	
 	//현재 페이지 번호 읽기.(null일 경우 1페이지로 설정)
@@ -138,8 +130,7 @@
 	<%
 	}
 %>
-
-
+<!-- question table -->
 <div class="accor-all">
 	<div class="qna-title">
 		<div class="qna-no">
@@ -170,9 +161,9 @@
 			</div>
 			<div class="qna-subject accor-title subject">
 				<%=dto.getSubject() %>
-				<%=dao.getNick(dto.getIdx()) %>
 				<input type="hidden" style="position: absolute;" class="writer" value="<%=dao.getNick(dto.getIdx()) %>" />
 				<input type="hidden" style="position: absolute;" id="sessionNick" value="<%=nick %>" />
+				<input type="hidden" style="position: absolute;" class="pass" value="<%=dto.getPass() %>" />
 			</div>
 			<div class="qna-writer">
 				<%=dto.getWriter() %>
@@ -182,7 +173,7 @@
 			</div>
 		</div>
 		<div class="accor-content">
-			<%=dto.getContent() %>
+			<%=dto.getContent().replace("\n","<br>") %>
 			<%
 			if(sessionLogin!=null && nick.equals(dto.getWriter())){
 			%>

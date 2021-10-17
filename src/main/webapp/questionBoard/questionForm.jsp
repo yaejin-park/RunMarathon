@@ -37,7 +37,7 @@
 		
 		<tr>
 			<td colspan="2">
-				<input type="text" name="content" class="form-control" required="required" style="width: 780px; height: 300px;">		
+				<textarea name="content" class="form-control" required="required" style="width: 780px; height: 300px;"></textarea>		
 			</td>
 		</tr>
 		<tr>
