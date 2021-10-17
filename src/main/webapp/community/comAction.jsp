@@ -7,9 +7,9 @@
 	request.setCharacterEncoding("utf-8");
 	//데이터읽어서 dto에 넣기
 	SmartDTO dto=new SmartDTO();
+	dto.setNickname(request.getParameter("nickname"));
 	dto.setSubject(request.getParameter("subject"));
 	dto.setContent(request.getParameter("content"));
-	
 	
 	//db insert
 	SmartDAO dao=new SmartDAO();
@@ -21,6 +21,6 @@
 	
 	//방금전에 추가된 num값 얻기
 	String idx=dao.getMaxNum();
-	String path="communityList.jsp?idx="+idx;
+	String path="../index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27?idx="+idx;
 	response.sendRedirect(path);
 %>

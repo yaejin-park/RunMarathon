@@ -1,3 +1,5 @@
+<%@page import="data.dao.MemberDAO"%>
+<%@page import="data.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,6 +12,11 @@
 <%
 	//프로젝트의 경로
 	String root=request.getContextPath();
+	MemberDTO mdto = new MemberDTO();
+	MemberDAO mdao = new MemberDAO();
+	String id = (String)session.getAttribute("sessionId");
+	String nickname = mdao.getIdNick(id);
+	String sessionLogin = (String)session.getAttribute("sessionLogin");
 %>
 <!-- se2 폴더에서 js 파일 가져오기 -->
 <script type="text/javascript" src="<%=root%>/community/se2/js/HuskyEZCreator.js"
@@ -19,21 +26,21 @@
 	charset="utf-8"></script>	
 </head>
 <body>
-<form action="smartaction.jsp" method="post">
+<form action="community/comAction.jsp" method="post">
 	<table class="table table-bordered" style="width: 800px;margin-left: 100px;">
-		<caption><h3>커뮤니티</h3></caption>
+		<caption><h3>커뮤니티 글작성</h3></caption>
 		<tr>
-			<th bgcolor="orange" width="100">닉네임</th>
+			<th bgcolor="orange" width="100">작성자</th>
 			<td>
-				<input type="text" name="nickname" class="form-control"
-					required="required" style="width: 130px;">
+				<input type="hidden" name="nickname" class="form-control" value="<%=nickname%>"
+					required="required" style="width: 130px;"><%=nickname%>
 			</td>
 		</tr>
 		<tr>
 			<th bgcolor="orange" width="100">제  목</th>
 			<td>
 				<input type="text" name="subject" class="form-control"
-					required="required" style="width: 500px;">
+					required="required" style="width: 350px;">
 			</td>
 		</tr>
 		<tr>
@@ -48,11 +55,11 @@
 			<td colspan="2" align="center">
 				<button type="button" class="btn btn-warning"
 					style="width: 120px;"
-					onclick="submitContents(this)">DB저장</button>
+					onclick="submitContents(this)">글저장</button>
 				
 				<button type="button" class="btn btn-warning"
 					style="width: 120px;"
-					onclick="location.href='communityList.jsp'">목록</button>
+					onclick="location.href='index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27'">목록</button>
 			</td>
 		</tr>
 		
@@ -69,7 +76,7 @@ nhn.husky.EZCreator.createInIFrame({
 
     elPlaceHolder: "content",
 
-    sSkinURI: "<%=request.getContextPath()%>/community/se2/SmartEditor2Skin.html",
+    sSkinURI: "<%=request.getContextPath()%>/se2/SmartEditor2Skin.html",
 
     fCreator: "createSEditor2"
 

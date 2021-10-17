@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Vector;
 
 import data.dto.ReviewDTO;
+import data.dto.SmartDTO;
 import mysql.db.DBConnect;
 
 public class ReviewDAO {
@@ -16,14 +17,15 @@ public class ReviewDAO {
 	{
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
-		String sql="insert into review (nickname,photo,content,write_day) values (?,?,?,now())";
+		String sql="insert into review (nickname,subject,photo,content,write_day) values (?,?,?,?,now())";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			//諛붿씤�뵫
 			pstmt.setString(1, dto.getNickname());
-			pstmt.setString(2, dto.getPhoto());
-			pstmt.setString(3, dto.getContent());
+			pstmt.setString(2, dto.getSubject());
+			pstmt.setString(3, dto.getPhoto());
+			pstmt.setString(4, dto.getContent());
 			
 			pstmt.execute();
 		} catch (SQLException e) {
@@ -72,6 +74,7 @@ public class ReviewDAO {
 			{
 				ReviewDTO dto=new ReviewDTO();
 				dto.setIdx(rs.getString("idx"));
+				dto.setSubject(rs.getString("subject"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setPhoto(rs.getString("photo"));
 				dto.setContent(rs.getString("content"));
@@ -86,5 +89,56 @@ public class ReviewDAO {
 			db.dbClose(rs, pstmt, conn);
 		}
 		return list;
+	}
+	public ReviewDTO getData(String idx)
+	{
+		ReviewDTO dto=new ReviewDTO();
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from review where idx=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//獄쏅뗄�뵥占쎈뎃
+			pstmt.setString(1, idx);
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+			{
+				dto.setIdx(rs.getString("idx"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setPhoto(rs.getString("photo"));
+				dto.setContent(rs.getString("content"));
+				dto.setWrite_day(rs.getTimestamp("write_day"));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
+	}
+	public void updateReview(ReviewDTO dto)
+	{
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		String sql="update review set subject=?,photo=?,content=? where idx=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//諛붿씤�뵫
+			pstmt.setString(1, dto.getSubject());
+			pstmt.setString(2, dto.getPhoto());
+			pstmt.setString(3, dto.getContent());
+			pstmt.setString(4, dto.getIdx());
+			//�떎�뻾
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
 	}
 }

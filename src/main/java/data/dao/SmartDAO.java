@@ -18,7 +18,7 @@ public class SmartDAO {
 	{
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
-	String sql="insert into community (num,nickname,subject,content,write_day) values (?,?,?,?,now())";
+	String sql="insert into community (idx,nickname,subject,content,write_day) values (?,?,?,?,now())";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			//獄쏅뗄�뵥占쎈뎃
@@ -228,11 +228,31 @@ public class SmartDAO {
 	{
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
-		String sql="delete from guest where idx=?";
+		String sql="delete from community where idx=?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			//諛붿씤�뵫
 			pstmt.setString(1, idx);
+			//�떎�뻾
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	public void updateSmart(SmartDTO dto)
+	{
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		String sql="update community set subject=?,content=? where idx=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//諛붿씤�뵫
+			pstmt.setString(1, dto.getSubject());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, dto.getIdx());
 			//�떎�뻾
 			pstmt.execute();
 		} catch (SQLException e) {
