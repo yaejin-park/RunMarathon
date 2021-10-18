@@ -5,8 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.profile{
+		background-color: gray;
+		
+	}
+</style>
 </head>
 <body>
-마이페이지
+<div class="profile">
+	<div>
+		<img alt="profile-img" src="../se2/img/mypage_profile.png">
+	</div>
+
+</div>
 </body>
 </html>
