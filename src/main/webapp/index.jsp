@@ -3,6 +3,19 @@
 <%@page import="data.dao.MenuDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메인페이지</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="./common/css/swiper.min.css">
+<link rel="stylesheet" href="./common/css/common.css">
+<script type="text/javascript" src="./common/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="./common/js/gsap.min.js"></script><!-- Green Sock (모션) -->
+<script type="text/javascript" src="./common/js/swiper.min.js"></script><!-- Swiper (롤링) -->
+<script type="text/javascript" src="./common/js/script.js"></script><!-- Script (공통) -->
+</head>
 <%
 	String goPage = "layout/main.jsp";
 	String menu_pt = request.getParameter("menu_one");
