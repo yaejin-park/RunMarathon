@@ -76,7 +76,7 @@
 	%>
 		<div class="util">
 			<a href="login/logoutAction.jsp">로그아웃</a>
-			<a href="index.jsp?go=login/loginMain.jsp&menu_one=21">마이페이지</a>
+			<a href="index.jsp?go=myPage/myPage.jsp&menu_one=32">마이페이지</a>
 		</div>
 	<%} %>
 </div>
