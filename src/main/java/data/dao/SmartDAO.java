@@ -59,7 +59,7 @@ public class SmartDAO {
 				sql = "select * from community where "+column+" like "+"'%"+words+"%'"+" order by idx desc limit "+start+","+perPage;
 			}	
 		}
-		System.out.println("sql="+sql);
+		//System.out.println("sql="+sql);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			//�뛾�룆�뾼占쎈데�뜝�럥�럠
