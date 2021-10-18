@@ -114,7 +114,7 @@ function check(p) {
 </head>
 <body>
 <form action="apply/applyAddAction.jsp" method="post" class="form-inline" name="joinfrm" onsubmit="return check(this)">
-<input hidden="hidden" name="marathon" value="런마라톤_2021">
+<input hidden="hidden" name="marathon" value="Run 2021 시즌3">
 <input hidden="hidden" id="courseData" name="course" value="">
 <input hidden="hidden" id="payData" name="pay" value="">
 <input hidden="hidden" id="id" name="id" value="<%=id%>">
