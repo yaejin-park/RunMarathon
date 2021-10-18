@@ -48,7 +48,6 @@ button {
 	AdminApplyDAO dao = new AdminApplyDAO();
 	AdminApplyDTO dto = new AdminApplyDTO();
 	List<AdminApplyDTO> list = dao.getAllMembers();
-	int idx = 1;
 %>
 	<div class="cap">
 		<b>전체 회원 목록</b>
@@ -91,7 +90,6 @@ button {
 			<tbody>
 				<%	for(AdminApplyDTO adt:list) { %>
 				<tr>
-					<td><%=idx%></td>
 					<td><%=adt.getName()%></td>
 					<td><%=adt.getNick()%></td>
 					<td><%=adt.getId()%></td>
@@ -105,7 +103,7 @@ button {
 						 삭제</button>
 					</td>
 				</tr>
-				<% idx++; } %>
+				<% } %>
 			</tbody>
 		</table>
 	</div>

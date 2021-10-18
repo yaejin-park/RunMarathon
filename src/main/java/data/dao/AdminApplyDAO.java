@@ -56,6 +56,7 @@ public class AdminApplyDAO {
 	
 	
 	
+	
 	// 대회별 회원 출력
 		public ArrayList<AdminApplyDTO> getSelectMembers(String sel) {
 			Connection conn = db.getConnection();
@@ -169,65 +170,33 @@ public class AdminApplyDAO {
 		
 		
 		
-	
-	
-	
-	// 회원별 완주 기록 update
-	public void updateRecord(AdminApplyDTO dto) {
-		Connection conn = db.getConnection();
-		PreparedStatement pstmt = null;
+		
+		// 완주시간 입력
+				public void recordtime(AdminApplyDTO dto) {
+					Connection conn = db.getConnection();
+					PreparedStatement pstmt = null;
 
-		String sql = "update apply set record=? where id=?";
+					String sql = "update apply set record=? where id=?";
 
-		try {
-			pstmt = conn.prepareStatement(sql);
+					try {
+						pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, dto.getRrecord());
-			pstmt.setString(2, dto.getRid());
+						pstmt.setString(1, dto.getFinishhour()+dto.getFinishminute());
+						pstmt.setString(2, dto.getRecordid());
 
-			pstmt.execute();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			db.dbClose(pstmt, conn);
+						pstmt.execute();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} finally {
+						db.dbClose(pstmt, conn);
 
-		}
-	}
-	
-	
-	
-	// 본인인증답변 체크
-		public boolean isPassEqual(String id, String pass) {
-			boolean b = false;
-			
-			Connection conn = db.getConnection();
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			String sql = "select * from member where id=? and pass=?";
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				
-				pstmt.setString(1, id);
-				pstmt.setString(2, pass);
-				
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					b = true;
+					}
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				db.dbClose(rs, pstmt, conn);
-			}
-			
-			return b;
-		}
-
+		
+		
+		
+	
 	
 	// 삭제
 	public void deleteMember(String id) {
