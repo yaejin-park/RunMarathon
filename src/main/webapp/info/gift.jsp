@@ -23,9 +23,10 @@
 }
 </style>
 <%
-	String name = "Run Fun 2020_시즌1";
 	GiftDAO dao = new GiftDAO();
+	String name = dao.getNewGift();
 	List<GiftDTO> list = dao.getGiftList(name);
+	System.out.println(name);
 %>
 <div class="gift-area">
 	<p class="title">기념품</p>
