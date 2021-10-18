@@ -4,7 +4,20 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<script type="text/javascript">
+	$(function(){
+		$(".btn-del").click(function(){
+			var del = confirm("삭제하시겠습니까?");
+			var idxVal = $(this).find("#idx").val();
+			var pageVal = $(this).find("#page").val();
+			if(!del){
+				return;
+			}else{
+				location.href = "noticeBoard/delete.jsp?&menu_one=12&menu_two=18&idx=" + idxVal + "&currentPage=" + pageVal;
+			}
+		});
+	});
+</script>
 <%
 	String idx = request.getParameter("idx");
 	String currentPage = request.getParameter("currentPage");
@@ -96,8 +109,10 @@
 		onclick="location.href='index.jsp?go=noticeBoard/noticeForm.jsp&menu_one=12&menu_two=18'">글쓰기</button>
 	<button type="button" class="btn btn-info" style="width: 80px;" 
 		onclick="location.href='index.jsp?go=noticeBoard/updateForm.jsp?&menu_one=12&menu_two=18&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
-	<button type="button" class="btn btn-info" style="width: 80px;" 
-		onclick="location.href='noticeBoard/delete.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">삭제</button>
+	<button type="button" class="btn btn-info btn-del" style="width: 80px;">삭제
+		<input type="hidden" id="idx" value="<%=dto.getIdx()%>"/>
+		<input type="hidden" id="page" value="<%=currentPage%>"/>
+	</button>
 <%
 	}
 %>
