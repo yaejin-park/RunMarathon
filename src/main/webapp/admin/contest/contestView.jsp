@@ -24,16 +24,17 @@
 		
 		$(".delete-btn").click(function(){
 			var s = $(this).val();
-			
-			$.ajax({
-				type:"get",
-				url:"./admin/contest/deleteContestAction.jsp",
-				dataType:"html",
-				data:{name:s},
-				success:function(){
-					location.href="index.jsp?go=admin/contest/contestList.jsp&menu_one=13&menu_two=20";
-				}
-			});
+			if(confirm("정말 삭제하시겠습니까?") == true){
+				$.ajax({
+					type:"get",
+					url:"./admin/contest/deleteContestAction.jsp",
+					dataType:"html",
+					data:{name:s},
+					success:function(){
+						location.href="index.jsp?go=admin/contest/contestList.jsp&menu_one=13&menu_two=20";
+					}
+				});
+			}
 		});
 	});
 </script>
