@@ -25,9 +25,7 @@
 <%
 	GiftDAO dao = new GiftDAO();
 	String name = dao.getNewGift().trim();
-	List<GiftDTO> list = dao.getGiftList("Run 2021 시즌2");
-	System.out.println("'" + name + "'");
-	System.out.println(name + ":" + list.size());
+	List<GiftDTO> list = dao.getGiftList(name);
 %>
 <div class="gift-area">
 	<p class="title">기념품</p>

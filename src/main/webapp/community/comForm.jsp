@@ -2,13 +2,6 @@
 <%@page import="data.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <%
 	//프로젝트의 경로
 	String root=request.getContextPath();
@@ -24,8 +17,8 @@
 
 <script type="text/javascript" src="<%=root%>/community/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js"
 	charset="utf-8"></script>	
-</head>
 <body>
+<p class="title">커뮤니티</p>
 <form action="community/comAction.jsp" method="post">
 	<table class="table table-bordered" style="width: 800px;margin-left: 100px;">
 		<caption><h3>커뮤니티 글작성</h3></caption>
@@ -53,11 +46,11 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-add"
 					style="width: 120px;"
 					onclick="submitContents(this)">글저장</button>
 				
-				<button type="button" class="btn btn-warning"
+				<button type="button" class="btn btn-add"
 					style="width: 120px;"
 					onclick="location.href='index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27'">목록</button>
 			</td>

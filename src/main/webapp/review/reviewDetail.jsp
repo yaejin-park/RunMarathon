@@ -5,9 +5,6 @@
 <%@page import="data.dao.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<style>
-</style>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("span.adel").click(function(){
@@ -74,13 +71,13 @@ String sessionLogin = (String)session.getAttribute("sessionLogin");
 		<tr>
 			<td align="center">
 
-				<button type="button" class="btn btn-sm btn-info"
+				<button type="button" class="btn btn-sm btn-add"
 					style="width: 80px;"
 					onclick="location.href='index.jsp?go=review/reviewList.jsp&menu_one=11&menu_two=28?currentPage=<%=currentPage%>'">목록</button>
 				<%
 				if(sessionLogin!=null && dto.getNickname().equals(nickname)){
 				%>
-				<button type="button" class="btn btn-sm btn-info"
+				<button type="button" class="btn btn-sm btn-update"
 					style="width: 80px;"
 					onclick="location.href='index.jsp?go=review/reviewUpdateForm.jsp&menu_one=11&menu_two=28&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
 				<%
@@ -91,7 +88,7 @@ String sessionLogin = (String)session.getAttribute("sessionLogin");
 				<%
 				if(sessionLogin!=null && dto.getNickname().equals(nickname)){
 				%>
-				<button type="button" class="btn btn-sm btn-info"
+				<button type="button" class="btn btn-sm btn-del"
 					style="width: 80px;"
 					onclick="location.href='review/reviewDelete.jsp?idx=<%=dto.getIdx()%>'">삭제</button>
 				<%

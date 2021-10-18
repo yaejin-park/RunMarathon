@@ -5,9 +5,15 @@ $(function(){
 	var mainSwiper = new Swiper(".main-vis", {
 		slidesPerView: 1,
         loop: true,
-		autoplay: true,
+		autoplay: {
+			delay: 5000,
+		},
 		observer: true,
 		observeParents: true,
+		effect: 'fade',
+		fadeEffect: {
+			crossFade: true
+		},
 		pagination: {
 			el: ".main-vis .swiper-pagination",
 		},
@@ -15,6 +21,7 @@ $(function(){
 			slideChangeTransitionEnd: function(){
 				gsap.to($(".main-vis .swiper-slide").eq(this.activeIndex).find(".txt1"), 0.6 , {top:0, opacity:1, ease:Power0.easeNone});
 				gsap.to($(".main-vis .swiper-slide").eq(this.activeIndex).find(".txt2"), 0.6 , {delay:0.4, top:0, opacity:1, ease:Power0.easeNone});
+				gsap.to($(".main-vis .swiper-slide").eq(this.activeIndex).find(".btn-wrap"), 0.6 , {delay:0.6, top:0, opacity:1, ease:Power0.easeNone});
 			}
 		}
 	});

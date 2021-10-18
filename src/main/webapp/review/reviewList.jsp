@@ -192,7 +192,7 @@ int no = totalCount - (currentPage - 1) * perPage;
 	if(sessionLogin!=null){
 	%>
 	<div class="btn-wrap">
-		<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">
+		<button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#myModal">
 			<span class="glyphicon glyphicon-pencil"></span>후기작성하기
 		</button>
 	</div>
@@ -272,7 +272,7 @@ int no = totalCount - (currentPage - 1) * perPage;
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-default">저장하기</button>
+					<button type="submit" class="btn btn-add">저장하기</button>
 				</div>
 			</form>
 		</div>
