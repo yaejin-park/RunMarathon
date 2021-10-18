@@ -29,7 +29,7 @@
 	}
 	
 	#memberRecord{
-		float:right;
+		float: right;
 		background-color:#eeeeee; 
 		width: 630px;
 		padding: 3px 10px;
@@ -52,7 +52,12 @@
 	}
 	
 	.circle{
-		background-color: black;
+		background-color: #999999;
+		width: 170px;
+		height: 170px;
+		border-radius: 100%;
+		float: left;
+		margin: 60px 0 0 25px;
 	}
 	
 </style>
@@ -102,11 +107,13 @@ $(function() {
 	</div>
 	<div id="memberStatus">
 		<div class="circle">
-		
+		</div>
+		<div class="circle">
+		</div>
+		<div class="circle">
 		</div>
 	</div>
 	
-	<span>최근 나의 기록</span>
 	<div id="memberRecord">
 	
 	</div>
