@@ -27,6 +27,14 @@ pageEncoding="UTF-8"%>
 }
 </style>
 <script type="text/javascript">
+ $(function(){
+	$(".searchBTN").click(function(){
+		var col=$("#selSearch").val();
+		var s=$("#textSearch").val();
+		//alert(col+","+s);
+		location.href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&selSearch="+col+"&textSearch="+s;
+	}) ;
+ });
 </script>
 <%
 request.setCharacterEncoding("UTF-8");
@@ -51,7 +59,7 @@ int startPage;//각블럭에 표시할 시작페이지
 int endPage;//각 블럭에 표시할 마지막 페이지
 
 //총 갯수
-totalCount = dao.getTotalCount();
+totalCount = dao.getTotalCount(column,words);
 //현재페이지 번호 읽기 (단 null 일경우는 1페이지로 설정)
 if (request.getParameter("currentPage") == null)
 	currentPage = 1;
@@ -68,14 +76,13 @@ if (endPage > totalPage)
 //각페이지에서 불러올 시작번호
 start = (currentPage - 1) * perPage;
 //각페이지에서 필요한 게시글 가져오기
-List<SmartDTO> list = dao.getList(start, perPage, words, column);
+List<SmartDTO> list = dao.getList(start, perPage, column, words);
 //제목 검색한 게시물 가져오기
 //List<SmartDTO> list1= dao.SearchSubList(search, start, perPage);
-
 if (list.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
-				location.href="index.jsp?go=community/communityList.jsp?currentPage=<%=currentPage - 1%>";
+			//	location.href="index.jsp?go=community/communityList.jsp?currentPage=<%=currentPage - 1%>";
 </script>
 <%
 }
@@ -85,7 +92,10 @@ int no = totalCount - (currentPage - 1) * perPage;
 ReplyDAO adao=new ReplyDAO();
 %>
 <body>
-<form action="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27" method="post">
+<!-- <form action="index.jsp?go=community/communityList.jsp" method="post">
+   <input type="hidden" name="menu_two" value="27" id="menu_two">
+   <input type="hidden" name="menu_one" value="11">
+   
 	<div>
 		<select name="selSearch">
 			<option value="">--검색타입</option>
@@ -95,7 +105,20 @@ ReplyDAO adao=new ReplyDAO();
 		</select> <input name="textSearch" />
 		<button type="submit" class="btn btn-success searchBTN" style="width: 70px;">검색</button>
 	</div>
-</form>	
+</form>	 -->
+   <input type="hidden" name="menu_two" value="27" id="menu_two">
+   <input type="hidden" name="menu_one" value="11">
+   
+	<div>
+		<select id="selSearch">
+			<option value="">--검색타입</option>
+			<option value="subject" class="onlySub">제목만</option>
+			<option value="content" class="onleCon">내용만</option>
+			<option value="nickname" class="onlyNick">닉네임</option>
+		</select> <input id="textSearch" />
+		<button type="button" class="btn btn-success searchBTN" style="width: 70px;">검색</button>
+	</div>
+
 	<!-- 게시판 출력 -->
 	<table class="table table-bordered" style="width: 800px;">
 		<colgroup>
@@ -165,7 +188,7 @@ ReplyDAO adao=new ReplyDAO();
 			if (startPage > 1) {
 			%>
 			<li><a
-				href="community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=startPage - 1%>">이전</a>
+				href="community/communityList.jsp&menu_one=11&menu_two=27&column=<%=column%>&words=<%=words%>&currentPage=<%=startPage - 1%>">이전</a>
 			</li>
 			<%
 			}
@@ -175,11 +198,11 @@ ReplyDAO adao=new ReplyDAO();
 			{
 			%>
 			<li class="active"><a
-				href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=pp%>"><%=pp%></a></li>
+				href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&column=<%=column%>&words=<%=words%>&currentPage=<%=pp%>"><%=pp%></a></li>
 			<%
 			} else {
 			%>
-			<li><a href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=pp%>"><%=pp%></a></li>
+			<li><a href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&column=<%=column%>&words=<%=words%>&currentPage=<%=pp%>"><%=pp%></a></li>
 			<%
 			}
 			}
@@ -188,7 +211,7 @@ ReplyDAO adao=new ReplyDAO();
 			if (endPage < totalPage) {
 			%>
 			<li><a
-				href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=endPage + 1%>">다음</a>
+				href="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&column=<%=column%>&words=<%=words%>&currentPage=<%=endPage + 1%>">다음</a>
 			</li>
 			<%
 			}

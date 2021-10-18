@@ -141,4 +141,22 @@ public class ReviewDAO {
 			db.dbClose(pstmt, conn);
 		}
 	}
+	public void deleteReview(String idx)
+	{
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		String sql="delete from review where idx=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//獄쏅뗄�뵥占쎈뎃
+			pstmt.setString(1, idx);
+			//占쎈뼄占쎈뻬
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 }

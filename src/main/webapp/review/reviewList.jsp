@@ -195,7 +195,6 @@ int no = totalCount - (currentPage - 1) * perPage;
 						</div>
 						<div class="modal-body">
 							<table width="400px" height="400px">
-
 								<tr>
 									<td style="width: 70px; height: 30px;"></td>
 									<td id="modalNick">

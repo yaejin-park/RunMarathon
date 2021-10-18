@@ -82,7 +82,7 @@ String sessionLogin = (String)session.getAttribute("sessionLogin");
 				%>
 				<button type="button" class="btn btn-sm btn-info"
 					style="width: 80px;"
-					onclick="location.href='index.jsp?go=review/reviewUpdateForm.jsp&menu_one=11&menu_two=28?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
+					onclick="location.href='index.jsp?go=review/reviewUpdateForm.jsp&menu_one=11&menu_two=28&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
 				<%
 				//System.out.println("idx="+dto.getIdx());
 				} 
@@ -93,7 +93,7 @@ String sessionLogin = (String)session.getAttribute("sessionLogin");
 				%>
 				<button type="button" class="btn btn-sm btn-info"
 					style="width: 80px;"
-					onclick="location.href='index.jsp?go=review/reviewDelete.jsp&menu_one=11&menu_two=28?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">삭제</button>
+					onclick="location.href='review/reviewDelete.jsp?idx=<%=dto.getIdx()%>'">삭제</button>
 				<%
 				} 
 				%>

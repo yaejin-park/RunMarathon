@@ -36,40 +36,6 @@ public class SmartDAO {
 		}
 
 	}
-	public List<SmartDTO> getList1(int start,int perpage)
-	{
-		List<SmartDTO> list1=new Vector<SmartDTO>();
-		Connection conn=db.getConnection();
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql="select * from community order by idx desc limit ?,?";
-		try {
-			pstmt=conn.prepareStatement(sql);
-			//�뛾�룆�뾼占쎈데�뜝�럥�럠
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, perpage);
-			rs=pstmt.executeQuery();
-			while(rs.next())
-			{
-				SmartDTO dto=new SmartDTO();
-				dto.setIdx(rs.getString("idx"));
-				dto.setNickname(rs.getString("nickname"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setContent(rs.getString("content"));
-				dto.setChu_count(rs.getInt("chu_count"));
-				dto.setRead_count(rs.getInt("read_count"));
-				dto.setWrite_day(rs.getTimestamp("write_day"));
-				list1.add(dto);
-
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			db.dbClose(rs, pstmt, conn);
-		}
-		return list1;
-	}
 	public List<SmartDTO> getList(int start,int perPage,String column,String words)
 	{
 		List<SmartDTO> list=new Vector<SmartDTO>();
@@ -93,6 +59,7 @@ public class SmartDAO {
 				sql = "select * from community where "+column+" like "+"'%"+words+"%'"+" order by idx desc limit "+start+","+perPage;
 			}	
 		}
+		System.out.println("sql="+sql);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			//�뛾�룆�뾼占쎈데�뜝�럥�럠
@@ -153,14 +120,28 @@ public class SmartDAO {
 	}
 	
 	//占쎌읈筌ｏ옙 揶쏉옙占쎈땾
-	public int getTotalCount()
+	public int getTotalCount(String column,String words)
 	{
 		int n=0;
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select count(*) from community";
-
+		String sql="";
+		if(words==null || words.equals("")||words.length()==0) //검색어가 없을때
+		{
+			if(column==null|| column.equals("")||column.length()==0) {//select이 없을때
+				sql = "select count(*) from community";
+			}
+			else {
+				sql = "select count(*) from community";
+			}	
+		}else { // 검색어가 있을때
+			if(column==null|| column.equals("")||column.length()==0) {//select이 없을때
+				sql = "select count(*) from community";
+			}else {
+				sql = "select count(*) from community where "+column+" like "+"'%"+words+"%'";
+			}	
+		}
 		try {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
