@@ -41,30 +41,34 @@
 	}
 	
 </style>
-<<<<<<< HEAD
-
-=======
->>>>>>> kmj
 <script type="text/javascript">
 	$(function(){
 		$(".subject").click(function(){
 	       	var sessionNick = $(this).find("#sessionNick").val();
-			if(sessionNick!="관리자"){
-				var writer = $(this).find(".writer").val();
-				var getPass = $(this).find(".pass").val();
-				if(sessionNick!=writer){
-					var pass = prompt("비밀번호를 입력해주세요.")
-					if(pass==null){
-						$(this).parents(".accor-div").find(".accor-content").css("display","none");
-						return;
-					}
-					if(pass!=getPass){
-						alert("비밀번호가 맞지 않습니다.")
-						$(this).parents(".accor-div").find(".accor-content").css("display","none");
-						return;
+	       	var sessionLogin = $(this).find("#sessionLogin").val();
+	       	if(sessionLogin=="null"){
+	       		alert("로그인이 필요한 페이지 입니다.");
+	       		location.href = "index.jsp?go=login/loginMain.jsp&menu_one=21";
+	       		$(this).parents(".accor-div").find(".accor-content").css("display","none");
+				return;
+	       	}else{
+				if(sessionNick!="관리자"){
+					var writer = $(this).find(".writer").val();
+					var getPass = $(this).find(".pass").val();
+					if(sessionNick!=writer){
+						var pass = prompt("비밀번호를 입력해주세요.");
+						if(pass==null){
+							$(this).parents(".accor-div").find(".accor-content").css("display","none");
+							return;
+						}
+						if(pass!=getPass){
+							alert("비밀번호가 맞지 않습니다.");
+							$(this).parents(".accor-div").find(".accor-content").css("display","none");
+							return;
+						}
 					}
 				}
-			}
+	       	}
 		});
 	});
 </script>
@@ -167,6 +171,7 @@
 				<%=dto.getSubject() %>
 				<input type="hidden" style="position: absolute;" class="writer" value="<%=dao.getNick(dto.getIdx()) %>" />
 				<input type="hidden" style="position: absolute;" id="sessionNick" value="<%=nick %>" />
+				<input type="hidden" style="position: absolute;" id="sessionLogin" value="<%=sessionLogin %>" />
 				<input type="hidden" style="position: absolute;" class="pass" value="<%=dto.getPass() %>" />
 			</div>
 			<div class="qna-writer">
