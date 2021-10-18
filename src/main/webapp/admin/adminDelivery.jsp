@@ -1,15 +1,26 @@
+<%@page import="data.dao.AdminApplyDAO"%>
+<%@page import="data.dto.AdminApplyDTO"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css2?family=Dokdo&family=Gaegu&family=Gugi&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-3.5.0.js"></script>
-</head>
-<body>
+<%
+	// 한글 인코딩
+	request.setCharacterEncoding("utf-8");
 
-</body>
-</html>
+	String checkid = request.getParameter("checkid");
+	String delivernum = request.getParameter("delivernum");
+	
+	// 데이터 읽어서 dto에 넣기
+	AdminApplyDTO dto = new AdminApplyDTO();
+	dto.setCheckid(checkid);
+	dto.setDelivernum(delivernum);
+	
+	AdminApplyDAO dao = new AdminApplyDAO();
+	dao.delivery(dto);
+	
+	// 목록으로 이동
+	response.sendRedirect("../index.jsp?go=admin/adminSelectListDelivery.jsp");
+%>
+
+
+
