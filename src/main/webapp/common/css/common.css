@@ -98,7 +98,7 @@ header {
     height:110px;
     background:#fff;
     border-bottom:1px solid #ccc;
-    z-index:10;
+    z-index:11;
 }
 header .inner {
     position:relative;
@@ -293,6 +293,91 @@ header.active .menu-div .menu-btn span {
    margin: 10px 10px 10px 20px;
    padding: 15px;
 }
+/* btn 스타일 */
+.btn-add {
+	display:inline-block;
+	padding: 5px 20px;
+	font-size:18px;
+	color: #fff;
+	border-radius: 5px;
+	border-color: #408eb9;
+	background: #408eb9;
+	vertical-align:top;	
+}
+.btn-add:hover, .btn-add:active {
+	color: #fff;
+	background:#408eb9;
+}
+.btn-update {
+	display:inline-block;
+	padding: 5px 20px;
+	font-size:18px;
+	color: #408eb9;
+	border: 1px solid #408eb9;
+	border-radius: 5px;
+	background: #fff;
+	vertical-align:top;	
+}
+.btn-update:hover, .btn-update:active {
+	color: #408eb9;
+	border: 1px solid #408eb9;
+	background:#fff;
+}
+.btn-del {
+	display:inline-block;
+	padding: 5px 20px;
+	font-size:18px;
+	color: #fff;
+	border: 1px solid #999;
+	border-radius: 5px;
+	background: #999;
+	vertical-align:top;	
+}
+.btn-del:hover, .btn-del:active {
+	color: #fff;
+	border: 1px solid #999;
+	background:#999;
+}
+.btn-basic {
+	display:inline-block;
+	padding: 5px 20px;
+	font-size:18px;
+	color: #999;
+	border: 1px solid #999;
+	border-radius: 5px;
+	background: #fff;
+	vertical-align:top;	
+}
+.btn-basic:hover, .btn-basic:active {
+	color: #666;
+	border: 1px solid #999;
+	background:#fff;
+}
+/* table 스타일 */
+.table {
+	border:none;
+	border-top:3px solid #408eb9;
+	border-bottom:1px solid #ddd;
+}
+.table th {
+	color:#444;
+	background:rgb(160, 199, 220, 0.2);
+}
+.table.table-bordered th, .table.table-bordered td {
+	border:none;
+	border-bottom:1px solid #ddd;
+	border-right:1px solid #ddd;
+}
+.table.table-bordered th:last-child, .table.table-bordered td:last-child {
+	border-right:0;
+}
+.no-border {
+	border-top:1px solid #ddd;
+}
+.no-border th, .no-border td{
+	color:#666;
+	background:none;
+}
 footer {
     padding:40px 0;
     border-top:1px solid #ccc;
@@ -337,11 +422,4 @@ footer .sns .twitter {
 }
 footer .sns .instagram {
     background-image:url("../image/sns-instagram.png");
-}
-
-.accor-content{
-	background-color: #ECECEC;
-	border-radius: 5px;
-	margin: 10px 10px 10px 20px;
-	padding: 15px;
 }

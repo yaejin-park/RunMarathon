@@ -22,9 +22,10 @@
 	}
 	.course-div .course-btn {
 		position:absolute;
-		top:55px;
-		left:25px;
-		width:100%;
+		top:25px;
+		right:25px;
+		width:200px;
+		background:url("./common/image/course-btn-default.jpg") no-repeat center;
 	}
 	.course-div .course-btn a {
 		display:inline-block;
@@ -38,9 +39,14 @@
 	$(function(){
 		$(".course-btn a").each(function(q){
 			$(this).click(function(){
-				console.log($(".course-list li").eq(q).offset().top);
 				gsap.to($("body, html"),0.5 , {scrollTop:$(".course-list li").eq(q).offset().top - $("header").height() - 40, ease:Power3.easeOut});
 			});
+			
+			$(this).hover(function(){
+				$(".course-div .course-btn").css("background-image","url(./common/image/course-btn-" + (q+1) + ".jpg)");
+			},function(){
+				$(".course-div .course-btn").css("background-image","url(./common/image/course-btn-default.jpg)");
+			})
 		});
 	});
 </script>
