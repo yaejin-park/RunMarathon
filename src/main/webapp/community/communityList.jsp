@@ -1,3 +1,5 @@
+<%@page import="data.dto.ReplyDTO"%>
+<%@page import="data.dao.ReplyDAO"%>
 <%@page import="data.dto.MemberDTO"%>
 <%@page import="data.dao.MemberDAO"%>
 <%@page import="data.dto.SmartDTO"%>
@@ -30,7 +32,7 @@ pageEncoding="UTF-8"%>
 request.setCharacterEncoding("UTF-8");
 String column=request.getParameter("selSearch");
 String words=request.getParameter("textSearch");
-System.out.println(column+","+words);
+//System.out.println(column+","+words);
 
 //세션
 MemberDTO mdto = new MemberDTO();
@@ -66,7 +68,7 @@ if (endPage > totalPage)
 //각페이지에서 불러올 시작번호
 start = (currentPage - 1) * perPage;
 //각페이지에서 필요한 게시글 가져오기
-List<SmartDTO> list = dao.getList(start, perPage);
+List<SmartDTO> list = dao.getList(start, perPage, words, column);
 //제목 검색한 게시물 가져오기
 //List<SmartDTO> list1= dao.SearchSubList(search, start, perPage);
 
@@ -80,13 +82,13 @@ if (list.size() == 0 && totalCount > 0) {
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //각페이지에 출력할 시작번호
 int no = totalCount - (currentPage - 1) * perPage;
+ReplyDAO adao=new ReplyDAO();
 %>
-
 <body>
-<form action="index.jsp?go=community/communityList.jsp" method="post">
+<form action="index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27" method="post">
 	<div>
 		<select name="selSearch">
-			<option value="-">--검색타입</option>
+			<option value="">--검색타입</option>
 			<option value="subject" class="onlySub">제목만</option>
 			<option value="content" class="onleCon">내용만</option>
 			<option value="nickname" class="onlyNick">닉네임</option>
@@ -124,12 +126,13 @@ int no = totalCount - (currentPage - 1) * perPage;
 			<%
 				} else{
 				for (SmartDTO dto : list) {
+				List<ReplyDTO> alist=adao.getAllAnswer(dto.getIdx());
 				%>
 			<tr id="selShow">
 				<td align="center"><%=no--%></td>
 				<td><a style="color: black;"
 					href="index.jsp?go=community/detail.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>&key=list&menu_one=11&menu_two=27">
-						<%=dto.getSubject()%>
+						<%=dto.getSubject()%><span style="color: orange;">[<%=alist.size()%>]</span>
 				</a></td>
 				<td><%=dto.getNickname()%></td>
 				<td><%=sdf.format(dto.getWrite_day())%></td>

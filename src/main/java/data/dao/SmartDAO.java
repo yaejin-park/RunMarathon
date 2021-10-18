@@ -36,9 +36,9 @@ public class SmartDAO {
 		}
 
 	}
-	public List<SmartDTO> getList(int start,int perpage)
+	public List<SmartDTO> getList1(int start,int perpage)
 	{
-		List<SmartDTO> list=new Vector<SmartDTO>();
+		List<SmartDTO> list1=new Vector<SmartDTO>();
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -48,41 +48,6 @@ public class SmartDAO {
 			//�뛾�룆�뾼占쎈데�뜝�럥�럠
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, perpage);
-			rs=pstmt.executeQuery();
-			while(rs.next())
-			{
-				SmartDTO dto=new SmartDTO();
-				dto.setIdx(rs.getString("idx"));
-				dto.setNickname(rs.getString("nickname"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setContent(rs.getString("content"));
-				dto.setChu_count(rs.getInt("chu_count"));
-				dto.setRead_count(rs.getInt("read_count"));
-				dto.setWrite_day(rs.getTimestamp("write_day"));
-				list.add(dto);
-
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			db.dbClose(rs, pstmt, conn);
-		}
-		return list;
-	}
-	public List<SmartDTO> SearchSubList(String search,int start,int perPage,String column,String words)
-	{
-		List<SmartDTO> list1=new Vector<SmartDTO>();
-		Connection conn=db.getConnection();
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql="select * from community where "+column+" like ? order by idx desc limit ?,?";
-		try {
-			pstmt=conn.prepareStatement(sql);
-			//�뛾�룆�뾼占쎈데�뜝�럥�럠
-			pstmt.setString(1, "%"+words+"%");
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, perPage);
 			rs=pstmt.executeQuery();
 			while(rs.next())
 			{
@@ -104,6 +69,55 @@ public class SmartDAO {
 			db.dbClose(rs, pstmt, conn);
 		}
 		return list1;
+	}
+	public List<SmartDTO> getList(int start,int perPage,String column,String words)
+	{
+		List<SmartDTO> list=new Vector<SmartDTO>();
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="";
+		
+		if(words==null || words.equals("")||words.length()==0) //검색어가 없을때
+		{
+			if(column==null|| column.equals("")||column.length()==0) {//select이 없을때
+				sql = "select * from community order by idx desc limit "+start+","+perPage;
+			}
+			else {
+				sql = "select * from community order by idx desc limit "+start+","+perPage;
+			}	
+		}else { // 검색어가 있을때
+			if(column==null|| column.equals("")||column.length()==0) {//select이 없을때
+				sql = "select * from community order by idx desc limit "+start+","+perPage;
+			}else {
+				sql = "select * from community where "+column+" like "+"'%"+words+"%'"+" order by idx desc limit "+start+","+perPage;
+			}	
+		}
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//�뛾�룆�뾼占쎈데�뜝�럥�럠
+			
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				SmartDTO dto=new SmartDTO();
+				dto.setIdx(rs.getString("idx"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setChu_count(rs.getInt("chu_count"));
+				dto.setRead_count(rs.getInt("read_count"));
+				dto.setWrite_day(rs.getTimestamp("write_day"));
+				list.add(dto);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list;
 	}
 	//num占쎈퓠 占쎈퉸占쎈뼣占쎈릭占쎈뮉 dto獄쏆꼹�넎
 	public SmartDTO getData(String idx)
