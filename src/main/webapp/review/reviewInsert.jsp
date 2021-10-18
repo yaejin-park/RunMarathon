@@ -37,7 +37,7 @@
 		//페이지 번호읽기
 		String currentPage=multi.getParameter("currentPage");
 		
-		String path="../index.jsp?go=review/reviewList.jsp?currentPage="+currentPage;
+		String path="../index.jsp?go=review/reviewList.jsp&menu_one=11&menu_two=28?currentPage="+currentPage;
 		response.sendRedirect(path);
 	}catch(Exception e){
 		System.out.println("업로드오류:"+e.getMessage());

@@ -57,21 +57,19 @@ public class AdminApplyDAO {
 	
 	
 	// 대회별 회원 출력
-		public ArrayList<AdminApplyDTO> getSelectMembers(String tname) {
+		public ArrayList<AdminApplyDTO> getSelectMembers(String sel) {
 			Connection conn = db.getConnection();
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 
-			String sql = "select * from apply where tname=? order by idx desc";
+			String sql = "select * from apply where marathon=? order by idx desc";
 
 			ArrayList<AdminApplyDTO> list = new ArrayList<AdminApplyDTO>();
-			
-			System.out.println(tname);
 
 			try {
 				pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, tname);
+				pstmt.setString(1, sel);
 				rs = pstmt.executeQuery();
 
 				while (rs.next()) {
@@ -81,7 +79,8 @@ public class AdminApplyDAO {
 					dto.setAmarathon(rs.getString("marathon"));
 					dto.setAid(rs.getString("id"));
 					dto.setAname(rs.getString("name"));
-					dto.setAaddr(rs.getString("addr"));
+					dto.setAaddr1(rs.getString("addr1"));
+					dto.setAaddr2(rs.getString("addr2"));
 					dto.setAhp(rs.getString("hp"));
 					dto.setAcourse(rs.getString("course"));
 					dto.setAtime(rs.getString("time"));
@@ -111,7 +110,7 @@ public class AdminApplyDAO {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 
-			String sql = "select * from contest order by contest_start";
+			String sql = "select * from contest order by contest_start desc";
 
 			ArrayList<AdminApplyDTO> list = new ArrayList<AdminApplyDTO>();
 
@@ -141,73 +140,50 @@ public class AdminApplyDAO {
 			return list;
 		}
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	
-
-
-	// 해당 회원 id에 대한 참가대회목록 반환
-	// 데이터 전체를 받아오는 것이 아니라 marathon 정보만 가져오는 것이기 때문에
-	// List 형식을 <String> 으로 선언해준다.
-	// 데이터 전체를 가져오려면 DTO를 선언
-	public List<String> getMarathon(String id) {
-		String marathon = "";
-		List<String> list = new ArrayList<String>();
-		// 아이디 값을 입력받아 해당 아이디에 대한 정보를 list에 담기 위해 선언해준다.
+	
 		
-		Connection conn = db.getConnection();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		// 기념품 발송정보 입력
+		public void delivery(AdminApplyDTO dto) {
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
 
-		String sql = "select marathon from participation where id=?";
+			String sql = "update apply set delivery=? where id=?";
 
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
+			try {
+				pstmt = conn.prepareStatement(sql);
 
-			// 해당 회원에 대한 참가대회목록 반환
-			while (rs.next()) {
-				marathon = rs.getString("marathon");
-				list.add(marathon);
+				pstmt.setString(1, dto.getDelivernum());
+				pstmt.setString(2, dto.getCheckid());
+
+				pstmt.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				db.dbClose(pstmt, conn);
+
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			db.dbClose(rs, pstmt, conn);
 		}
-
-		return list;
-	}
-
+		
+		
+		
 	
 	
 	
-	
-	
-	// 회원별 완주 기록 insert
-	public void insertRecord(AdminApplyDTO dto) {
+	// 회원별 완주 기록 update
+	public void updateRecord(AdminApplyDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into participation (name,marathon,course,contest_date,record) values (?,?,?,?,?)";
+		String sql = "update apply set record=? where id=?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, dto.getName());
-			pstmt.setString(2, dto.getMarathon());
-			pstmt.setString(3, dto.getCourse());
-			pstmt.setTimestamp(4, dto.getContestDate());
-			pstmt.setString(5, dto.getRecord());
+			pstmt.setString(1, dto.getRrecord());
+			pstmt.setString(2, dto.getRid());
 
 			pstmt.execute();
 		} catch (SQLException e) {
@@ -276,25 +252,35 @@ public class AdminApplyDAO {
 	
 	
 	
-	// 검색
-	
 	
 
-	/*
-	 * // 수정 public void updateMember(MemberDto dto) { Connection conn =
-	 * db.getConnection(); PreparedStatement pstmt = null;
-	 * 
-	 * String sql = "update member set name=?,hp=?,addr=?,email=? where num=?";
-	 * 
-	 * try { pstmt = conn.prepareStatement(sql);
-	 * 
-	 * pstmt.setString(1, dto.getName()); pstmt.setString(2, dto.getHp());
-	 * pstmt.setString(3, dto.getAddr()); pstmt.setString(4, dto.getEmail());
-	 * pstmt.setString(5, dto.getNum());
-	 * 
-	 * pstmt.execute(); } catch (SQLException e) { // TODO Auto-generated catch
-	 * block e.printStackTrace(); } finally { db.dbClose(pstmt, conn);
-	 * 
-	 * } }
-	 */
+	
+	  // 수정 
+	  public void updateMember(AdminApplyDTO dto) { 
+	  Connection conn = db.getConnection(); 
+	  PreparedStatement pstmt = null;
+	  
+	  String sql = "update member set name=?,nick=?,hp=?,pass=?,addr1=?,addr2=?,auth1=?,auth2=? where id=?";
+	  
+	  try { pstmt = conn.prepareStatement(sql);
+	  
+	  pstmt.setString(1, dto.getName()); 
+	  pstmt.setString(2, dto.getNick());
+	  pstmt.setString(3, dto.getHp()); 
+	  pstmt.setString(4, dto.getPass());
+	  pstmt.setString(5, dto.getAddr1());
+	  pstmt.setString(6, dto.getAddr2());
+	  pstmt.setString(7, dto.getAuth1());
+	  pstmt.setString(8, dto.getAuth2());
+	  pstmt.setString(9, dto.getId());
+	  
+	  pstmt.execute();
+	  } catch (SQLException e) { 
+		  // TODO Auto-generated catch
+		  e.printStackTrace(); 
+	  } finally { 
+		  db.dbClose(pstmt, conn);
+	  } 
+	}
+
 }

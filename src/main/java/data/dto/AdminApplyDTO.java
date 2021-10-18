@@ -25,7 +25,8 @@ public class AdminApplyDTO {
 	private String amarathon;
 	private String aid;
 	private String aname;
-	private String aaddr;
+	private String aaddr1;
+	private String aaddr2;
 	private String ahp;
 	private String acourse;
 	private String atime;
@@ -36,7 +37,45 @@ public class AdminApplyDTO {
 	private Timestamp contestDate;
 	private String record;
 	
+	private String ridx;
+	private String rid;
+	private String rrecord;
 	
+	private String checkid;
+	private String delivernum;
+	
+	
+	
+	public String getCheckid() {
+		return checkid;
+	}
+	public void setCheckid(String checkid) {
+		this.checkid = checkid;
+	}
+	public String getDelivernum() {
+		return delivernum;
+	}
+	public void setDelivernum(String delivernum) {
+		this.delivernum = delivernum;
+	}
+	public String getRidx() {
+		return ridx;
+	}
+	public void setRidx(String ridx) {
+		this.ridx = ridx;
+	}
+	public String getRid() {
+		return rid;
+	}
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
+	public String getRrecord() {
+		return rrecord;
+	}
+	public void setRrecord(String rrecord) {
+		this.rrecord = rrecord;
+	}
 	public String getContestName() {
 		return contestName;
 	}
@@ -182,11 +221,17 @@ public class AdminApplyDTO {
 	public void setAname(String aname) {
 		this.aname = aname;
 	}
-	public String getAaddr() {
-		return aaddr;
+	public String getAaddr1() {
+		return aaddr1;
 	}
-	public void setAaddr(String aaddr) {
-		this.aaddr = aaddr;
+	public void setAaddr1(String aaddr1) {
+		this.aaddr1 = aaddr1;
+	}
+	public String getAaddr2() {
+		return aaddr2;
+	}
+	public void setAaddr2(String aaddr2) {
+		this.aaddr2 = aaddr2;
 	}
 	public String getAhp() {
 		return ahp;
