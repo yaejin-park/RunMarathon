@@ -45,9 +45,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<button type="submit" class="btn btn-info" style="width: 120px;">수정하기</button>
+						<button type="submit" class="btn btn-update" style="width: 120px;">수정하기</button>
 
-						<button type="button" class="btn btn-info" style="width: 120px;"
+						<button type="button" class="btn btn-basic" style="width: 120px;"
 							onclick="location.href='index.jsp?go=community/detail.jsp?idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>&key=list&menu_one=11&menu_two=27'">취소</button>
 					</td>
 				</tr>

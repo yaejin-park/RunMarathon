@@ -10,7 +10,6 @@
 	pageEncoding="utf-8"%>
 <style>
 </style>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("button.like").click(function() {
@@ -22,7 +21,8 @@
 				url:"community/ajaxChu.jsp",
 				data :{"idx":idx},
 				success:function(data){
-					location.reload();
+					$("#showChu").text(data.chu_count);
+					
 				}
 			}); 
 		});
@@ -69,6 +69,7 @@
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
 <body>
+<p class="title">커뮤니티</p>
 	<table class="table table-bordered" style="width: 600px;">
 		<thead>
 			<tr>
@@ -76,7 +77,7 @@
 					<span style="color: black; font-size: 12pt; margin-left: 30px;">
 						<%=dto.getNickname()%></span><br> <span
 					style="color: gray; font-size: 10pt; margin-left: 30px;"> <%=sdf.format(dto.getWrite_day())%>
-						&nbsp;&nbsp;&nbsp; 조회 <%=dto.getRead_count() %> 추천 <%=dto.getChu_count() %>
+						&nbsp;&nbsp;&nbsp; 조회 <%=dto.getRead_count() %> 추천 <span id="showChu"><%=dto.getChu_count()%></span>
 				</span></th>
 			</tr>
 		</thead>
@@ -109,7 +110,7 @@
 											style="width: 470px; height: 70px;" name="content"
 											required="required" class="form-control"></textarea></td>
 									<td>
-										<button type="submit" class="btn btn-info"
+										<button type="submit" class="btn btn-add"
 											style="width: 70px; hieght: 70px;" id="listAdd">등록</button>
 									</td>
 								</tr>
@@ -118,7 +119,7 @@
 					</div>
 					<%} %>
 					<div>
-						<table style="width: 500px;">
+						<table class="table table" style="width: 500px;">
 							<%
 					 			for(ReplyDTO adto:alist)
 					 			{%>
@@ -158,19 +159,23 @@
 				</div>
 					<tr>
 						<td align="center">
+							<%
+					 		if(sessionLogin!=null){//입력폼은 로그인한 경우에만 보이게하기
+					 		%>
 							<button type="button" class="like btn btn-info" style="width: 80px;"
 							idx="<%=dto.getIdx()%>">추천</button>
+							<%} %>
 
-							<button type="button" class="btn btn-sm btn-info"
+							<button type="button" class="btn btn-sm btn-add"
 								style="width: 80px;"
 								onclick="location.href='index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27&currentPage=<%=currentPage%>'">목록</button>
 
 							<%
 							if(sessionLogin!=null && dto.getNickname().equals(nickname)){
 							%>
-							<button type="button" class="btn btn-sm btn-info"
+							<button type="button" class="btn btn-sm btn-update"
 								style="width: 80px;" onclick="location.href='index.jsp?go=community/updateForm.jsp&menu_one=11&menu_two=27&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
-							<button type="button" class="btn btn-sm btn-info"
+							<button type="button" class="btn btn-sm btn-del"
 								style="width: 80px;" onclick="location.href='index.jsp?go=community/comDelete.jsp&menu_one=11&menu_two=27&idx=<%=dto.getIdx()%>'">삭제</button>
 							<%
 							} 
