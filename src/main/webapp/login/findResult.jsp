@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <%
 	String type = request.getParameter("find-type");
 	String id= request.getParameter("id");
@@ -90,5 +91,6 @@ $(function() {
 </tbody>
 </table>
 </form>
+>>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 </body>
 </html>

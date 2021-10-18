@@ -1,8 +1,12 @@
+<%@page import="data.dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	//프로젝트의 경로
 	String root=request.getContextPath();
+
+	String id = (String)session.getAttribute("sessionId");
+	MemberDAO mdao = new MemberDAO();
 %>
 <!-- se2 폴더에서 js 파일 가져오기 -->
 <script type="text/javascript" src="<%=root%>/se2/js/HuskyEZCreator.js"
@@ -16,13 +20,13 @@
 	<table class="table table-bordered" style="width: 800px;">
 		<caption><h3>스마트 포토 게시판</h3></caption>
 		<tr>
-			<th bgcolor="orange" width="100">작성자</th>
+			<th bgcolor="#dda0dd">작성자</th>
 			<td>
-				<input type="text" name="writer" class="form-control" required="required" style="width: 130px;">
+				<input type="text" name="writer" class="form-control" required="required" style="width: 130px;" value="<%=mdao.getIdNick(id)%>">
 			</td>
 		</tr>
 		<tr>
-			<th bgcolor="orange" width="100">제  목</th>
+			<th bgcolor="#dda0dd">제  목</th>
 			<td>
 				<input type="text" name="subject" class="form-control" required="required" style="width: 300px;">
 			</td>
@@ -34,7 +38,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<button type="button" class="btn btn-warning" style="width: 120px;" onclick="submitContents(this)">DB저장</button>
+				<button type="button" class="btn btn-warning" style="width: 120px;" onclick="submitContents(this)">저장하기</button>
 				<button type="button" class="btn btn-warning" style="width: 120px;" onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp'">목록</button>
 			</td>
 		</tr>

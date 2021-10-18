@@ -52,7 +52,7 @@
 	}
 </style>
 <div class="intro-area">
-	<p class="title">Run&Fun 소개</p>
+	<p class="title">Run 2021 소개</p>
 	<div class="sub-title">
 		<p class="logo-img"><img alt="" src="./common/image/logo-main.png"></p>
 		<p>

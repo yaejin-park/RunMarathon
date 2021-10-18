@@ -1,15 +1,16 @@
-<%@page import="data.dao.SmartDAO"%>
+<%@page import="data.dao.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	String idx=request.getParameter("idx");
 	
+	
 
-	SmartDAO dao=new SmartDAO();
+	ReviewDAO dao=new ReviewDAO();
 	
 	//db삭제
-	dao.deleteCommunity(idx);
+	dao.deleteReview(idx);
 	
-	String path="../index.jsp?go=community/communityList.jsp&menu_one=11&menu_two=27";
+	String path="../index.jsp?go=review/reviewList.jsp&menu_one=11&menu_two=28";
 	response.sendRedirect(path);
 %>

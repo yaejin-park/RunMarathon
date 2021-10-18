@@ -24,7 +24,8 @@
 			<tr>
 				<th>작성자</th>
 				<td>
-					<input type="text" name="writer" class="form-control" required="required" style="width: 130px;" value="<%=dto.getWriter() %>">
+					<input type="text" name="writer" class="form-control" required="required" style="width: 130px;"
+					readonly="readonly" value="<%=dto.getWriter() %>">
 				</td>
 			</tr>
 			<tr>
@@ -43,7 +44,7 @@
 		
 		<tr>
 			<td colspan="2">
-				<input type="text" name="content" class="form-control" required="required" style="width: 780px; height: 300px;" value="<%=dto.getContent() %>">		
+				<textarea name="content" class="form-control" required="required" style="width: 780px; height: 300px;"><%=dto.getContent() %></textarea>		
 			</td>
 		</tr>
 		<tr>

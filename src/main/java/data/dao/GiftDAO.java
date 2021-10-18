@@ -16,7 +16,7 @@ public class GiftDAO {
 	public void insertGift(GiftDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "insert into gift (name, content, contest_name, photo) values (?,?,?,?)";
+		String sql = "insert ignore into gift (name, content, contest_name, photo) values (?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -36,7 +36,7 @@ public class GiftDAO {
 	public void updateGift(GiftDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "update ignore gift set name=?, content=?, contest_name=?, photo=? where num=?";
+		String sql = "update gift set name=?, content=?, contest_name=?, photo=? where num=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -82,5 +82,28 @@ public class GiftDAO {
 		}
 		
 		return list;
+	}
+	
+	public String getNewGift() {
+		String name = "";
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select name from contest order by abs(DATEDIFF(contest_start, now())) limit 1;";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				name = rs.getString("name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return name;
 	}
 }
