@@ -98,8 +98,8 @@
 		</div>
 		
 		<div classs="btn-div">
-			<button type="submit" class="btn btn-info update-btn">수정</button>
-			<button type="button" class="btn btn-info delete-btn" value="<%= dto.getName() %>">삭제</button>
+			<button type="submit" class="btn btn-info update-btn btn-update">수정</button>
+			<button type="button" class="btn btn-info delete-btn btn-del" value="<%= dto.getName() %>">삭제</button>
 		</div>
 	</form>
 </div>

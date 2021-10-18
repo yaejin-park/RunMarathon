@@ -143,7 +143,7 @@
     	color:#FF0000;
     }
     .modal .modal-dialog {
-    	width:800px;
+    	width:850px;
     }
     .modal .title-div {
     	margin-bottom:30px;
@@ -167,8 +167,26 @@
     	clear:both;
     }
     .info-div .img-div {
+    	position:relative;
     	float:left;
     	width:400px;
+    	padding:40px 0 0 40px;
+    }
+    .info-div .img-div:before {
+    	content:"";
+    	position:absolute;
+    	top:0;
+    	left:0;
+    	display:block;
+    	width:340px;
+    	height:410px;
+    	border-width:15px;
+    	border-style:solid;
+    	border-image:linear-gradient(to right,  #408eb9 0%,#6a1c52 100%);
+    	border-image-slice:1; 
+    }
+    .info-div .img-div img {
+    	width:340px;
     }
     .info-div .table {
     	float:right;
@@ -200,7 +218,9 @@
 				</div>
 					
 				<div class="info-div">
-					<div class="img-div"></div>
+					<div class="img-div">
+						<img alt="" src="./common/image/calendar-info-img.jpg">
+					</div>
 					<table class="table table-bordered">
 						<caption>대회 정보 안내</caption>
 						<colgroup>
