@@ -16,7 +16,7 @@ public class GiftDAO {
 	public void insertGift(GiftDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "insert into gift (name, content, contest_name, photo) values (?,?,?,?)";
+		String sql = "insert ignore into gift (name, content, contest_name, photo) values (?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -36,7 +36,7 @@ public class GiftDAO {
 	public void updateGift(GiftDTO dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "update ignore gift set name=?, content=?, contest_name=?, photo=? where num=?";
+		String sql = "update gift set name=?, content=?, contest_name=?, photo=? where num=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -34,7 +34,7 @@
 				<td>
 					<div class="accor-title">
 						참가자 유의사항
-						<span class="glyphicon detail-icon glyphicon-menu-up">자세히보기</span>
+						<span class="glyphicon detail-icon glyphicon-menu-down">자세히보기</span>
 					</div>
 					<div class="accor-content" style="">
 						1. 가명 또는 차명을 통한 신청이나 신청 후 참가권 양도는 불가능합니다.<br>
@@ -49,7 +49,7 @@
 				<td>
 					<div class="accor-title">
 						참가자 정보 수집 안내
-						<span class="glyphicon detail-icon glyphicon-menu-up">자세히보기</span>
+						<span class="glyphicon detail-icon glyphicon-menu-down">자세히보기</span>
 					</div>
 					<div class="accor-content">
 						<b>1. 개인정보 보호정책</b><br>
@@ -66,7 +66,7 @@
 				<td>
 					<div class="accor-title">
 						접수 취소 안내
-						<span class="glyphicon detail-icon glyphicon-menu-up">자세히보기</span>
+						<span class="glyphicon detail-icon glyphicon-menu-down">자세히보기</span>
 					</div>
 					<div class="accor-content">
 						택배 발송 전까지 환불신청이 가능하며, 택배 발송 이후에는 환불이 불가 합니다.
@@ -77,7 +77,7 @@
 				<td>
 					<div class="accor-title">
 						기타사항
-						<span class="glyphicon detail-icon glyphicon-menu-up">자세히보기</span>
+						<span class="glyphicon detail-icon glyphicon-menu-down">자세히보기</span>
 					</div>
 					<div class="accor-content">
 						2021 Run&Fun 사무국은 참가자격 박탈, 특별인사 초대, 대회 중지 및 취소 (천재지변으로 인한 대회 취소 시 참가비 환불 불가) 등의 권한을 가집니다.

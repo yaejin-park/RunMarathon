@@ -139,6 +139,7 @@
 			var plusItem = $(this).parents("tr").find(".gift-box").eq(0).clone();
 			tot+=1;
 			$("#giftCnt").val(tot);
+			console.log(tot);
 			
 			if(tot <= 4){
 				$(this).show();
@@ -192,8 +193,8 @@
 %>
 <div class="admin-area">
 	<form action="./admin/contest/updateContestAction.jsp" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="beforeGiftCnt" id="beforeGiftCnt" value="<%= giftList.size() %>">
-		<input type="hidden" name="giftCnt" id="giftCnt" value="<%= giftList.size() %>">
+		<input type="text" name="beforeGiftCnt" id="beforeGiftCnt" value="<%= giftList.size()==0?1:giftList.size() %>">
+		<input type="text" name="giftCnt" id="giftCnt" value="<%= giftList.size()==0?1:giftList.size() %>">
 		<div class="contest-add-div">
 			<p class="title">대회 수정</p>
 			<table class="table table-bordered">
@@ -291,7 +292,32 @@
 									<a href="javascript:" class="minus-btn">-</a>
 								</div>
 							<% } else{
-									int cnt = 0;
+								int cnt = 0;
+								
+								if(giftList.size() == 0 ){
+									cnt = 1;
+								%>
+									<div class="gift-box copy">
+										<div class="form-list">
+											<p class="txt1">타이틀</p>
+											<input type="text" class="form-control" name="giftName1">
+										</div>
+										<div class="form-list">
+											<p class="txt1">설명</p>
+											<input class="form-control" name="giftContent1" />
+										</div>
+										<div class="form-list">
+											<p class="txt1">첨부파일</p>
+											<div class="file-attach">
+												<input type="file" class="form-control" name="photo1" onchange="readUrl(this)" multiple>
+												<button type="button" class="file-btn">파일 선택</button>
+												<p class="file-txt"></p>
+											</div>
+										</div>
+										<a href="javascript:" class="minus-btn">-</a>
+									</div>
+								<% 
+								}
 									for(GiftDTO giftDto:giftList){
 										++cnt;
 								%>
