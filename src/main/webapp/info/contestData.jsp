@@ -8,8 +8,6 @@
 	ContestDAO dao = new ContestDAO();
 	ContestDTO dto = dao.getList(contestName);
 	
-	System.out.println("'" + contestName + "'");
-	
 	JSONObject ob = new JSONObject();
 	ob.put("name", dto.getName());
 	ob.put("content", dto.getContent());

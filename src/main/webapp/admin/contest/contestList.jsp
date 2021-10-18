@@ -56,15 +56,17 @@ $(function(){
 	});
 	
 	$(".delete-btn").click(function(){
-		$.ajax({
-			type:"get",
-			url:"./admin/contest/deleteContestAction.jsp",
-			dataType:"html",
-			data:{name:s},
-			success:function(){
-				location.reload(true);
-			},
-		});
+		if(confirm("정말 삭제하시겠습니까?") == true){
+			$.ajax({
+				type:"get",
+				url:"./admin/contest/deleteContestAction.jsp",
+				dataType:"html",
+				data:{name:s},
+				success:function(){
+					location.reload(true);
+				},
+			});
+		}
 	});
 });
 </script>

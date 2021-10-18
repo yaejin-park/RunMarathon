@@ -48,7 +48,7 @@
 									title:title, 
 									start:contestStartDate, 
 									end:contestEndDate,
-									className : "contest-day",
+									className : "contest-day event-btn",
 									backgroundColor: "rgb(64, 142, 185, 0.7)"
 								});								
 							}else if(title.indexOf("신청기간") != -1){
@@ -57,7 +57,7 @@
 									title:title, 
 									start:applyStartDate, 
 									end:applyEndDate,
-									className : "apply-day",
+									className : "apply-day event-btn",
 									backgroundColor: "rgb(190, 3, 192, 0.7)"
 								});								
 							}else if(title.indexOf("기념품 배송기간") != -1){
@@ -66,7 +66,7 @@
 									title:title, 
 									start:giftStartDate, 
 									end:giftEndDate,
-									className : "gift-day",
+									className : "gift-day event-btn",
 									backgroundColor: "rgb(255, 192, 0, 0.7)"
 								});								
 							}
@@ -91,7 +91,11 @@
 		// 캘린더 랜더링
 		calendar.render();
 		
-		$(document).on("click", ".fc-daygrid-event" , function(){
+		$(document).on("click", ".fc-daygrid-event.koHolidays" , function(e){
+			e.preventDefault();
+		});
+		
+		$(document).on("click", ".fc-daygrid-event.event-btn" , function(){
 			var contestName = $(this).find(".fc-event-title.fc-sticky").text();
 			
 			if(contestName.indexOf("대회기간") != -1){
@@ -102,26 +106,22 @@
 				contestName = contestName.replace(" 기념품 배송기간","");
 			}
 			
-			console.log(contestName);
 			$.ajax({
 				type:"get",
 				url:'./info/contestData.jsp',
 				dataType:'json',
 				data:{contestName:contestName.trim()},
 				success : function(data){
-					console.log("성공")
 					var name = data.name;
 					var content = data.content;
 					var contestDate = data.contestDate;
 					var applyDate = data.applyDate;
 					var money = data.money;
 					
-					console.log(data.money)
-					
 					$("#contestModel").find(".title-div .txt1").text(name);
 					$("#contestModel").find(".title-div .txt2").text(content);
 					$("#contestModel").find(".table .apply-date").text(applyDate);
-					$("#contestModel").find(".table .contest-date").text(contestDate);
+					$("#contestModel").find(".table .contest-date").text(contestDate + " 오전 10시");
 					$("#contestModel").find(".table .money").text(money + "원");
 				}
 			});
