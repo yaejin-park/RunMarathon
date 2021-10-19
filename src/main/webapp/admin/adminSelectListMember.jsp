@@ -14,33 +14,19 @@
 
 
 <style type="text/css">
-#tbl {
-	margin-top: 10px;
-}
-
-#tbl *, #recordTable * {
-	text-align: center;
-}
-
-#tbl th {
-	background-color: skyblue;
-}
-
-td {
-	white-space: normal;
-}
-
-.search_bar_top {
-	display: inline-block;
-}
-
-.cap {
-	margin-top: 10px;
-	font-size: 25pt;
-	text-align: center;
-}
-
 .info_text{display:inline-block;}
+
+#backform {
+	padding: 10px;
+}
+
+th, td {
+	font-size: 12pt;
+}
+
+button.deliverid, button.recordid {
+	font-size: 10pt;
+}
 </style>
 </head>
 <body>
@@ -52,10 +38,7 @@ td {
 	String marathon =request.getParameter("marathon");
 	int idx = 1;
 %>
-
-	<div class="cap">
-		<b><%=marathon%> 참가회원 목록</b>
-	</div>
+<p class="title"><%=marathon%> 참가회원 목록</p>
 	<div id="backform">
 		<button type="button" class="btn-basic btn btn-warning" onclick="gogo()">참가현황관리로 돌아가기</button>
 	</div>
@@ -63,13 +46,13 @@ td {
 		<table class="table table-bordered" align="center">
 			<colgroup>
 			<col width="50">
-			<col width="80">
-			<col width="80">
-			<col width="150">
-			<col width="80">
+			<col width="70">
+			<col width="70">
 			<col width="120">
 			<col width="70">
-			<col width="150">
+			<col width="100">
+			<col width="70">
+			<col width="140">
 			<col width="120">
 			</colgroup>
 			<thead>
@@ -80,7 +63,7 @@ td {
 					<th>핸드폰</th>
 					<th>참가코스</th>
 					<th>참가시간</th>
-					<th>참가인원수</th>
+					<th>참가인원</th>
 					<th>기념품 발송정보</th>
 					<th>완주 시간</th>
 				</tr>

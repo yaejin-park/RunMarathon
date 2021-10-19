@@ -102,13 +102,13 @@ $(function() {
 	</div>
 	<div id="memberStatus">
 		<div class="circle">
-		
+			
 		</div>
 	</div>
 	
 	<span>최근 나의 기록</span>
 	<div id="memberRecord">
-	
+		
 	</div>
 </div>
 
