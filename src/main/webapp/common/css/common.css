@@ -357,6 +357,7 @@ header.active .menu-div .menu-btn span {
 .table {
 	border:none;
 	border-top:3px solid #408eb9;
+	border-bottom:1px solid #ddd;
 }
 .table th {
 	color:#444;
@@ -369,6 +370,13 @@ header.active .menu-div .menu-btn span {
 }
 .table.table-bordered th:last-child, .table.table-bordered td:last-child {
 	border-right:0;
+}
+.no-border {
+	border-top:1px solid #ddd;
+}
+.no-border th, .no-border td{
+	color:#666;
+	background:none;
 }
 footer {
     padding:40px 0;

@@ -9,8 +9,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
 .search-div>* {
 	vertical-align: top;
@@ -106,6 +104,7 @@ ReplyDAO adao=new ReplyDAO();
 		<button type="submit" class="btn btn-success searchBTN" style="width: 70px;">검색</button>
 	</div>
 </form>	 -->
+	<p class="title">커뮤니티</p>
    <input type="hidden" name="menu_two" value="27" id="menu_two">
    <input type="hidden" name="menu_one" value="11">
    
@@ -116,7 +115,7 @@ ReplyDAO adao=new ReplyDAO();
 			<option value="content" class="onleCon">내용만</option>
 			<option value="nickname" class="onlyNick">닉네임</option>
 		</select> <input id="textSearch" />
-		<button type="button" class="btn btn-success searchBTN" style="width: 70px;">검색</button>
+		<button type="button" class="btn btn-add searchBTN" style="width: 70px;">검색</button>
 	</div>
 
 	<!-- 게시판 출력 -->
@@ -171,7 +170,7 @@ ReplyDAO adao=new ReplyDAO();
 	<%
 	if(sessionLogin!=null){
 	%>
-	<button type="button" class="btn btn-info"
+	<button type="button" class="btn btn-add"
 		style="width: 100px; margin-left: 700px;"
 		onclick="location.href='index.jsp?go=community/comForm.jsp&menu_one=11&menu_two=27'">
 		<span class="glyphicon glyphicon-pencil"></span>글쓰기
