@@ -123,7 +123,7 @@ public class ContestDAO {
 			pstmt.setString(8, dto.getGift_start());
 			pstmt.setString(9, dto.getGift_end());
 			pstmt.setString(10, dto.getMoney());
-			pstmt.setString(11, dto.getName());
+			pstmt.setString(11, dto.getBefore_name());
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
