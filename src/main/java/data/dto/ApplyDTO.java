@@ -10,6 +10,8 @@ public class ApplyDTO {
 	private String course;
 	private String time;
 	private String person;
+	private String record;
+	private String delivery;
 	
 	public String getMarathon() {
 		return marathon;
@@ -64,6 +66,18 @@ public class ApplyDTO {
 	}
 	public void setPerson(String person) {
 		this.person = person;
+	}
+	public String getRecord() {
+		return record;
+	}
+	public void setRecord(String record) {
+		this.record = record;
+	}
+	public String getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
 	}
 	
 }

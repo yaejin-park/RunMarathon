@@ -162,7 +162,7 @@
 							<%
 					 		if(sessionLogin!=null){//입력폼은 로그인한 경우에만 보이게하기
 					 		%>
-							<button type="button" class="like btn btn-info" style="width: 80px;"
+							<button type="button" class="like btn-add" style="width: 80px;"
 							idx="<%=dto.getIdx()%>">추천</button>
 							<%} %>
 

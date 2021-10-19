@@ -46,7 +46,7 @@ $(function(){
 					} else{
 						s+= '입력하신 닉네임 <span style="font-weight: bold; color: #9D9DFA;">'+data.nick+'</span>는 사용가능합니다.<br>';
 						s+= '이 닉네임을 사용하시겠습니까?<br>';
-						s+= '<button type="button" id="nickUse" myNick='+data.nick+' class="btn btn-info" style="margin: 10px; width: 100px; height: 40px; font-size: 1em;">사용하기</button>';
+						s+= '<button type="button" id="nickUse" myNick='+data.nick+' class="btn btn-add" style="margin: 10px; width: 100px; height: 40px; font-size: 1em;">사용하기</button>';
 					}
 					$("#nickResult").html(s); 
 				}
@@ -75,7 +75,7 @@ $(function(){
 	request.setCharacterEncoding("utf-8");
 %>
 <form action="nickSearchAction.jsp" method="post" class="form-inline">
-<table class="table" style="width: 500px; text-align: center;">
+<table class="table no-border" style="width: 500px; text-align: center;">
 	<thead>
 		<tr>
 			<th colspan="3" style="text-align: center; font-size: 1.3em; font-weight: bold; padding-bottom: 50px;">중복닉네임 체크</th>
@@ -85,7 +85,7 @@ $(function(){
 		<tr>
 			<th>닉네임</th>
 			<td><input type="text" class="form-control" name="nick" id="nick" required="required" autofocus="autofocus" maxlength="8"></td>
-			<td><button type="button" class="btn btn-info" id="checkNick" value="<%=request.getParameter("nick")%>">확인</button>
+			<td><button type="button" class="btn btn-add" id="checkNick" value="<%=request.getParameter("nick")%>">확인</button>
 		</tr>
 		<tr>
 			<td colspan="3" style="padding: 50px;" id="nickResult">

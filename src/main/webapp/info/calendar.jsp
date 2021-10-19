@@ -188,9 +188,13 @@
     .info-div .img-div img {
     	width:340px;
     }
-    .info-div .table {
+    .info-div .table-div {
     	float:right;
     	width:400px;
+    	/* margin-top:40px; */
+    }
+    .info-div .table-div .btn-wrap {
+    	text-align:center;
     }
 </style>
 <div class="calendar-area">
@@ -202,7 +206,6 @@
 		</div>
 	</div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="contestModel" role="dialog">
@@ -221,31 +224,37 @@
 					<div class="img-div">
 						<img alt="" src="./common/image/calendar-info-img.jpg">
 					</div>
-					<table class="table table-bordered">
-						<caption>대회 정보 안내</caption>
-						<colgroup>
-							<col width="100px">
-							<col width="*">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th>신청기간</th>
-								<td class="apply-date"></td>
-							</tr>
-							<tr>
-								<th>대회기간</th>
-								<td class="contest-date"></td>
-							</tr>
-							<tr>
-								<th>코스</th>
-								<td>42K/25K/15K</td>
-							</tr>
-							<tr>
-								<th>참가비</th>
-								<td class="money"></td>
-							</tr>
-						</tbody>
-					</table>	
+					<div class="table-div">
+						<p class="title">대회 일정</p>
+						<table class="table table-bordered">
+							<caption>대회 정보 안내</caption>
+							<colgroup>
+								<col width="100px">
+								<col width="*">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>신청기간</th>
+									<td class="apply-date"></td>
+								</tr>
+								<tr>
+									<th>대회기간</th>
+									<td class="contest-date"></td>
+								</tr>
+								<tr>
+									<th>코스</th>
+									<td>42K/25K/15K</td>
+								</tr>
+								<tr>
+									<th>참가비</th>
+									<td class="money"></td>
+								</tr>
+							</tbody>
+						</table>	
+						<div class="btn-wrap">
+							<a href="index.jsp?go=apply/applyMain.jsp&menu_one=8&menu_two=9" class="btn-update">신청하러가기</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

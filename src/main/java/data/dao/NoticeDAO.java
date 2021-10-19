@@ -198,7 +198,7 @@ public class NoticeDAO {
 	}
 	
 	//이전글, 다음글 출력. idx를 받아와서 idx에 대한 이전 데이터, 다음 데이터 뽑아옴
-	public List<NoticeDTO> getSubject(String idx) {
+	public List<NoticeDTO> nextList(String idx) {
 		List<NoticeDTO> list = new Vector<NoticeDTO>();
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
