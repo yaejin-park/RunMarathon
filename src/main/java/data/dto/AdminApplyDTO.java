@@ -37,15 +37,34 @@ public class AdminApplyDTO {
 	private Timestamp contestDate;
 	private String record;
 	
-	private String ridx;
-	private String rid;
-	private String rrecord;
+	private String recordid;
+	private int finishhour;
+	private int finishminute;
+	private int sumtime;
 	
 	private String checkid;
 	private String delivernum;
 	
 	
 	
+	public int getSumtime() {
+		return sumtime;
+	}
+	public void setSumtime(int finishhour, int finishminute) {
+		this.sumtime = finishhour + finishminute;
+	}
+	public void setFinishhour(int finishhour) {
+		this.finishhour = finishhour;
+	}
+	public void setFinishminute(int finishminute) {
+		this.finishminute = finishminute;
+	}
+	public String getRecordid() {
+		return recordid;
+	}
+	public void setRecordid(String recordid) {
+		this.recordid = recordid;
+	}
 	public String getCheckid() {
 		return checkid;
 	}
@@ -57,24 +76,6 @@ public class AdminApplyDTO {
 	}
 	public void setDelivernum(String delivernum) {
 		this.delivernum = delivernum;
-	}
-	public String getRidx() {
-		return ridx;
-	}
-	public void setRidx(String ridx) {
-		this.ridx = ridx;
-	}
-	public String getRid() {
-		return rid;
-	}
-	public void setRid(String rid) {
-		this.rid = rid;
-	}
-	public String getRrecord() {
-		return rrecord;
-	}
-	public void setRrecord(String rrecord) {
-		this.rrecord = rrecord;
 	}
 	public String getContestName() {
 		return contestName;
