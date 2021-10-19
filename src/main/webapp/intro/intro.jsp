@@ -50,7 +50,7 @@
 		font-weight:bold;
 		color:#5799c0;
 	}
-	.intro-div th, .intro-div td {
+	.intro-div .table th ,.intro-div .table td {
 		text-align:center;
 	}
 </style>
