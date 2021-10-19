@@ -11,35 +11,10 @@
 <script src="http://code.jquery.com/jquery-3.5.0.js"></script>
 
 <style type="text/css">
-#tbl {
-	margin-top: 10px;
-}
-
-#tbl *, #recordTable * {
-	text-align: center;
-}
-
-#tbl th {
-	background-color: skyblue;
-}
-
-td {
-	white-space: normal;
-}
-
-button {
-	font-family: Gugi;
-}
-
 .search_bar_top {
 	display: inline-block;
 }
 
-.cap {
-	margin-top: 10px;
-	font-size: 25pt;
-	text-align: center;
-}
 </style>
 </head>
 <body>
@@ -50,10 +25,8 @@ button {
 	List<AdminApplyDTO> list = dao.getAllMembers();
 	int idx = 1;
 %>
-	<div class="cap">
-		<b>전체 회원 목록</b>
-	</div>
-	<form class="serachform" action="adminMemberSearch.jsp">
+<p class="title">회원정보관리</p>
+<!-- 	<form class="serachform" action="adminMemberSearch.jsp">
 		<div align="center" style="margin-top: 10px">
 			<div class="search_bar_top">
 				<select id="selopt" style="width: 100px; height: 30px">
@@ -71,10 +44,20 @@ button {
 				<button type="submit" style="height: 30px">검색</button>
 			</div>
 		</div>
-	</form>
+	</form> -->
 	<div>
-		<table class="table table-bordered" style="width: 1800px"
-			align="center">
+		<table class="table table-bordered">
+		<colgroup>
+			<col width="30">
+			<col width="50">
+			<col width="70">
+			<col width="80">
+			<col width="80">
+			<col width="150">
+			<col width="60">
+			<col width="60">
+			<col width="60">
+		</colgroup>
 			<thead>
 				<tr>
 					<th style="width:50px">번호</th>
@@ -85,7 +68,7 @@ button {
 					<th>주소</th>
 					<th>본인인증질문</th>
 					<th>본인인증답변</th>
-					<th>회원관리(수정/삭제)</th>
+					<th>회원관리</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -100,7 +83,7 @@ button {
 					<td><%=adt.getAuth1()%></td>
 					<td><%=adt.getAuth2()%></td>
 					<td>
-						<button type="button" class="btn btn-warning btn-sm">수정</button>
+						<!-- <button type="button" class="btn btn-warning btn-sm">수정</button> -->
 						<button type="button" class="btn btn-danger btn-sm btn-del" value="<%=adt.getId()%>">
 						 삭제</button>
 					</td>

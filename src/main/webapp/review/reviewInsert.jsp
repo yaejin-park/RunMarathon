@@ -9,7 +9,7 @@
 	//String nickname=(String)session.getAttribute("nickname");
 	//이미지 업로드될 실제 경로 구하기
 	String realPath=getServletContext().getRealPath("/save");
-	//System.out.println(realPath);
+	System.out.println(realPath);
 	
 	int uploadSize=1024*1024*2;//2mb
 	MultipartRequest multi=null;

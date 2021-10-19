@@ -62,12 +62,13 @@
 %>
 
 <!-- noticeList -->
+<p class="title">공지사항</p>
 <%
 	if(sessionLogin!=null && id.equals("admin")){
 %>
-	<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
+	<button type="button" class="btn btn-add" style="margin-bottom: 10px; float: right;"
 		onclick="location.href='index.jsp?go=noticeBoard/noticeForm.jsp&menu_one=12&menu_two=18'">
-		<span class="glyphicon glyphicon-pencil"></span>글추가
+		글쓰기
 	</button>
 <%
 }
@@ -76,15 +77,15 @@
 	<caption>
 		<b>공지사항</b>
 	</caption>
+	<colgroup>
+		<col width="50px">
+		<col width="350px">
+		<col width="100px">
+		<col width="100px">
+		<col width="50px">
+	</colgroup>
 	<thead>
-		<colgroup>
-			<col width="50px">
-			<col width="350px">
-			<col width="100px">
-			<col width="100px">
-			<col width="50px">
-		</colgroup>
-		<tr bgcolor="#dda0dd">
+		<tr>
 			<th>번호</th>
 			<th>제목</th>
 			<th>작성자</th>

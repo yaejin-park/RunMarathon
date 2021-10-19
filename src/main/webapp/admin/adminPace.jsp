@@ -11,8 +11,8 @@
 	int finishhour = Integer.parseInt(request.getParameter("finishhour"));
 	int finishminute = Integer.parseInt(request.getParameter("finishminute"));
 	String recordid = request.getParameter("recordid");
-	//System.out.println(finishhour+finishminute+recordid);
-
+	System.out.println(finishcourse+finishhour+finishminute+recordid);
+	// 숫자형으로 잘 들어옴
 
  	// 데이터 읽어서 dto에 넣기
 	AdminApplyDTO dto = new AdminApplyDTO();
@@ -22,10 +22,10 @@
 	dto.setFinishminute(finishminute);
 	
 	AdminApplyDAO dao = new AdminApplyDAO();
-	dao.recordtime(dto); 
+	dao.getPace(recordid);
 %>
 <script type="text/javascript">
-	history.go(-2);
+	alert(<%=dao.getPace(recordid)%>);
 </script>
 
 

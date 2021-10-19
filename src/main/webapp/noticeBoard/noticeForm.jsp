@@ -38,8 +38,8 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<button type="button" class="btn btn-warning" style="width: 120px;" onclick="submitContents(this)">저장하기</button>
-				<button type="button" class="btn btn-warning" style="width: 120px;" onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp'">목록</button>
+				<button type="button" class="btn btn-add" style="width: 120px;" onclick="submitContents(this)">저장</button>
+				<button type="button" class="btn btn-add" style="width: 120px;" onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp'">목록</button>
 			</td>
 		</tr>
 	</table>   

@@ -43,7 +43,7 @@ $(function(){
 
 <form action="myPage/deleteSuccess.jsp" method="post" class="form-inline">
 <input type="hidden" id="findType" name="find-type" value="findId">
-<table class="no-border" style="width: 600px; padding: 30px; margin: 30px;">
+<table class="table no-border" style="width: 600px; padding: 30px; margin: 30px;">
 <tbody>
 	<tr id="question" style="padding: 30px;">
 		<td colspan="2" style="font-size: 1.3em; padding: 30px;">

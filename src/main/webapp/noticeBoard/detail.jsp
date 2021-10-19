@@ -4,6 +4,21 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+	#sub{
+		font-size: 20pt;
+	}
+
+	#sub2{
+		font-size: 10pt;
+		float: right;
+		margin-right: 10px;
+	}
+	
+	#th{
+		padding: 25px 0px 10px 20px;
+	}
+</style>
 <script type="text/javascript">
 	$(function(){
 		$(".btn-del").click(function(){
@@ -40,18 +55,16 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 %>
+<p class="title">공지사항</p>
 	<!-- detail table -->
 	<table class="table table-bordered">
 		<caption><b>내용보기</b></caption>
 		<tr>
-			<th>
-				<span><%=dto.getSubject() %></span>
+			<th id="th">
+				<span id="sub"><%=dto.getSubject() %></span>
 				<br>
-				<span>
-					<%=dto.getWriter() %></span><br>
-				<span>
-					<%=sdf.format(dto.getWriteDay()) %>
-					&nbsp;&nbsp;&nbsp;
+				<span id="sub2">
+					<%=sdf.format(dto.getWriteDay()) %>&nbsp;&nbsp;&nbsp;
 					조회 <%=dto.getReadCount() %>
 				</span>
 			</th>
@@ -63,7 +76,7 @@
 		</tr>
 		<tr>
 			<td align="center">
-				<button type="button" class="btn btn-info" style="width: 80px;" 
+				<button type="button" class="btn btn-add" 
 					onclick="location.href='index.jsp?go=noticeBoard/noticeList.jsp?&menu_one=12&menu_two=18&currentPage=<%=currentPage%>'">목록</button>
 			</td>
 		</tr>
@@ -76,21 +89,45 @@
 			<col width="*">
 		</colgroup>
 <%		
-		List<NoticeDTO> list = dao.getSubject(idx);
+		List<NoticeDTO> list = dao.nextList(idx);
 		int cnt =0;
 		for(NoticeDTO ssdto:list){
 	     cnt++;
-	     if(cnt==2){
-	    	 continue;
-	     }
 %>
 	     <tr>
-	        <th><%=cnt==1?"▲ 다음글":cnt==3?"▼ 이전글":""%></th>
+	     <%
+	     	if(list.size()==3){
+	     		if(cnt==2){
+	     			continue;
+	     		}
+	     %>
+	        <th>
+	       		<%=cnt==1?"▲ 다음글":cnt==3?"▼ 이전글":""%>
+	        </th>
 	        <td>
 				<a style="color: black"
 					href="index.jsp?go=noticeBoard/detail.jsp?&menu_one=12&menu_two=18&idx=<%=ssdto.getIdx()%>&currentPage=<%=currentPage%>&key=list">
 					<%=ssdto.getSubject() %></a>
 			</td>
+	     <%		
+	     	}else if(list.size()==2){
+	     %>
+     		<th>
+       			<%=cnt==1?"▲ 다음글":cnt==2?"▼ 이전글":""%>
+			</th>
+			<td>
+			<%if(cnt==1){%>
+				등록된 글이 없습니다.
+			<%}
+			if(cnt==2){%>
+				<a style="color: black"
+				href="index.jsp?go=noticeBoard/detail.jsp?&menu_one=12&menu_two=18&idx=<%=ssdto.getIdx()%>&currentPage=<%=currentPage%>&key=list">
+				<%=ssdto.getSubject() %></a>
+			<%}%>
+			</td>
+	     <%	
+	     	}
+	     %>
 	     </tr>
 <%
 		}
@@ -105,11 +142,11 @@
 	String id = (String)session.getAttribute("sessionId");
 	if(sessionLogin!=null && id.equals("admin")){
 %>
-	<button type="button" class="btn btn-info" style="width: 80px;" 
+	<button type="button" class="btn btn-add" 
 		onclick="location.href='index.jsp?go=noticeBoard/noticeForm.jsp&menu_one=12&menu_two=18'">글쓰기</button>
-	<button type="button" class="btn btn-info" style="width: 80px;" 
+	<button type="button" class="btn btn-update" 
 		onclick="location.href='index.jsp?go=noticeBoard/updateForm.jsp?&menu_one=12&menu_two=18&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
-	<button type="button" class="btn btn-info btn-del" style="width: 80px;">삭제
+	<button type="button" class="btn btn-del">삭제
 		<input type="hidden" id="idx" value="<%=dto.getIdx()%>"/>
 		<input type="hidden" id="page" value="<%=currentPage%>"/>
 	</button>
