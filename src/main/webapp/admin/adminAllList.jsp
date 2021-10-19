@@ -73,7 +73,7 @@ button {
 		</div>
 	</form>
 	<div>
-		<table id="tbl" class="table table-bordered" style="width: 1400px"
+		<table class="table table-bordered" style="width: 1800px"
 			align="center">
 			<thead>
 				<tr>
@@ -101,7 +101,7 @@ button {
 					<td><%=adt.getAuth2()%></td>
 					<td>
 						<button type="button" class="btn btn-warning btn-sm">수정</button>
-						<button type="button" class="btn btn-danger btn-sm delid" value="<%=adt.getId()%>">
+						<button type="button" class="btn btn-danger btn-sm btn-del" value="<%=adt.getId()%>">
 						 삭제</button>
 					</td>
 				</tr>
@@ -112,10 +112,11 @@ button {
 
 <script type="text/javascript">
 $(function(){	
-	$(".delid").click(function() {
+	$(".btn-del").click(function() {
 		var id = $(this).val();
 		alert("회원정보를 삭제합니다.");
-		location.href = "./index.jsp?go=admin/adminMemberDelete.jsp&delid="+id;
+		//location.href = "./index.jsp?go=admin/adminMemberDelete.jsp&delid="+id;
+		location.href = "./index.jsp?go=admin/adminMemberDelete.jsp&menu_one=13&menu_two=30&delid="+id;
 	});
 });
 </script>

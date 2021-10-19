@@ -57,14 +57,24 @@ td {
 		<b><%=marathon%> 참가회원 목록</b>
 	</div>
 	<div id="backform">
-		<button type="button" class="btn btn-warning" onclick="gogo()">참가현황관리로 돌아가기</button>
+		<button type="button" class="btn-basic btn btn-warning" onclick="gogo()">참가현황관리로 돌아가기</button>
 	</div>
 	<div>
-		<table id="tbl" class="table table-bordered" style="width: 1400px"
-			align="center">
+		<table class="table table-bordered" align="center">
+			<colgroup>
+			<col width="50">
+			<col width="80">
+			<col width="80">
+			<col width="150">
+			<col width="80">
+			<col width="120">
+			<col width="70">
+			<col width="150">
+			<col width="120">
+			</colgroup>
 			<thead>
 				<tr>
-					<th style="width: 50px">번호</th>
+					<th>번호</th>
 					<th>아이디</th>
 					<th>이름</th>
 					<th>핸드폰</th>
@@ -86,8 +96,8 @@ td {
 					<td><%=adt.getAcourse()%></td>
 					<td><%=adt.getAtime()%></td>
 					<td><%=adt.getAperson()%></td>
-					<td><button type="button" class="deliverid" value="<%=adt.getAid()%>">운송장번호 입력</button></td>
-					<td><button type="button" class="recordid" value="<%=adt.getAid()%>">완주시간 기록</button></td>
+					<td><button type="button" class="btn-add deliverid" value="<%=adt.getAid()%>">운송장번호 입력</button></td>
+					<td><button type="button" class="btn-add recordid" value="<%=adt.getAid()%>">완주시간 기록</button></td>
 				</tr>
 				<% idx++; } %>
 			</tbody>
@@ -105,13 +115,14 @@ function gogo() {
 $("button.deliverid").click(function(){
 	var deliverid=$(this).val();
 	//alert(deliverid);
-	location.href="./index.jsp?go=admin/adminSelectListDelivery.jsp?deliverid="+deliverid;
+	//location.href="./index.jsp?go=admin/adminSelectListDelivery.jsp?deliverid="+deliverid;
+	location.href="./index.jsp?go=admin/adminSelectListDelivery.jsp&menu_one=13&menu_two=31&deliverid="+deliverid;
 });
 
 $("button.recordid").click(function(){
 	var recordid=$(this).val();
 	//alert(recordid);
-	location.href="./index.jsp?go=admin/adminSelectListRecord.jsp?recordid="+recordid;
+	location.href="./index.jsp?go=admin/adminSelectListRecord.jsp&menu_one=13&menu_two=31&recordid="+recordid;
 });
 </script>
 </body>

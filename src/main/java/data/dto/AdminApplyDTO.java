@@ -38,31 +38,32 @@ public class AdminApplyDTO {
 	private String record;
 	
 	private String recordid;
-	private String finishhour;
-	private String finishminute;
+	private int finishhour;
+	private int finishminute;
+	private int sumtime;
 	
 	private String checkid;
 	private String delivernum;
 	
 	
 	
+	public int getSumtime() {
+		return sumtime;
+	}
+	public void setSumtime(int finishhour, int finishminute) {
+		this.sumtime = finishhour + finishminute;
+	}
+	public void setFinishhour(int finishhour) {
+		this.finishhour = finishhour;
+	}
+	public void setFinishminute(int finishminute) {
+		this.finishminute = finishminute;
+	}
 	public String getRecordid() {
 		return recordid;
 	}
 	public void setRecordid(String recordid) {
 		this.recordid = recordid;
-	}
-	public String getFinishhour() {
-		return finishhour;
-	}
-	public void setFinishhour(String finishhour) {
-		this.finishhour = finishhour;
-	}
-	public String getFinishminute() {
-		return finishminute;
-	}
-	public void setFinishminute(String finishminute) {
-		this.finishminute = finishminute;
 	}
 	public String getCheckid() {
 		return checkid;

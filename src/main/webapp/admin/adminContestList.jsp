@@ -45,7 +45,7 @@ button {
 			<p>접수 시작일자: <%=adt.getApplyStart()%></p>
 			<p>접수 마감일자: <%=adt.getApplyEnd()%></p>
 			<p>접수비: <%=adt.getMoney()%></p><br>
-			<button type="button" name="marathon" value="<%=adt.getContestName()%>" class="marathon">
+			<button type="button" name="marathon" value="<%=adt.getContestName()%>" class="btn-add marathon">
 			 참가 현황</button><br>
 		</div>
 <%  }  %>
@@ -54,7 +54,7 @@ button {
 	$("button.marathon").click(function(){
 		var marathon=$(this).val();
 		//alert(tname);
-		location.href='./index.jsp?go=admin/adminSelectListMember.jsp?marathon='+marathon;
+		location.href='./index.jsp?go=admin/adminSelectListMember.jsp&menu_one=13&menu_two=31&marathon='+marathon;
 	});
 </script>
 </body>

@@ -26,8 +26,8 @@
 		<input type="text" style="width:100px" id="delivernum">
 	</div>
 	<div id="backform">
-		<button type="button" class="btn btn-warning" onclick="goback()">뒤로 가기</button>
-		<button type="submit" class="btn btn-warning savedn">기념품 발송정보 저장</button>
+		<button type="button" class="btn-basic btn btn-warning" onclick="goback()">뒤로 가기</button>
+		<button type="submit" class="btn-update btn btn-warning savedn">기념품 발송정보 저장</button>
 	</div>
 <script type="text/javascript">
 function goback() {

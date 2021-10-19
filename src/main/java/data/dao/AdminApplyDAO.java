@@ -144,7 +144,6 @@ public class AdminApplyDAO {
 
 	
 	
-		
 		// 기념품 발송정보 입력
 		public void delivery(AdminApplyDTO dto) {
 			Connection conn = db.getConnection();
@@ -171,31 +170,56 @@ public class AdminApplyDAO {
 		
 		
 		
+		
 		// 완주시간 입력
-				public void recordtime(AdminApplyDTO dto) {
-					Connection conn = db.getConnection();
-					PreparedStatement pstmt = null;
+		public void recordtime(AdminApplyDTO dto) {
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
 
-					String sql = "update apply set record=? where id=?";
+			String sql = "update apply set record=? where id=?";
 
-					try {
-						pstmt = conn.prepareStatement(sql);
+			try {
+				pstmt = conn.prepareStatement(sql);
 
-						pstmt.setString(1, dto.getFinishhour()+dto.getFinishminute());
-						pstmt.setString(2, dto.getRecordid());
+				pstmt.setInt(1, dto.getSumtime());
+				pstmt.setString(2, dto.getRecordid());
 
-						pstmt.execute();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} finally {
-						db.dbClose(pstmt, conn);
+				pstmt.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				db.dbClose(pstmt, conn);
 
-					}
-				}
+			}
+		}
 		
 		
-		
+		// 페이스 계산
+		public void pace(AdminApplyDTO dto) {
+			Connection conn = db.getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			String sql = "select * from apply where id=?";
+
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, dto.getSumtime());
+				//pstmt.setString(1, dto.getFinishhour() + dto.getFinishminute());
+				pstmt.setString(2, dto.getRecordid());
+
+				pstmt.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				db.dbClose(pstmt, conn);
+
+			}
+		}
 	
 	
 	// 삭제

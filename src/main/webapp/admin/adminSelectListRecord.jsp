@@ -27,8 +27,8 @@
 		<input type="text" style="width:100px" id="finishminute">분
 	</div>
 	<div id="backform">
-		<button type="button" class="btn btn-warning" onclick="goback()">뒤로 가기</button>
-		<button type="submit" class="btn btn-warning savetm">완주 기록 저장</button>
+		<button type="button" class="btn-basic btn btn-warning" onclick="goback()">뒤로 가기</button>
+		<button type="submit" class="btn-update btn btn-warning savetm">완주 기록 저장</button>
 	</div>
 <script type="text/javascript">
 function goback() {
@@ -36,10 +36,11 @@ function goback() {
 }
 
 $(".savetm").click(function() {
-	var finishhour = $("#finishhour").val();
-	var finishminute = $("#finishminute").val();
+	var finishhour = parseInt($("#finishhour").val());
+	var finishminute = parseInt($("#finishminute").val()/60);
 	var recordid = $("#recordid").val();
-	alert("완주 정보를 저장했습니다." + finishhour + finishminute + recordid);
+	//alert(finishminute);
+	//alert("완주 정보를 저장했습니다." + finishhour + finishminute + recordid);
 	location.href = "./index.jsp?go=admin/adminRecord.jsp&finishhour="+finishhour+"&finishminute="+finishminute+"&recordid="+recordid;
 });
 

@@ -7,8 +7,8 @@
 	// 한글 인코딩
 	request.setCharacterEncoding("utf-8");
 
-	String finishhour = request.getParameter("finishhour");
-	String finishminute = request.getParameter("finishminute");
+	int finishhour = Integer.parseInt(request.getParameter("finishhour"));
+	int finishminute = Integer.parseInt(request.getParameter("finishminute"));
 	String recordid = request.getParameter("recordid");
 	//System.out.println(finishhour+finishminute+recordid);
 
