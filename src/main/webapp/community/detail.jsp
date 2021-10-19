@@ -119,7 +119,7 @@
 					</div>
 					<%} %>
 					<div>
-						<table class="table no-border" style="width: 500px;">
+						<table class="table no-border">
 							<%
 					 			for(ReplyDTO adto:alist)
 					 			{%>
