@@ -193,6 +193,7 @@
 %>
 <div class="admin-area">
 	<form action="./admin/contest/updateContestAction.jsp" method="post" enctype="multipart/form-data">
+		<input type="text" name="before_name" value="<%=contestName %>">
 		<input type="text" name="beforeGiftCnt" id="beforeGiftCnt" value="<%= giftList.size()==0?1:giftList.size() %>">
 		<input type="text" name="giftCnt" id="giftCnt" value="<%= giftList.size()==0?1:giftList.size() %>">
 		<div class="contest-add-div">
