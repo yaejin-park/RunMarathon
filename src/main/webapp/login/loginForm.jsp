@@ -138,7 +138,7 @@ $(function() {
 <body>
 <div style="margin-left: 130px;">
 <form action="login/loginAction.jsp" method="post">
-<table class="no-border" style="width: 410px; padding: 30px; margin: 30px; font-size: 0.85em;">
+<table class="table no-border" style="width: 410px; padding: 30px; margin: 30px; font-size: 0.85em;">
 	<caption>로그인</caption>
 	
 	<tbody>

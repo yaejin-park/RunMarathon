@@ -69,7 +69,7 @@ $(function(){
 	String key = request.getParameter("key");
 %>
 <form action="idSearchAction.jsp" method="post" class="form-inline">
-<table class="no-bordered" style="width: 500px; text-align: center;">
+<table class="table no-border" style="width: 500px; text-align: center;">
 	<thead>
 		<tr>
 			<th colspan="3" style="text-align: center; font-size: 1.3em; font-weight: bold; padding-bottom: 50px;">중복아이디 체크</th>

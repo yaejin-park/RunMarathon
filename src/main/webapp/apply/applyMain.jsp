@@ -8,12 +8,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	table{
+	no-border{
 		margin: 30px;
 	}
 	
 	table td{
-		font-size: 0.7em;
+		font-size: 0.85em;
 	}
 	
 	th{
@@ -123,7 +123,7 @@ function check() {
 <br><br>
 <!-- 동의 -->
 <div>
-	<table class="no-border option accor-all" style="width: 760px;">
+	<table class="table no-border option accor-all" style="width: 760px;">
 		<tbody>
 			<tr>
 				<td>

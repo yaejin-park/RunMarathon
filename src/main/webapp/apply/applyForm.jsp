@@ -120,7 +120,7 @@ function check(p) {
 <input hidden="hidden" id="id" name="id" value="<%=id%>">
 
 <div>
-	<table class="no-border" style="width: 760px; float: left;">
+	<table class="table no-border" style="width: 760px; float: left;">
 		<colgroup>
 			<col width="20%">
 			<col width="80%">

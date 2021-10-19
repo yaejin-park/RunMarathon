@@ -75,7 +75,7 @@ $(function(){
 	request.setCharacterEncoding("utf-8");
 %>
 <form action="nickSearchAction.jsp" method="post" class="form-inline">
-<table class="no-borderd" style="width: 500px; text-align: center;">
+<table class="table no-border" style="width: 500px; text-align: center;">
 	<thead>
 		<tr>
 			<th colspan="3" style="text-align: center; font-size: 1.3em; font-weight: bold; padding-bottom: 50px;">중복닉네임 체크</th>
