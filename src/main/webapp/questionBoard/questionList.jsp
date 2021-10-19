@@ -11,14 +11,37 @@
 	pageEncoding="UTF-8"%>
 	
 <style>
+	.accor-content{
+		width: 740px;
+		margin-left: 100px;
+		margin-top: 0px;
+		font-size: 19px;
+	}
+	.accor-content:after{
+		content:"";
+		display:block;
+		clear:both;
+	}
+	
 	.qna-title{
 		display: table;
 		width: 100%;
 		table-layout: fixed;
 		border-top: 1px solid gray;
+		padding-top: 10px;
 	}
+	
+	.qna-head {
+		border:none;
+		border-top:3px solid #408eb9;
+		border-bottom:1px solid #ddd;
+		color:#444;
+		background:rgb(160, 199, 220, 0.2);
+		font-weight: bold;
+	}
+	
 	.qna-title > * {
-		display:table-cell;	
+		display:table-cell;
 	}
 	
 	.qna-no{
@@ -29,6 +52,7 @@
 	
 	.qna-subject{
 		width: 380px;
+		
 	}
 	
 	.qna-writer{
@@ -129,18 +153,20 @@
 	String id = (String)session.getAttribute("sessionId");
 	String nick = mdao.getIdNick(id);
 	String sessionLogin = (String)session.getAttribute("sessionLogin");
-	if(sessionLogin!=null){
+%>
+<p class="title">Q&A</p>
+	<%if(sessionLogin!=null){
 	%>	
-		<button type="button" class="btn btn-success" style="width: 100px; margin-top: 10px; margin-bottom: 10px;"
+		<button type="button" class="btn btn-add" style="margin-bottom: 10px; float: right;"
 			onclick="location.href='index.jsp?go=questionBoard/questionForm.jsp&menu_one=12&menu_two=19'">
-			<span class="glyphicon glyphicon-pencil"></span>글추가
+			글쓰기
 		</button>
 	<%
 	}
-%>
+	%>
 <!-- question table -->
 <div class="accor-all">
-	<div class="qna-title">
+	<div class="qna-title qna-head">
 		<div class="qna-no">
 			번호
 		</div>
@@ -186,8 +212,9 @@
 			<%
 			if(sessionLogin!=null && nick.equals(dto.getWriter())){
 			%>
-				<button type="button" onclick="location.href='index.jsp?go=questionBoard/updateForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
-				<button type="button" 
+				<br><button type="button" class="btn btn-update" style="float: right;"
+				onclick="location.href='index.jsp?go=questionBoard/updateForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
+				<button type="button" class="btn btn-del" style="float: right;"
 				onclick="
 			<%
 				if(dto.getStep()==0){
@@ -200,9 +227,10 @@
 				</button>
 			<%}
 			
-			if(sessionLogin!=null && id.equals("admin")){
+			if(sessionLogin!=null && id.equals("admin") && dto.getStep()==0){
 			%>
-				<button type="button" onclick="location.href='index.jsp?go=questionBoard/answerForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">답변</button>
+				<br><button type="button" class="btn btn-add" style="float: right;"
+					onclick="location.href='index.jsp?go=questionBoard/answerForm.jsp?&menu_one=12&menu_two=19&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">답변</button>
 			<%
 			}
 			%>

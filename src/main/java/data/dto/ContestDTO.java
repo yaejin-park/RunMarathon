@@ -3,6 +3,7 @@ package data.dto;
 import java.util.Date;
 
 public class ContestDTO {
+	private String before_name;
 	private String name;
 	private String content;
 	private String contest_start;
@@ -14,6 +15,12 @@ public class ContestDTO {
 	private String gift_end;
 	private String money;
 	
+	public String getBefore_name() {
+		return before_name;
+	}
+	public void setBefore_name(String before_name) {
+		this.before_name = before_name;
+	}
 	public String getName() {
 		return name;
 	}

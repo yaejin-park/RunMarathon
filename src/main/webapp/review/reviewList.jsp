@@ -252,8 +252,8 @@ int no = totalCount - (currentPage - 1) * perPage;
 							</td>
 						</tr>
 						<tr>
-							<td><span
-								class="glyphicon glyphicon-camera camera"><b>사진첨부</b></span> <input
+							<td style="vertical-align: middle;"><span
+								class="glyphicon glyphicon-camera camera"><b>사진</b></span> <input
 								type="file" name="photo" id="photo"
 								style="visibility: hidden;" onchange="readUrl(this)">
 							</td>
@@ -265,7 +265,7 @@ int no = totalCount - (currentPage - 1) * perPage;
 						</tr>
 
 						<tr>
-							<td><b>후기내용</b></td>
+							<td><b>내용</b></td>
 							<td><textarea class="form-control" name="content" required="required"></textarea>
 							</td>
 						</tr>

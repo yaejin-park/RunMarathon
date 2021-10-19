@@ -23,6 +23,7 @@
 		multi = new MultipartRequest(request,realPath,uploadSize, "utf-8", new DefaultFileRenamePolicy());
 
 		// 대회	
+		String before_name = multi.getParameter("before_name");
 		String name = multi.getParameter("name");
 		String content = multi.getParameter("content");
 		String contest_start = multi.getParameter("contest_start");
@@ -57,7 +58,10 @@
 		contest.setGift_check(gift_check.trim());
 		contest.setGift_start(gift_start.trim());
 		contest.setGift_end(gift_end.trim());
+		contest.setBefore_name(before_name);
 		contest.setMoney(money.trim());
+		
+		System.out.print(name);
 		
 		ContestDAO dao = new ContestDAO();
 		dao.updateContest(contest);
