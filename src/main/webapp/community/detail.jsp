@@ -70,7 +70,7 @@
 %>
 <body>
 <p class="title">커뮤니티</p>
-	<table class="table table-bordered" style="width: 600px;">
+	<table class="table table-bordered">
 		<thead>
 			<tr>
 				<th><span style="font-size: 1.7em;"><%=dto.getSubject()%></span>
@@ -119,7 +119,7 @@
 					</div>
 					<%} %>
 					<div>
-						<table class="table table" style="width: 500px;">
+						<table class="table no-border" style="width: 500px;">
 							<%
 					 			for(ReplyDTO adto:alist)
 					 			{%>
@@ -176,7 +176,7 @@
 							<button type="button" class="btn btn-sm btn-update"
 								style="width: 80px;" onclick="location.href='index.jsp?go=community/updateForm.jsp&menu_one=11&menu_two=27&idx=<%=dto.getIdx()%>&currentPage=<%=currentPage%>'">수정</button>
 							<button type="button" class="btn btn-sm btn-del"
-								style="width: 80px;" onclick="location.href='index.jsp?go=community/comDelete.jsp&menu_one=11&menu_two=27&idx=<%=dto.getIdx()%>'">삭제</button>
+								style="width: 80px;" onclick="location.href='community/comDelete.jsp?idx=<%=dto.getIdx()%>'">삭제</button>
 							<%
 							} 
 							%>

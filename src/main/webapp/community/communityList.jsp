@@ -84,7 +84,7 @@ if (list.size() == 0 && totalCount > 0) {
 </script>
 <%
 }
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 //각페이지에 출력할 시작번호
 int no = totalCount - (currentPage - 1) * perPage;
 ReplyDAO adao=new ReplyDAO();
@@ -115,11 +115,11 @@ ReplyDAO adao=new ReplyDAO();
 			<option value="content" class="onleCon">내용만</option>
 			<option value="nickname" class="onlyNick">닉네임</option>
 		</select> <input id="textSearch" />
-		<button type="button" class="btn btn-add searchBTN" style="width: 70px;">검색</button>
+		<button type="button" class="btn btn-add searchBTN" style="width: 70px; margin-bottom: 10px;">검색</button>
 	</div>
 
 	<!-- 게시판 출력 -->
-	<table class="table table-bordered" style="width: 800px;">
+	<table class="table table-bordered">
 		<colgroup>
 			<col width="70">
 			<col width="350">

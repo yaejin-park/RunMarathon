@@ -25,6 +25,11 @@
 		});
 	});
 </script>
+<style>
+.table thead th {
+	text-align: left;
+}
+</style>
 <%
 String idx = request.getParameter("idx");
 
@@ -48,7 +53,7 @@ String nickname = mdao.getIdNick(id);
 String sessionLogin = (String)session.getAttribute("sessionLogin");
 %>
 <body>
-	<table class="table table-bordered" style="width: 600px;">
+	<table class="table table-bordered">
 		<thead>
 			<tr>
 				<th><span style="font-size: 1.7em;"><%=dto.getSubject()%></span>
