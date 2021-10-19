@@ -18,7 +18,6 @@
 <% }else{%>
 	<title>Run&Fun 2021</title>
 <%}%>
-	<title><%=dao.getOneDepth(menu_pt)%> | <%=dao.getOneDepth(menu_idx)%></title>
 <link rel="icon" href="./common/image/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="./common/css/swiper.min.css">
