@@ -198,7 +198,7 @@ $(function(){
 				<th>닉네임</th>
 				<td>
 					<input type="text" name="nick" id="nick" class="form-control" required="required" readonly="readonly">
-					<button type="button" class="btn btn-info" id="nickDouble">중복체크</button>
+					<button type="button" class="btn btn-add" id="nickDouble">중복체크</button>
 				</td>
 			</tr>
 			
@@ -226,7 +226,7 @@ $(function(){
 				<th>주소</th>
 				<td>
 					<input type="text" name="addr1" id="addr1" class="form-control" required="required"  placeholder="주소" readonly="readonly">
-					<button type="button" class="btn btn-info" id="searchAddr">주소검색</button>
+					<button type="button" class="btn btn-add" id="searchAddr">주소검색</button>
 					<br><br>
 					<input type="text" name="addr2" id="addr2" class="form-control" required="required"  placeholder="상세주소 입력" style="width: 300px;">
 				</td>					
@@ -248,8 +248,8 @@ $(function(){
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<button type="button" id="modifyYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">저장</button>&nbsp;&nbsp;
-					<button type="button" id="modifyNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;" onclick="location.href='./index.jsp'">메인</button>
+					<button type="button" id="modifyYes" class="btn btn-add" style="height: 52px; width: 160px; font-size: 1.1em;">저장</button>&nbsp;&nbsp;
+					<button type="button" id="modifyNo" class="btn btn-update" style="height: 52px; width: 130px; font-size: 1.1em;" onclick="location.href='./index.jsp'">메인</button>
 				</td>
 			</tr>
 		</tbody>

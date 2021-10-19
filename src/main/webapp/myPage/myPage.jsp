@@ -169,7 +169,7 @@ $(function() {
 <div class="mypage-area">
 	<p class="title">My Page</p>
 	<div id="sidebox">
-		<table style="text-align: center; box">
+		<table style="text-align: center;">
 			<tbody>
 				<tr>
 					<td>

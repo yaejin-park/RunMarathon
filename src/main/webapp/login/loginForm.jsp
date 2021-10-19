@@ -138,7 +138,7 @@ $(function() {
 <body>
 <div style="margin-left: 130px;">
 <form action="login/loginAction.jsp" method="post">
-<table class="table" style="width: 410px; padding: 30px; margin: 30px; font-size: 0.85em;">
+<table class="no-border" style="width: 410px; padding: 30px; margin: 30px; font-size: 0.85em;">
 	<caption>로그인</caption>
 	
 	<tbody>
@@ -164,7 +164,7 @@ $(function() {
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button type="submit" class="btn btn-info" style="width: 400px; font-size: 1.2em; font-weight: bold;">로그인</button>
+				<button type="submit" class="btn btn-add" style="width: 400px; font-size: 1.2em; font-weight: bold;">로그인</button>
 			</td>
 		</tr>
 		<tr>
@@ -195,7 +195,7 @@ $(function() {
 			</td>
 			<td>
 				<div align="right">
-					<button type="button" class="btn btn-info" style="width: 100px; height: 40px;" onclick="location.href='index.jsp?go=join/joinForm.jsp?&menu_one=24'">회원가입</button>
+					<button type="button" class="btn btn-add" style="width: 100px; height: 40px;" onclick="location.href='index.jsp?go=join/joinForm.jsp?&menu_one=24'">회원가입</button>
 				</div>				
 			</td>
 		</tr>

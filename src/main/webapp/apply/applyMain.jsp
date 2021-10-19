@@ -123,7 +123,7 @@ function check() {
 <br><br>
 <!-- 동의 -->
 <div>
-	<table class="table option accor-all" style="width: 760px;">
+	<table class="no-border option accor-all" style="width: 760px;">
 		<tbody>
 			<tr>
 				<td>
@@ -164,8 +164,8 @@ function check() {
 			</tr>
 			<tr>
 				<td style="text-align: center;">
-					<button type="submit" class="btn btn-info apply-type" id="soloApply" value="1">개인 참가</button>
-					<button type="submit" class="btn btn-info apply-type" id="groupApply" value="2">단체 참가</button>
+					<button type="submit" class="btn btn-add apply-type" id="soloApply" value="1">개인 참가</button>
+					<button type="submit" class="btn btn-add apply-type" id="groupApply" value="2">단체 참가</button>
 				</td>
 			</tr>
 		</tbody>

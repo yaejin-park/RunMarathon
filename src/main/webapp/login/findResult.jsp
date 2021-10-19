@@ -37,8 +37,8 @@ $(function() {
 			s+="존재하지 않습니다.";
 			$("#findResult").html(s);
 			
-			b+='<button type="button" id="joinBtn" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">회원가입</button>';
-			b+='<button type="button" id="findId" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">아이디/비번 찾기</button>';
+			b+='<button type="button" id="joinBtn" class="btn btn-add" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">회원가입</button>';
+			b+='<button type="button" id="findId" class="btn btn-update" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">아이디/비번 찾기</button>';
 			$("#findBtn").html(b);
 		<%
 		}else if(!id.equals("null")){
@@ -47,8 +47,8 @@ $(function() {
 			s+='<span style="font-weight: bold; color: #659EFF"><%=id %></span>입니다.';
 			$("#findResult").html(s);
 			
-			b+='<button type="submit" id="login" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">로그인</button>';
-			b+='<button type="button" id="findId" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">아이디/비밀번호 찾기</button>';
+			b+='<button type="submit" id="login" class="btn btn-add" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">로그인</button>';
+			b+='<button type="button" id="findId" class="btn btn-update" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">아이디/비밀번호 찾기</button>';
 			$("#findBtn").html(b);
 		<%}
 	} else{
@@ -57,16 +57,16 @@ $(function() {
 			s+='<span style="font-weight: bold; color: #659EFF"><%=pass %></span>입니다.';
 			$("#findResult").html(s);
 			
-			b+='<button type="submit" id="login" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">로그인</button>';
-			b+='<button type="button" id="findId" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid" value="yes">아이디/비밀번호 찾기</button>';
+			b+='<button type="submit" id="login" class="btn btn-add" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">로그인</button>';
+			b+='<button type="button" id="findId" class="btn btn-update" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid" value="yes">아이디/비밀번호 찾기</button>';
 			$("#findBtn").html(b);
 		<%}else{%>
 			s+="해당하는 회원정보가<br>";
 			s+="존재하지 않습니다.";
 			$("#findResult").html(s);
 			
-			b+='<button type="button" id="joinBtn" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">회원가입</button>';
-			b+='<button type="button" id="findId" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">아이디/비번 찾기</button>';
+			b+='<button type="button" id="joinBtn" class="btn btn-add" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">회원가입</button>';
+			b+='<button type="button" id="findId" class="btn btn-update" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">아이디/비번 찾기</button>';
 			$("#findBtn").html(b);
 		<%}
 	}%>
@@ -91,6 +91,5 @@ $(function() {
 </tbody>
 </table>
 </form>
->>>>>>> branch 'dev' of https://github.com/jeejee1106/SemiProject5.git
 </body>
 </html>
