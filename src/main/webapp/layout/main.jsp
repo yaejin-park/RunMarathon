@@ -1,3 +1,6 @@
+<%@page import="data.dto.ReviewDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dao.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="./common/css/main.css">
@@ -97,70 +100,22 @@
 <div class="main-sec review">
 	<p class="tit">REVIEW</p>
 	<div class="swiper-wrapper">
-		<a href="javascript:" class="swiper-slide">
-			<div class="img-div">
-				<img alt="" src="./common/image/review-img1.jpg">
-			</div>
-			<div class="main-txt">
-				<p class="txt1">oo 마라톤</p>
-			</div>
-		</a>
-		<a href="javascript:" class="swiper-slide">
-			<div class="img-div">
-				<img alt="" src="./common/image/review-img2.jpg">
-			</div>
-			<div class="main-txt">
-				<p class="txt1">oo 마라톤 후기 타이틀</p>
-			</div>
-		</a>
-		<a href="javascript:" class="swiper-slide">
-			<div class="img-div">
-				<img alt="" src="./common/image/review-img3.jpg">
-			</div>
-			<div class="main-txt">
-				<p class="txt1">oo 마라톤 후기 타이틀</p>
-			</div>
-		</a>
-		<a href="javascript:" class="swiper-slide">
-			<div class="img-div">
-				<img alt="" src="./common/image/review-img4.jpg">
-			</div>
-			<div class="main-txt">
-				<p class="txt1">oo 마라톤 후기 타이틀</p>
-			</div>
-		</a>
-		<a href="javascript:" class="swiper-slide">
-			<div class="img-div">
-				<img alt="" src="./common/image/review-img1.jpg">
-			</div>
-			<div class="main-txt">
-				<p class="txt1">oo 마라톤</p>
-			</div>
-		</a>
-		<a href="javascript:" class="swiper-slide">
-			<div class="img-div">
-				<img alt="" src="./common/image/review-img2.jpg">
-			</div>
-			<div class="main-txt">
-				<p class="txt1">oo 마라톤 후기 타이틀</p>
-			</div>
-		</a>
-		<a href="javascript:" class="swiper-slide">
-			<div class="img-div">
-				<img alt="" src="./common/image/review-img3.jpg">
-			</div>
-			<div class="main-txt">
-				<p class="txt1">oo 마라톤 후기 타이틀</p>
-			</div>
-		</a>
-		<a href="javascript:" class="swiper-slide">
-			<div class="img-div">
-				<img alt="" src="./common/image/review-img4.jpg">
-			</div>
-			<div class="main-txt">
-				<p class="txt1">oo 마라톤 후기 타이틀</p>
-			</div>
-		</a>
+		<%-- <%
+			ReviewDAO dao = new ReviewDAO();
+			List<ReviewDTO> list = dao.getAllList();
+			for(ReviewDTO dto:list){
+		%>
+				<a href="javascript:" class="swiper-slide">
+					<div class="img-div">
+						<img alt="" src="./save/<%= dto.getPhoto()%>">
+					</div>
+					<div class="main-txt">
+						<p class="txt1"><%= dto.getSubject() %></p>
+					</div>
+				</a>
+		<%		
+			}
+		%> --%>
 	</div>
 	<div class="swiper-button-prev"><span></span></div>
   	<div class="swiper-button-next"><span></span></div>
