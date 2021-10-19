@@ -48,7 +48,7 @@ public class ApplyDAO {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql="update apply set name=?, addr1=?, addr2=?, hp=?, course=?, time=?, person=? where id=?";
+		String sql="update apply set name=?, addr1=?, addr2=?, hp=?, course=?, time=?, person=? where id=? and marathon='Run 2021 ½ÃÁð3'";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -80,13 +80,13 @@ public class ApplyDAO {
 
 		ApplyDTO dto = new ApplyDTO();
 
-		String sql = "select * from apply where id=?";
+		String sql = "select * from apply where id=? and marathon='Run 2021 ½ÃÁð3'";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
+			if(rs.next()) {
 				dto.setMarathon(rs.getString("marathon"));
 				dto.setName(rs.getString("name"));
 				dto.setAddr1(rs.getString("addr1"));
@@ -95,6 +95,8 @@ public class ApplyDAO {
 				dto.setCourse(rs.getString("course"));
 				dto.setTime(rs.getString("time"));
 				dto.setPerson(rs.getString("person"));
+				dto.setRecord(rs.getString("record"));
+				dto.setDelivery(rs.getString("delivery"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -111,7 +113,7 @@ public class ApplyDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from apply where id=?";
+		String sql = "select * from apply where id=? and marathon='Run 2021 ½ÃÁð3'";
 		
 		boolean flag = false;
 		try {
@@ -130,4 +132,34 @@ public class ApplyDAO {
 		return flag;
 	}
 	
+	//È¸¿ø »óÅÂ ¾ò±â
+	public String applyStatus(String id) {
+		String status = null;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select record,delivery from apply where id=? and marathon='Run 2021 ½ÃÁð3'";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				status = "apply";
+				if(rs.getString("delivery")!=null) {
+					status="delivery";
+					if(rs.getString("record")!=null) {
+						status="record";
+					}
+				} 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return status;
+	}
 }

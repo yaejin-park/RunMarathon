@@ -48,7 +48,6 @@ button {
 	AdminApplyDAO dao = new AdminApplyDAO();
 	AdminApplyDTO dto = new AdminApplyDTO();
 	List<AdminApplyDTO> list = dao.getAllMembers();
-	int idx = 1;
 %>
 	<div class="cap">
 		<b>전체 회원 목록</b>
@@ -73,7 +72,7 @@ button {
 		</div>
 	</form>
 	<div>
-		<table class="table table-bordered" style="width: 1800px"
+		<table id="tbl" class="table table-bordered" style="width: 1400px"
 			align="center">
 			<thead>
 				<tr>
@@ -91,7 +90,6 @@ button {
 			<tbody>
 				<%	for(AdminApplyDTO adt:list) { %>
 				<tr>
-					<td><%=idx%></td>
 					<td><%=adt.getName()%></td>
 					<td><%=adt.getNick()%></td>
 					<td><%=adt.getId()%></td>
@@ -101,22 +99,21 @@ button {
 					<td><%=adt.getAuth2()%></td>
 					<td>
 						<button type="button" class="btn btn-warning btn-sm">수정</button>
-						<button type="button" class="btn btn-danger btn-sm btn-del" value="<%=adt.getId()%>">
+						<button type="button" class="btn btn-danger btn-sm delid" value="<%=adt.getId()%>">
 						 삭제</button>
 					</td>
 				</tr>
-				<% idx++; } %>
+				<% } %>
 			</tbody>
 		</table>
 	</div>
 
 <script type="text/javascript">
 $(function(){	
-	$(".btn-del").click(function() {
+	$(".delid").click(function() {
 		var id = $(this).val();
 		alert("회원정보를 삭제합니다.");
-		//location.href = "./index.jsp?go=admin/adminMemberDelete.jsp&delid="+id;
-		location.href = "./index.jsp?go=admin/adminMemberDelete.jsp&menu_one=13&menu_two=30&delid="+id;
+		location.href = "./index.jsp?go=admin/adminMemberDelete.jsp&delid="+id;
 	});
 });
 </script>

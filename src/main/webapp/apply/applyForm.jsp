@@ -114,13 +114,13 @@ function check(p) {
 </head>
 <body>
 <form action="apply/applyAddAction.jsp" method="post" class="form-inline" name="joinfrm" onsubmit="return check(this)">
-<input hidden="hidden" name="marathon" value="런마라톤_2021">
+<input hidden="hidden" name="marathon" value="Run 2021 시즌3">
 <input hidden="hidden" id="courseData" name="course" value="">
 <input hidden="hidden" id="payData" name="pay" value="">
 <input hidden="hidden" id="id" name="id" value="<%=id%>">
 
 <div>
-	<table class="table" style="width: 760px; float: left;">
+	<table class="no-border" style="width: 760px; float: left;">
 		<colgroup>
 			<col width="20%">
 			<col width="80%">
@@ -163,7 +163,7 @@ function check(p) {
 				<th>주소</th>
 				<td>
 					<input type="text" name="addr1" id="addr1" class="form-control" required="required"  placeholder="주소" readonly="readonly">
-					<button type="button" class="btn btn-info" id="searchAddr">주소검색</button>
+					<button type="button" class="btn btn-add" id="searchAddr">주소검색</button>
 					<br><br>
 					<input type="text" name="addr2" id="addr2" class="form-control" required="required"  placeholder="상세주소 입력" style="width: 300px;">
 				</td>					
@@ -172,9 +172,9 @@ function check(p) {
 			<tr>
 				<th>코스</th>
 				<td>
-					<button type="button" id="course42" value="42K" class="btn btn-default course">42K</button>
-					<button type="button" id="course25" value="25K" class="btn btn-default course">25K</button>
-					<button type="button" id="course15" value="15K" class="btn btn-default course">15K</button>
+					<button type="button" id="course42" value="42K" class="btn btn-basic course">42K</button>
+					<button type="button" id="course25" value="25K" class="btn btn-basic course">25K</button>
+					<button type="button" id="course15" value="15K" class="btn btn-basic course">15K</button>
 				</td>
 			</tr>
 			<tr>
@@ -204,14 +204,14 @@ function check(p) {
 				<th>결제방법</th>
 				<td>
 					<div class="btn-group">
-						<button type="button" id="pay" value="pay" class="btn btn-default">무통장입금</button>
+						<button type="button" id="pay" value="pay" class="btn btn-basic">무통장입금</button>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<button type="button" id="applyNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;" onclick="history.go(-1);">취소</button>
-					<button type="submit" id="applyYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">참가신청</button>&nbsp;&nbsp;
+					<button type="button" id="applyNo" class="btn btn-basic" style="height: 52px; width: 130px; font-size: 1.1em;" onclick="history.go(-1);">취소</button>
+					<button type="submit" id="applyYes" class="btn btn-add" style="height: 52px; width: 160px; font-size: 1.1em;">참가신청</button>&nbsp;&nbsp;
 				</td>
 			</tr>
 		</tbody>

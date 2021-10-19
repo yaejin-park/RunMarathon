@@ -43,7 +43,7 @@ $(function(){
 
 <form action="myPage/deleteSuccess.jsp" method="post" class="form-inline">
 <input type="hidden" id="findType" name="find-type" value="findId">
-<table class="table" style="width: 600px; padding: 30px; margin: 30px;">
+<table class="no-border" style="width: 600px; padding: 30px; margin: 30px;">
 <tbody>
 	<tr id="question" style="padding: 30px;">
 		<td colspan="2" style="font-size: 1.3em; padding: 30px;">
@@ -66,8 +66,8 @@ $(function(){
 	
 	<tr>
 		<td colspan="2">
-			<button type="button" id="yesBtn" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">탈퇴</button>
-			<button type="button" id="cancleBtn" class="btn btn-default" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid" onclick="location.href='./index.jsp?go=myPage/myPage.jsp'">취소</button>
+			<button type="button" id="yesBtn" class="btn btn-del" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid">탈퇴</button>
+			<button type="button" id="cancleBtn" class="btn btn-basic" style="width: 412px; height: 45px; margin: 10px; border: 2px grey solid" onclick="location.href='./index.jsp?go=myPage/myPage.jsp'">취소</button>
 		</td>
 	</tr>
 </tbody>

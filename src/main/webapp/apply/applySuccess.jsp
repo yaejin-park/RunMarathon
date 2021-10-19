@@ -60,8 +60,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<button type="button" class="btn btn-info" onclick="location.href='index.jsp?go=apply/applyModify.jsp&menu_one=8&menu_two=9&type=2'">수정</button>
-					<button type="button" class="btn btn-info" onclick="location.href='index.jsp'">메인페이지</button>
+					<button type="button" class="btn btn-add" onclick="location.href='index.jsp?go=apply/applyModify.jsp&menu_one=8&menu_two=9&type=2'">수정</button>
+					<button type="button" class="btn btn-add" onclick="location.href='index.jsp'">메인페이지</button>
 				</td>
 			</tr>
 		</tbody>

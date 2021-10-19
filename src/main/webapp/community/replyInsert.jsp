@@ -18,7 +18,7 @@
 	//페이지 번호읽기
 	String currentPage=request.getParameter("currentPage");
 	//다시 목록 보던 페이지로 이동
-	String path="../index.jsp?go=community/communityList.jsp?currentPage="+currentPage;
+	String path="../index.jsp?go=community/detail.jsp?idx="+dto.getNum()+"&menu_one=11&menu_two=27&currentPage="+currentPage;
 	response.sendRedirect(path);
 	
 

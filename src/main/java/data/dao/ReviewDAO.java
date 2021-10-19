@@ -35,6 +35,37 @@ public class ReviewDAO {
 			db.dbClose(pstmt, conn);
 		}
 	}
+	
+	public List<ReviewDTO> getAllList()
+	   {
+	      List<ReviewDTO> list=new Vector<ReviewDTO>();
+	      Connection conn=db.getConnection();
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      String sql="select * from review";
+	      try {
+	         pstmt=conn.prepareStatement(sql);
+	         rs=pstmt.executeQuery();
+	         while(rs.next())
+	         {
+	            ReviewDTO dto=new ReviewDTO();
+	            dto.setIdx(rs.getString("idx"));
+	            dto.setSubject(rs.getString("subject"));
+	            dto.setNickname(rs.getString("nickname"));
+	            dto.setPhoto(rs.getString("photo"));
+	            dto.setContent(rs.getString("content"));
+	            dto.setWrite_day(rs.getTimestamp("write_day"));
+	            list.add(dto);
+
+	         }
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }finally {
+	         db.dbClose(rs, pstmt, conn);
+	      }
+	      return list;
+	   }
 	public int getTotalCount()
 	{
 		int n=0;

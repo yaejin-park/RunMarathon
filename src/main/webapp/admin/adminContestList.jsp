@@ -11,17 +11,17 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.5.0.js"></script>
 <style type="text/css">
-h4 {
+h2 {
 	white-space: normal;
 }
 
 #nemo {
-	width: 300px;
-	height: 400px;
+	width: 400px;
+	height: 300px;
 	background-color: skyblue;
-	float: left;
 	display: inline-block;
 	margin: 20px;
+	padding: 20px 20px;
 }
 
 button {
@@ -39,30 +39,14 @@ button {
 <div align="center" style="margin-top: 50px;">
 <%	for(AdminApplyDTO adt:list) { %>
 		<div id="nemo">
-			<h4><%=adt.getContestName()%></h4><br>
+			<h2><%=adt.getContestName()%></h2><br>
 			<p>대회 시작일자: <%=adt.getContestStart()%></p>
 			<p>대회 종료일자: <%=adt.getContestEnd()%></p>
 			<p>접수 시작일자: <%=adt.getApplyStart()%></p>
 			<p>접수 마감일자: <%=adt.getApplyEnd()%></p>
 			<p>접수비: <%=adt.getMoney()%></p><br>
-			<%-- <form action="./index.jsp?go=admin/adminSelectListMember.jsp" method="post">
-				<button type="submit" name="tname" value="<%=adt.getContestName()%>">
-				참가 회원 목록</button><br>
-			</form> --%>
-			<button type="button" name="marathon" value="<%=adt.getContestName()%>" class="marathon">
-				참가 회원 목록</button><br>
-			<!-- <form action="adminSelectListDelivery.jsp" method="get">
-				<button type="submit">
-				기념품 발송 정보 입력</button><br>
-			</form>
-			<form action="adminSelectListRecord.jsp" method="get">
-				<button type="submit">
-				완주 시간 기록</button>
-			</form> -->
-			<button type="button" name="deliver" value="<%=adt.getContestName()%>" class="deliver">
-				기념품 발송 정보 입력</button><br>
-			<button type="button" name="timerecord" value="<%=adt.getContestName()%>" class="timerecord">
-				완주 시간 기록</button><br>
+			<button type="button" name="marathon" value="<%=adt.getContestName()%>" class="btn-add marathon">
+			 참가 현황</button><br>
 		</div>
 <%  }  %>
 </div>
@@ -70,19 +54,7 @@ button {
 	$("button.marathon").click(function(){
 		var marathon=$(this).val();
 		//alert(tname);
-		location.href='./index.jsp?go=admin/adminSelectListMember.jsp?marathon='+marathon;
-	});
-	
-	$("button.deliver").click(function(){
-		var deliver=$(this).val();
-		//alert(tname);
-		location.href='./index.jsp?go=admin/adminSelectListDelivery.jsp?deliver='+deliver;
-	});
-	
-	$("button.timerecord").click(function(){
-		var timerecord=$(this).val();
-		//alert(tname);
-		location.href='./index.jsp?go=admin/adminSelectListRecord.jsp?timerecord='+timerecord;
+		location.href='./index.jsp?go=admin/adminSelectListMember.jsp&menu_one=13&menu_two=31&marathon='+marathon;
 	});
 </script>
 </body>
