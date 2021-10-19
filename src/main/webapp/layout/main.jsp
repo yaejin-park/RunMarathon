@@ -100,7 +100,7 @@
 <div class="main-sec review">
 	<p class="tit">REVIEW</p>
 	<div class="swiper-wrapper">
-		<%-- <%
+		<%
 			ReviewDAO dao = new ReviewDAO();
 			List<ReviewDTO> list = dao.getAllList();
 			for(ReviewDTO dto:list){
@@ -115,7 +115,7 @@
 				</a>
 		<%		
 			}
-		%> --%>
+		%>
 	</div>
 	<div class="swiper-button-prev"><span></span></div>
   	<div class="swiper-button-next"><span></span></div>
