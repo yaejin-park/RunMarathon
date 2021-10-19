@@ -50,6 +50,9 @@
 		font-weight:bold;
 		color:#5799c0;
 	}
+	.intro-div th, .intro-div td {
+		text-align:center;
+	}
 </style>
 <div class="intro-area">
 	<p class="title">Run 2021 소개</p>
