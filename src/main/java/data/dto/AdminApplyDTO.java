@@ -38,20 +38,34 @@ public class AdminApplyDTO {
 	private String record;
 	
 	private String recordid;
+	private int finishcourse;
 	private int finishhour;
 	private int finishminute;
-	private int sumtime;
+	private double pace;
 	
 	private String checkid;
 	private String delivernum;
 	
 	
 	
-	public int getSumtime() {
-		return sumtime;
+	public int getFinishcourse() {
+		return finishcourse;
 	}
-	public void setSumtime(int finishhour, int finishminute) {
-		this.sumtime = finishhour + finishminute;
+	public void setFinishcourse(int finishcourse) {
+		this.finishcourse = finishcourse;
+	}
+	public int getFinishhour() {
+		return finishhour;
+	}
+	public int getFinishminute() {
+		return finishminute;
+	}
+	
+	public double getPace() {
+		return pace;
+	}
+	public void setPace(double pace) {
+		this.pace = pace;
 	}
 	public void setFinishhour(int finishhour) {
 		this.finishhour = finishhour;

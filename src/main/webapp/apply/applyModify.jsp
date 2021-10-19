@@ -109,7 +109,7 @@ $(function(){
 				<th>주소</th>
 				<td>
 					<input type="text" name="addr1" id="addr1" class="form-control" required="required"  placeholder="주소" readonly="readonly">
-					<button type="button" class="btn btn-info" id="searchAddr">주소검색</button>
+					<button type="button" class="btn btn-add" id="searchAddr">주소검색</button>
 					<br><br>
 					<input type="text" name="addr2" id="addr2" class="form-control" required="required"  placeholder="상세주소 입력" style="width: 300px;">
 				</td>					
@@ -118,9 +118,9 @@ $(function(){
 			<tr>
 				<th>코스</th>
 				<td>
-					<button type="button" id="42K" value="42K" class="btn btn-default course course-clicked">42K</button>
-					<button type="button" id="25K" value="25K" class="btn btn-default course">25K</button>
-					<button type="button" id="15K" value="15K" class="btn btn-default course">15K</button>
+					<button type="button" id="42K" value="42K" class="btn btn-update course course-clicked">42K</button>
+					<button type="button" id="25K" value="25K" class="btn btn-update course">25K</button>
+					<button type="button" id="15K" value="15K" class="btn btn-update course">15K</button>
 				</td>
 			</tr>
 			<tr>
@@ -148,8 +148,8 @@ $(function(){
 			}%>
 			<tr>
 				<td colspan="2" align="center">
-					<button type="button" id="applyNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;" onclick="history.go(-1);">취소</button>
-					<button type="submit" id="applyYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">수정완료</button>&nbsp;&nbsp;
+					<button type="button" id="applyNo" class="btn btn-update" style="height: 52px; width: 130px; font-size: 1.1em;" onclick="history.go(-1);">취소</button>
+					<button type="submit" id="applyYes" class="btn btn-add" style="height: 52px; width: 160px; font-size: 1.1em;">수정완료</button>&nbsp;&nbsp;
 				</td>
 			</tr>
 		</tbody>

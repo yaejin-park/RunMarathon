@@ -26,19 +26,6 @@ $(function(){
 		}
 	});
 	
-	// main > review
-	var reviewSwiper = new Swiper(".main-sec.review", {
-		slidesPerView: "auto",
-		centeredSlides: true,
-        loop: true,
-		observer: true,
-		observeParents: true,
-		navigation: {
-			nextEl: '.main-sec.review .swiper-button-next',
-			prevEl: '.main-sec.review .swiper-button-prev',
-		},
-	});
-	
 	$(window).resize(function(){
 		$(".main-vis").height($(".main-vis").find(".bg.video video").height());
 	}).resize();
@@ -53,6 +40,19 @@ $(function(){
                 $(this).find("img").height("auto");
             }
         });
+		
+		// main > review
+		var reviewSwiper = new Swiper(".main-sec.review", {
+			slidesPerView: "auto",
+			centeredSlides: true,
+	        loop: true,
+			observer: true,
+			observeParents: true,
+			navigation: {
+				nextEl: '.main-sec.review .swiper-button-next',
+				prevEl: '.main-sec.review .swiper-button-prev',
+			},
+		});
     });
 
 	$(window).scroll(function(){

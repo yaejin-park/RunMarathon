@@ -363,6 +363,9 @@ header.active .menu-div .menu-btn span {
 	color:#444;
 	background:rgb(160, 199, 220, 0.2);
 }
+.table thead th {
+	text-align:center;
+}
 .table.table-bordered th, .table.table-bordered td {
 	border:none;
 	border-bottom:1px solid #ddd;

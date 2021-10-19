@@ -291,7 +291,7 @@ $(function(){
 				<th>아이디</th>
 				<td>
 				<input type="text" name="id" id="id" class="form-control" required="required" readonly="readonly">
-				<button type="button" class="btn btn-info" id="idDouble">중복체크</button>
+				<button type="button" class="btn btn-add" id="idDouble">중복체크</button>
 				</td>
 			</tr>
 			
@@ -309,7 +309,7 @@ $(function(){
 				<th>주소</th>
 				<td>
 					<input type="text" name="addr1" id="addr1" class="form-control" required="required"  placeholder="주소" readonly="readonly">
-					<button type="button" class="btn btn-info" id="searchAddr">주소검색</button>
+					<button type="button" class="btn btn-add" id="searchAddr">주소검색</button>
 					<br><br>
 					<input type="text" name="addr2" id="addr2" class="form-control" required="required"  placeholder="상세주소 입력" style="width: 300px;">
 				</td>					
@@ -319,7 +319,7 @@ $(function(){
 				<th>닉네임</th>
 				<td>
 				<input type="text" name="nick" id="nick" class="form-control" required="required" readonly="readonly">
-				<button type="button" class="btn btn-info" id="nickDouble">중복체크</button>
+				<button type="button" class="btn btn-add" id="nickDouble">중복체크</button>
 				</td>
 			</tr>
 			
@@ -339,8 +339,8 @@ $(function(){
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<button type="submit" id="joinYes" class="btn btn-info" style="height: 52px; width: 160px; font-size: 1.1em;">회원가입하기</button>&nbsp;&nbsp;
-					<button type="reset" id="joinNo" class="btn btn-default" style="height: 52px; width: 130px; font-size: 1.1em;">취소</button>
+					<button type="submit" id="joinYes" class="btn btn-add" style="height: 52px; width: 160px; font-size: 1.1em;">회원가입하기</button>&nbsp;&nbsp;
+					<button type="reset" id="joinNo" class="btn btn-basic" style="height: 52px; width: 130px; font-size: 1.1em;">취소</button>
 				</td>
 			</tr>
 		</tbody>

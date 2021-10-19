@@ -163,7 +163,6 @@ public class AdminApplyDAO {
 				e.printStackTrace();
 			} finally {
 				db.dbClose(pstmt, conn);
-
 			}
 		}
 		
@@ -176,13 +175,15 @@ public class AdminApplyDAO {
 			Connection conn = db.getConnection();
 			PreparedStatement pstmt = null;
 
-			String sql = "update apply set record=? where id=?";
+			String sql = "update apply set finishcourse=?, finishhour=?, finishminute=? where id=?";
 
 			try {
 				pstmt = conn.prepareStatement(sql);
 
-				pstmt.setInt(1, dto.getSumtime());
-				pstmt.setString(2, dto.getRecordid());
+				pstmt.setInt(1, dto.getFinishcourse());
+				pstmt.setInt(2, dto.getFinishhour());
+				pstmt.setInt(3, dto.getFinishminute());
+				pstmt.setString(4, dto.getRecordid());
 
 				pstmt.execute();
 			} catch (SQLException e) {
@@ -196,32 +197,43 @@ public class AdminApplyDAO {
 		
 		
 		// 페이스 계산
-		public void pace(AdminApplyDTO dto) {
+		public double getPace(String id) {
 			Connection conn = db.getConnection();
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
+			
+			double pace = 0;
 
-			String sql = "select * from apply where id=?";
-
+			String sql = "select finishhour,finishminute,finishcourse from apply where id=?";
 
 			try {
 				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
 
-				pstmt.setInt(1, dto.getSumtime());
-				//pstmt.setString(1, dto.getFinishhour() + dto.getFinishminute());
-				pstmt.setString(2, dto.getRecordid());
-
-				pstmt.execute();
+				if (rs.next()) {
+					AdminApplyDTO dto = new AdminApplyDTO();
+					
+					dto.setFinishcourse(rs.getInt("finishcourse"));
+					dto.setFinishhour(rs.getInt("finishhour"));
+					dto.setFinishminute(rs.getInt("finishminute"));
+					
+					pace = ((dto.getFinishhour()*60)+dto.getFinishminute())/dto.getFinishcourse();
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-				db.dbClose(pstmt, conn);
-
+				db.dbClose(rs, pstmt, conn);
 			}
+			
+			return pace;
 		}
 	
-	
+		
+		
+		
 	// 삭제
 	public void deleteMember(String id) {
 		Connection conn = db.getConnection();
