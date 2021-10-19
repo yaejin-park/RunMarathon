@@ -124,11 +124,7 @@ $(function() {
 	String km = null;
 	String pace = null;
 	String record = null;
-	%>
-	<script type="text/javascript">
-		console.log("신청상태 :<%=status%>");
-	</script>
-	<%
+
 	if(status.equals("apply")){
 		%>
 		<script type="text/javascript">
@@ -137,33 +133,31 @@ $(function() {
 			});
 		</script>
 		<%
-	} else if(status.equals("record")){
-		km = adto.getCourse().substring(0, adto.getCourse().length()-1);
-		record = adto.getRecord();
-		Double paceCalc = Double.parseDouble(km)/Double.parseDouble(record);
-		pace= paceCalc.toString();
+	} else if(status.equals("delivery")){
 		%>
 		<script type="text/javascript">
 			$(function() {
-				$("#record").addClass("now-status");
+				$("#delivery").addClass("now-status");
 			});
 		</script>
 		<%
-	} else if(status.equals("delievery")){
+	} else if(status.equals("record")){
+		/* km = adto.getCourse().substring(0, adto.getCourse().length()-1);
+		record = adto.getRecord();
+		Double paceCalc = Double.parseDouble(km)/Double.parseDouble(record);
+		pace= paceCalc.toString(); 
+		평균페이스 계산 부분*/
 		%>
 		<script type="text/javascript">
 		$(function() {
-			$("#delievery").addClass("now-status");
+			$("#record").addClass("now-status");
 		});
 		</script>
 		<%
 	}
 %>
-<script type="text/javascript">
-	console.log("신청여부 : <%=applyYes%>");
-	console.log("회원상태 : <%=adao.applyStatus(id).equals("record")%>");
-	console.log("<%=pace%>");
-</script>
+
+
 </head>
 <body>
 <div class="mypage-area">
@@ -211,16 +205,15 @@ $(function() {
 			<p class="txt">기록</p>
 		</div>
 	</div>
-	<%}%>
-	
-	<%if(!adao.applyStatus(id).equals("record")){%>
+	<%}
+	if(!status.equals("record")){
+	%>
 	<div id="memberRecord">
 		<span class="glyphicon glyphicon-refresh" style="font-size: 6em; margin: 60px 235px 40px;"></span>
-		<!-- <img alt="" src="./common/image/mypage_again.png" style="width: 140px; margin: 40px 235px;"> -->
 		<br>
 		<span style="font-weight: bold; font-size: 1.2em;">마라톤 기록이 존재하지 않습니다.</span>
 	</div>
-	<% } else{%>
+	<% }else{%>
 	<div id="memberRecord">
 		<table class="table table-bordered">
 			<thead>
