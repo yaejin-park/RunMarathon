@@ -180,7 +180,7 @@ $(function() {
 		recordMinuteForm = String.format("%.0f",recordMinute);
 		recordForm = racordHourForm + ":" + recordMinuteForm;
 		
-		pace = Double.parseDouble(km)/Double.parseDouble(record);
+		pace = (Double.parseDouble(record)*60)/Double.parseDouble(km);
 		//Double paceCalc = Double.parseDouble(km)/Double.parseDouble(record);
 		//pace= paceCalc.toString(); 
 		intPace = (int)pace;
