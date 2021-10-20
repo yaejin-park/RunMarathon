@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="false" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="data.dto.MemberDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/MemberDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="682" width="138" x="715" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="data.dto.ReviewDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/ReviewDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="412" width="193" x="893" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="data.dto.SmartDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/SmartDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="466" width="193" x="1126" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="data.dto.GiftDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/GiftDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="358" width="188" x="1359" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="data.dto.NoticeDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/NoticeDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="412" width="188" x="1587" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="data.dto.QuestionDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/QuestionDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="574" width="188" x="1815" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="data.dto.ReplyDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/ReplyDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="358" width="193" x="2043" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="data.dto.ContestDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/ContestDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="628" width="182" x="2276" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="data.dto.MenuDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/MenuDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="358" width="175" x="2498" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="data.dto.AdminApplyDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/AdminApplyDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1996" width="206" x="2713" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="data.dto.ApplyDTO" project="SemiProject5" 
+    file="/SemiProject5/src/main/java/data/dto/ApplyDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="682" width="158" x="2959" y="-517"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -38,26 +38,33 @@ public class AdminApplyDTO {
 	private String record;
 	
 	private String recordid;
-	private int finishcourse;
-	private int finishhour;
-	private int finishminute;
+	private double finishcourse;
+	private double finishhour;
+	private double finishminute;
 	private double pace;
+	private String pacerecord;
 	
 	private String checkid;
 	private String delivernum;
 	
 	
 	
-	public int getFinishcourse() {
+	public String getPacerecord() {
+		return pacerecord;
+	}
+	public void setPacerecord(String pacerecord) {
+		this.pacerecord = pacerecord;
+	}
+	public double getFinishcourse() {
 		return finishcourse;
 	}
-	public void setFinishcourse(int finishcourse) {
+	public void setFinishcourse(double finishcourse) {
 		this.finishcourse = finishcourse;
 	}
-	public int getFinishhour() {
+	public double getFinishhour() {
 		return finishhour;
 	}
-	public int getFinishminute() {
+	public double getFinishminute() {
 		return finishminute;
 	}
 	
@@ -67,10 +74,10 @@ public class AdminApplyDTO {
 	public void setPace(double pace) {
 		this.pace = pace;
 	}
-	public void setFinishhour(int finishhour) {
+	public void setFinishhour(double finishhour) {
 		this.finishhour = finishhour;
 	}
-	public void setFinishminute(int finishminute) {
+	public void setFinishminute(double finishminute) {
 		this.finishminute = finishminute;
 	}
 	public String getRecordid() {

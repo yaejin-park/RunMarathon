@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -12,6 +13,7 @@ import mysql.db.DBConnect;
 
 public class AdminApplyDAO {
 	DBConnect db = new DBConnect();
+	
 
 	// 전체 회원 출력
 	public ArrayList<AdminApplyDTO> getAllMembers() {
@@ -175,14 +177,14 @@ public class AdminApplyDAO {
 			Connection conn = db.getConnection();
 			PreparedStatement pstmt = null;
 
-			String sql = "update apply set finishcourse=?, finishhour=?, finishminute=? where id=?";
+			String sql = "update apply set finishhour=?, finishminute=?, record=? where id=?";
 
 			try {
 				pstmt = conn.prepareStatement(sql);
 
-				pstmt.setInt(1, dto.getFinishcourse());
-				pstmt.setInt(2, dto.getFinishhour());
-				pstmt.setInt(3, dto.getFinishminute());
+				pstmt.setDouble(1, dto.getFinishhour());
+				pstmt.setDouble(2, dto.getFinishminute());
+				pstmt.setDouble(3, (dto.getFinishhour()+dto.getFinishminute()/60));
 				pstmt.setString(4, dto.getRecordid());
 
 				pstmt.execute();
@@ -196,15 +198,17 @@ public class AdminApplyDAO {
 		}
 		
 		
+		
 		// 페이스 계산
-		public double getPace(String id) {
+		public String getPace(String id) {
 			Connection conn = db.getConnection();
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
+			String pacevalue = null;
 			double pace = 0;
 
-			String sql = "select finishhour,finishminute,finishcourse from apply where id=?";
+			String sql = "select finishhour,finishminute from apply where id=?";
 
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -214,12 +218,16 @@ public class AdminApplyDAO {
 
 				if (rs.next()) {
 					AdminApplyDTO dto = new AdminApplyDTO();
-					
-					dto.setFinishcourse(rs.getInt("finishcourse"));
-					dto.setFinishhour(rs.getInt("finishhour"));
-					dto.setFinishminute(rs.getInt("finishminute"));
-					
+
+					dto.setFinishhour(rs.getDouble("finishhour"));
+					dto.setFinishminute(rs.getDouble("finishminute"));
+
 					pace = ((dto.getFinishhour()*60)+dto.getFinishminute())/dto.getFinishcourse();
+					
+					pacevalue = String.format("%.2f",pace);
+					
+					dto.setPacerecord(pacevalue);
+
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -228,7 +236,7 @@ public class AdminApplyDAO {
 				db.dbClose(rs, pstmt, conn);
 			}
 			
-			return pace;
+			return pacevalue;
 		}
 	
 		
@@ -287,5 +295,111 @@ public class AdminApplyDAO {
 		  db.dbClose(pstmt, conn);
 	  } 
 	}
+	  
+	  
+	  
+	  
+	// 전체 게시물 갯수
+	  public int getTotalCount() {
+	    int n = 0;
+	    Connection conn = db.getConnection();
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = "select count(*) from member";
+
+
+	    try {
+	      pstmt = conn.prepareStatement(sql);
+	      rs = pstmt.executeQuery();
+	      if (rs.next())
+	        n = rs.getInt(1);
+
+	    } catch (SQLException e) {
+	      // TODO Auto-generated catch block
+	      e.printStackTrace();
+	    } finally {
+	      db.dbClose(rs, pstmt, conn);
+	    }
+	    return n;
+	  }
+
+	  public List<AdminApplyDTO> getNotice(int start, int perpage) {
+	    List<AdminApplyDTO> list = new Vector<AdminApplyDTO>();
+	    Connection conn = db.getConnection();
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = "select * from member order by idx asc limit ?,?";
+
+	    try {
+	      pstmt = conn.prepareStatement(sql);
+	      pstmt.setInt(1, start);
+	      pstmt.setInt(2, perpage);
+	      rs = pstmt.executeQuery();
+
+	      while (rs.next()) {
+	    	  AdminApplyDTO dto = new AdminApplyDTO();
+
+				dto.setIdx(rs.getString("idx"));
+				dto.setName(rs.getString("name"));
+				dto.setNick(rs.getString("nick"));
+				dto.setHp(rs.getString("hp"));
+				dto.setId(rs.getString("id"));
+				dto.setPass(rs.getString("pass"));
+				dto.setAddr1(rs.getString("addr1"));
+				dto.setAddr2(rs.getString("addr2"));
+				dto.setAuth1(rs.getString("auth1"));
+				dto.setAuth2(rs.getString("auth2"));
+
+				list.add(dto);
+	      }
+	    } catch (SQLException e) {
+	      // TODO Auto-generated catch block
+	      e.printStackTrace();
+	    } finally {
+	      db.dbClose(rs, pstmt, conn);
+	    }
+	    return list;
+
+	  }
+	  
+	  
+	  
+	  
+	  
+	  public List<AdminApplyDTO> getNotice2(int start, int perpage) {
+		    List<AdminApplyDTO> list = new Vector<AdminApplyDTO>();
+		    Connection conn = db.getConnection();
+		    PreparedStatement pstmt = null;
+		    ResultSet rs = null;
+		    String sql = "select * from contest order by contest_start desc limit ?,?";
+
+		    try {
+		      pstmt = conn.prepareStatement(sql);
+		      pstmt.setInt(1, start);
+		      pstmt.setInt(2, perpage);
+		      rs = pstmt.executeQuery();
+
+		      while (rs.next()) {
+					AdminApplyDTO dto = new AdminApplyDTO();
+
+					dto.setContestName(rs.getString("name"));
+					dto.setContestStart(rs.getString("contest_start"));
+					dto.setContestEnd(rs.getString("contest_end"));
+					dto.setApplyStart(rs.getString("apply_start"));
+					dto.setApplyEnd(rs.getString("apply_end"));
+					dto.setMoney(rs.getString("money"));
+
+					list.add(dto);
+		      }
+		    } catch (SQLException e) {
+		      // TODO Auto-generated catch block
+		      e.printStackTrace();
+		    } finally {
+		      db.dbClose(rs, pstmt, conn);
+		    }
+		    return list;
+
+		  }
+
 
 }

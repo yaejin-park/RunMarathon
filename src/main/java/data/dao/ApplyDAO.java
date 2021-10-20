@@ -134,7 +134,7 @@ public class ApplyDAO {
 	
 	//회원 상태 얻기
 	public String applyStatus(String id) {
-		String status = null;
+		String status = "no";
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

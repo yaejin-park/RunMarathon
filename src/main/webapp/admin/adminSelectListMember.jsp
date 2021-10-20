@@ -24,7 +24,7 @@ th, td {
 	font-size: 12pt;
 }
 
-button.deliverid, button.recordid {
+button.deliverid, button.recordid, button.btn-basic {
 	font-size: 10pt;
 }
 </style>
@@ -46,12 +46,12 @@ button.deliverid, button.recordid {
 		<table class="table table-bordered" align="center">
 			<colgroup>
 			<col width="50">
-			<col width="70">
+			<col width="100">
 			<col width="70">
 			<col width="120">
 			<col width="70">
 			<col width="100">
-			<col width="70">
+			<col width="50">
 			<col width="140">
 			<col width="120">
 			</colgroup>
@@ -63,7 +63,7 @@ button.deliverid, button.recordid {
 					<th>핸드폰</th>
 					<th>참가코스</th>
 					<th>참가시간</th>
-					<th>참가인원</th>
+					<th>인원</th>
 					<th>기념품 발송정보</th>
 					<th>완주 시간</th>
 				</tr>

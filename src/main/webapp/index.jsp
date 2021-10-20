@@ -51,7 +51,7 @@
 			<div class="inner">
 				<div class="sub-content">
 					<div class="nav-area">
-						<%
+					 <%
                         String oneDepth = dao.getOneDepth(menu_pt);
                      %>
 						<p><%= oneDepth %></p>

@@ -9,7 +9,7 @@
 
 	String dnum = request.getParameter("dnum");
 	String deliverid = request.getParameter("deliverid");
-	//System.out.println(dnum+deliverid);
+	System.out.println(dnum+deliverid);
 
 	
  	// 데이터 읽어서 dto에 넣기

@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="data.dto.ApplyDTO"%>
 <%@page import="data.dao.ApplyDAO"%>
 <%@page import="data.dao.MemberDAO"%>
@@ -37,7 +38,7 @@
 		padding: 3px 10px;
 		margin: 0 30px 30px;
 		border-radius: 10px;
-		height: 315px;
+		height: 210px;
 	}
 	
 	tr.space {
@@ -52,7 +53,7 @@
 		display:block;
 		clear:both;
 	}
-	#memberStatus > div {
+	#memberStatus > div{
 		position:relative;
 		float: left;
 		width: 170px;
@@ -83,12 +84,21 @@
 		margin: 20px 30px 0px 25px
 	}
 	
-	#memberRecord{
+	#memberRecord, #memberStatus {
 		text-align: center;
 	}
 	
 	.now-status{
 		background-color: #d4e093;
+	}
+	
+	#tbh {
+		font-size: 15pt;
+	}
+	
+	#tbf {
+		font-size: 50pt;
+		font-weight: bold;
 	}
 	
 </style>
@@ -117,18 +127,31 @@ $(function() {
 	//신청상태 (apply, delivery, record)
 	String status = adao.applyStatus(id);
 	ApplyDTO adto = adao.getApply(id);
+
 	
 	//신청여부
 	boolean applyYes = adao.isDoubleApply(id);
 	
 	String km = null;
-	String pace = null;
+	
+	double pace = 0;
+	int intPace = 0;
+	String paceForm = null;
+	double paceMinute = 0;
+	String paceMinuteForm = null;
+	double paceSecond = 0;
+	String paceSecondForm = null;
+	
 	String record = null;
-	%>
-	<script type="text/javascript">
-		console.log("신청상태 :<%=status%>");
-	</script>
-	<%
+	int intRecord = 0;
+	double doubleRecord = 0;
+	String recordForm = null;
+	double recordHour = 0;
+	String racordHourForm = null;
+	double recordMinute = 0;
+	String recordMinuteForm = null;
+	
+	
 	if(status.equals("apply")){
 		%>
 		<script type="text/javascript">
@@ -137,33 +160,47 @@ $(function() {
 			});
 		</script>
 		<%
-	} else if(status.equals("record")){
-		km = adto.getCourse().substring(0, adto.getCourse().length()-1);
-		record = adto.getRecord();
-		Double paceCalc = Double.parseDouble(km)/Double.parseDouble(record);
-		pace= paceCalc.toString();
+	} else if(status.equals("delivery")){
 		%>
 		<script type="text/javascript">
 			$(function() {
-				$("#record").addClass("now-status");
+				$("#delivery").addClass("now-status");
 			});
 		</script>
 		<%
-	} else if(status.equals("delievery")){
+	} else if(status.equals("record")){
+		km = adto.getCourse().substring(0, adto.getCourse().length()-1);
+		
+		record = adto.getRecord();
+		doubleRecord = Double.parseDouble(record);
+		intRecord = (int)doubleRecord;
+		recordHour = Math.floor(doubleRecord);
+		racordHourForm = String.format("%.0f",recordHour);
+		recordMinute = (doubleRecord - intRecord)*60;
+		recordMinuteForm = String.format("%.0f",recordMinute);
+		recordForm = racordHourForm + ":" + recordMinuteForm;
+		
+		pace = Double.parseDouble(km)/Double.parseDouble(record);
+		//Double paceCalc = Double.parseDouble(km)/Double.parseDouble(record);
+		//pace= paceCalc.toString(); 
+		intPace = (int)pace;
+		paceMinute = Math.floor(pace);
+		paceMinuteForm = String.format("%.0f",paceMinute);
+		paceSecond = (pace - intPace)*60;
+		paceSecondForm = String.format("%.0f",paceSecond);
+		paceForm = paceMinuteForm + ":" + paceMinuteForm;
+	
 		%>
 		<script type="text/javascript">
 		$(function() {
-			$("#delievery").addClass("now-status");
+			$("#record").addClass("now-status");
 		});
 		</script>
 		<%
 	}
 %>
-<script type="text/javascript">
-	console.log("신청여부 : <%=applyYes%>");
-	console.log("회원상태 : <%=adao.applyStatus(id).equals("record")%>");
-	console.log("<%=pace%>");
-</script>
+
+
 </head>
 <body>
 <div class="mypage-area">
@@ -191,7 +228,9 @@ $(function() {
 	
 	<%if(!applyYes){%>
 	<div id="memberStatus">
-		신청내역이 존재하지 않습니다.
+		<span class="glyphicon glyphicon-exclamation-sign" style="font-size: 4em; margin: 90px 235px 40px;"></span>
+		<br>
+		<span style="font-weight: bold; font-size: 1.2em;">신청내역이 존재하지 않습니다.</span>
 	</div>
 	<% } else{%>
 	<div id="memberStatus">
@@ -211,28 +250,26 @@ $(function() {
 			<p class="txt">기록</p>
 		</div>
 	</div>
-	<%}%>
-	
-	<%if(!adao.applyStatus(id).equals("record")){%>
+	<%}
+	if(!status.equals("record")){
+	%>
 	<div id="memberRecord">
-		<span class="glyphicon glyphicon-refresh" style="font-size: 6em; margin: 60px 235px 40px;"></span>
-		<!-- <img alt="" src="./common/image/mypage_again.png" style="width: 140px; margin: 40px 235px;"> -->
+		<span class="glyphicon glyphicon-exclamation-sign" style="font-size: 4em; margin: 30px 235px 40px;"></span>
 		<br>
 		<span style="font-weight: bold; font-size: 1.2em;">마라톤 기록이 존재하지 않습니다.</span>
 	</div>
-	<% } else{%>
+	<% }else{%>
 	<div id="memberRecord">
-		<table class="table table-bordered">
+		<table class="table no-border">
 			<thead>
-				<tr><th><%=adto.getMarathon()%></th><th><%=adto.getTime()%></th></tr>
+				<tr id="tbh"><th><%=adto.getMarathon()%></th><th><%=adto.getTime()%></th></tr>
 			</thead>
-			
 			<tbody>
-				<tr>
-					<td><%=km%></td><td><%=pace%></td><td><%=record%></td>
+				<tr id="tbf">
+					<td><%=km%></td><td><%=paceForm%></td><td><%=recordForm%></td>
 				</tr>			
 				<tr class="point">
-					<td>km</td><td>평균페이스</td><td>시간</td>
+					<td>완주거리(Km)</td><td>평균페이스(m/Km)</td><td>완주시간(m)</td>
 				</tr>
 			</tbody>
 		</table>
