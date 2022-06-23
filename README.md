@@ -19,18 +19,18 @@
    - 박규민 : 커뮤니티, 후기
  - **협업tool**<br>
       <details>
-        <summary>Git</summary>
-        <pre>
-          각자의 branch 만들어서, 매일 자신의 브랜치, dev  push
-          <img src="https://user-images.githubusercontent.com/80744051/175228550-0a333aaf-5329-4b89-997f-2817c81b7d7a.png" width="500px">       
-        </pre>
+	<summary><b>Git</b></summary>
+	
+	- 각자의 브랜치 만들어서, 정해진 GIT규칙에 따라 PUSH, PULL
+		<img src="https://user-images.githubusercontent.com/80744051/175343694-f36c565f-f054-444f-ae5c-a2f6035f18b4.png" width="600px">
       </details>
+      
       <details>
-        <summary>Notion</summary>
-        <pre>
-          노션을 활용해 정보 공유 및 일정 공유
-          <img src="https://user-images.githubusercontent.com/80744051/175228448-c5c904f4-234a-4153-9ebd-dc21def2592e.png"  width="500px">   
-        </pre>
+	<summary><b>Notion</b></summary>
+
+	- 노션을 활용해 정보 공유 및 일정 공유
+	
+          	<img src="https://user-images.githubusercontent.com/80744051/175228448-c5c904f4-234a-4153-9ebd-dc21def2592e.png"  width="500px"> 
       </details>
 
 
