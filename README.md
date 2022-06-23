@@ -176,9 +176,45 @@ if(type.equals("1")){
     ```
 
 </details>
+	
 <details>
-    <summary><h4>참가 신청시, 고려사항</h4></summary>
-    
+    <summary><b>참가 신청시, 고려사항</b></summary>
+	
+	- 로그인 여부 체크
+	- 신청내역 존재 여부 체크
+	- 약관 동의 여부 체크
+	[:link:](https://github.com/yaejin-park/RunMarathon/blob/6fc5f3a24e1a4ec91becf1ec2cb8067bcbacac74/src/main/webapp/apply/applyMain.jsp#L73)
+	```javascript
+	function check() {
+	//로그인 경고
+	<%String sessionLogin = (String)session.getAttribute("sessionLogin");
+	if(sessionLogin==null){%>
+		alert("로그인 이후, 이용가능합니다");
+		return true;
+		<%} else{
+			//이미 신청한 아이디일 경우,
+			ApplyDAO dao = new ApplyDAO();
+			String id = (String)session.getAttribute("sessionId");
+			boolean doubleApply = dao.isDoubleApply(id);
+			if(doubleApply){
+				%>
+				alert("이미 신청한 내역이 존재합니다");
+				return false;
+				<%
+			}else{
+			%>
+			//약관 동의 경고
+			if($("#opt1").is(":checked") && $("#opt2").is(":checked")){
+				return true;
+			} else{
+				alert("약관에 동의해주세요");
+				return false;
+			}
+	 	<%}
+ 	}%>  
+}
+	```
+	
 </details>
 
 
