@@ -17,22 +17,22 @@
    - 윤인정 : 회원관리, 마이페이지
    - 한희규 : 메인/소개/일정, 위치/코스/기념품, 유의사항, 대회관리
    - 박규민 : 커뮤니티, 후기
- - **협업tool**<br>
-      <details>
-	<summary><b>Git</b></summary>
+ - **협업tool**
+ 
+	<details>
+		<summary><b>Git</b></summary>
 	
 	- 각자의 브랜치 만들어서, 정해진 GIT규칙에 따라 PUSH, PULL
 		<img src="https://user-images.githubusercontent.com/80744051/175343694-f36c565f-f054-444f-ae5c-a2f6035f18b4.png" width="600px">
-      </details>
-      
-      <details>
-	<summary><b>Notion</b></summary>
+	</details>
+	
+	<details>
+		<summary><b>Notion</b></summary>
 
 	- 노션을 활용해 정보 공유 및 일정 공유
 	
-          	<img src="https://user-images.githubusercontent.com/80744051/175228448-c5c904f4-234a-4153-9ebd-dc21def2592e.png"  width="500px"> 
-      </details>
-
+		<img src="https://user-images.githubusercontent.com/80744051/175228448-c5c904f4-234a-4153-9ebd-dc21def2592e.png"  width="500px"> 
+	</details>
 
 ## 🛠 기술스택
 <img src="https://img.shields.io/badge/java-007396?style=flat-square&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/html5-E34F26?style=flat-square&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=flat-square&logo=css3&logoColor=white">  <img src="https://img.shields.io/badge/bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/jquery-0769AD?style=flat-square&logo=jquery&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=flat-square&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=Amazon%20AWS&logoColor=white"/> ![image](https://user-images.githubusercontent.com/80744051/175230762-90ecaf7e-2303-44f0-9cf3-d0a275e858e5.png)
@@ -184,7 +184,7 @@ if(type.equals("1")){
 
 ## :unlock: 트러블슈팅
 <details>
-  <summary>컬럼을 하나로 통합? 혹은 분리?</summary>
+  <summary><b>컬럼을 하나로 통합? 혹은 분리?</b></summary>
  
 - **문제상황**
 	- 처음에는 전화번호, 주소를 insert시, 분리된 input의 데이터를 구분자를 통해 합쳐서 한 컬럼에 insert하였다.
@@ -199,10 +199,10 @@ if(type.equals("1")){
 - **느낀점**
 	- 테이블 구조를 미리 치밀하게 계획해야 개발의 효율성을 높일 수 있다는 것을 깨달았다.
 	- 다시 생각하니, 컬럼을 다 분리하는 게 제일 효 방법일 것이라는 생각이 든다. 
-<details>
+</details>
 
 <details>
-  <summary>DB백업파일 없이, RDS 삭제</summary>
+  <summary><b>DB백업파일 없이, RDS 삭제</b></summary>
  
 - **문제상황**
     - DB로 아마존의 RDS를 활용했다. RDS 연결을 끊어도 로컬DB에서는 데이터가 살아있을 줄 알고, 무료 이용기간이 끝나기 전 백업과정없이 RDS를 삭제했다. 그 결과, DB가 쥐도새도 없이 통째로 날아가버리는 참사가 벌어졌다.
@@ -212,8 +212,9 @@ if(type.equals("1")){
 - **느낀점**
     - 프로젝트 시, DB 더미파일은 꼭 백업해둬야겠다.
     - 코드를 중간중간 백업해두는 것의 중요성을 깨달았다.
-<details>
+</details>
 
+	
 ## 🏸 회고
 - **사용자 중심**으로 세세한 기능 하나하나에 집중하고자 했다.
    - 마라톤 신청폼 작성 시, 로그인된 사용자 정보를 불러오기 체크박스 만들기
@@ -236,8 +237,8 @@ if(type.equals("1")){
     - 테스트, 유지보수에 시간을 넉넉히 투자해야겠다는 생각과 테스트케이스를 미리 작성해놓으면 일을 두번하지 않아도 되겠다는 생각이 들었다.
     - 
 - **AWS** 에 도전하다.
-    - 
-
+    - 사이트배포 및 RDS사용을 위해 AWS에 도전하였다. AWS개념을 익히기 위해 여러 유튜브 강의도 듣고, 사용법을 찾기 위해 구글링도 꼬박 3일은 한 것 같다. 구글링하는 곳마다 정보도 제각각이고, 친절하게 처음부터 끝까지 알려주는 곳이 없어 애를 많이 먹었다. 그래도 여러 군데의 구글링을 통합한 결과, 팀원들에게 RDS 설정도 직접 다 해줄 수 있을 정도로 AWS를 익힐 수 있었다. 이 경험으로 구글링만으로도 새로운 기술을 스스로 익일 수 있다는 것을 깨닫게 되었다.
+	
 - **Dummy 파일** 꼭 만들어 놓기
     - RDS로 DB를 활용한 후, 유료 전환이 되기 전에 RDS를 끊는다는 게 DB를 다 날리는 상황으로 이어졌다.
     - 그나마 다행히, 혹시나 해서 테이블을 만들 때, SQL을 노션에 정리해둬서 어느정도 복원은 가능했지만, 프로젝트가 끝날 때는 Dummy로 DB파일을 정리해두면 포폴 관리에 도움이 많이 될 것이라고 생각이 든다.
