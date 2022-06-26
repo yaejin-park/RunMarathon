@@ -51,25 +51,19 @@
 </details>
 <details>
   <summary><b>회원가입</b></summary>
-  <pre>      
     <img src="https://user-images.githubusercontent.com/80744051/175223822-892903fa-e51f-4a3f-b251-9cfeffe826b6.jpg">  
     <img src="https://user-images.githubusercontent.com/80744051/175223936-b6aefa6b-edbb-4620-a53e-5ac0094d032a.jpg">     
     <img src="https://user-images.githubusercontent.com/80744051/175223954-d68c9237-305d-445a-a4a1-0867ab5af532.jpg">
-  </pre>
 </details>
 <details>
   <summary><b>참가신청</b></summary>
-  <pre>      
     <img src="https://user-images.githubusercontent.com/80744051/175223988-4f2085f1-adbb-43b7-96bd-74b2df5b2379.jpg">  
     <img src="https://user-images.githubusercontent.com/80744051/175223999-485cab0f-746c-4313-9e55-eaf94cb67ea9.jpg">     
     <img src="https://user-images.githubusercontent.com/80744051/175230198-faf46d85-a71c-4cff-9fc8-0d071664e858.png">
-  </pre>
 </details>
 <details>
   <summary><b>마이페이지</b></summary>
-  <pre>      
     <img src="https://user-images.githubusercontent.com/80744051/175224062-2cddb171-42de-4981-9528-27cbf74d7c98.jpg">  
-  </pre>
 </details>
 
 ## :triangular_ruler: 주요 로직
@@ -180,12 +174,14 @@ if(type.equals("1")){
 <details>
     <summary><b>참가 신청시, 고려사항</b></summary>
 	
-	- 로그인 여부 체크
-	- 신청내역 존재 여부 체크
-	- 약관 동의 여부 체크
-	[:link:](https://github.com/yaejin-park/RunMarathon/blob/6fc5f3a24e1a4ec91becf1ec2cb8067bcbacac74/src/main/webapp/apply/applyMain.jsp#L73)
-	```javascript
-	function check() {
+- **로그인 여부 체크**
+- **신청내역 존재 여부 체크**
+- **약관 동의 여부 체크**
+
+[:link:](https://github.com/yaejin-park/RunMarathon/blob/6fc5f3a24e1a4ec91becf1ec2cb8067bcbacac74/src/main/webapp/apply/applyMain.jsp#L73)
+
+```javascript
+function check() {
 	//로그인 경고
 	<%String sessionLogin = (String)session.getAttribute("sessionLogin");
 	if(sessionLogin==null){%>
@@ -210,10 +206,10 @@ if(type.equals("1")){
 				alert("약관에 동의해주세요");
 				return false;
 			}
-	 	<%}
- 	}%>  
+		<%}
+	}%>  
 }
-	```
+```
 	
 </details>
 
